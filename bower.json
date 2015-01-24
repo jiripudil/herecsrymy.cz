@@ -1,0 +1,9 @@
+{
+	"name": "jiripudil-project",
+	"private": true,
+	"dependencies": {
+		"jquery": "~2.1",
+		"nette.ajax.js": "~2.0",
+		"nette-forms": "~2.2"
+	}
+}

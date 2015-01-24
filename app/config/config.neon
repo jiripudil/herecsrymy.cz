@@ -1,0 +1,31 @@
+php:
+	date.timezone: Europe/Prague
+
+
+nette:
+	application:
+		errorPresenter: Error
+		mapping:
+			*: JiriHraje\*Module\Presenters\*Presenter
+	session:
+		expiration: 14 days
+
+
+extensions:
+	autowired: Kdyby\Autowired\DI\AutowiredExtension
+	links: Librette\LinkBuilder\DI\LinkBuilderExtension
+	console: Kdyby\Console\DI\ConsoleExtension
+	events: Kdyby\Events\DI\EventsExtension
+	annotations: Kdyby\Annotations\DI\AnnotationsExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
+	translation: Kdyby\Translation\DI\TranslationExtension
+
+
+doctrine:
+	metadata:
+		App: %appDir%
+
+
+migrations:
+	namespace: JiriHraje\Migrations
