@@ -24,7 +24,13 @@ extensions:
 
 doctrine:
 	metadata:
-		App: %appDir%
+		JiriHraje: %appDir%
+	types:
+		point: JiriHraje\Doctrine\Types\PointType
+	dql:
+		string:
+			isNull: JiriHraje\Doctrine\Dql\IsNull
+			distance: JiriHraje\Doctrine\Dql\EarthDistance
 
 
 migrations:
