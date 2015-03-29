@@ -39,7 +39,7 @@ trait TBasePresenter
 		$head->setTitleReversed(TRUE);
 		$head->addStyle('static/css/new.css');
 		$head->addScript('static/js/scripts.js');
-		$head->addFeed(HeadControl::FEED_RSS, $this->link('Feed:'), 'Všechny příspěvky – Jiří Pudil, herec s rýmy');
+		$head->addFeed(HeadControl::FEED_RSS, $this->link(':Front:Feed:'), 'Všechny příspěvky – Jiří Pudil, herec s rýmy');
 
 		$head->setFavicon('favicon.ico');
 
