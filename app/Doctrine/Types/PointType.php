@@ -1,10 +1,10 @@
 <?php
 
-namespace JiriHraje\Doctrine\Types;
+namespace Slovotepec\Doctrine\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use JiriHraje\Doctrine\Geo;
+use Slovotepec\Doctrine\Geo;
 
 
 class PointType extends Type

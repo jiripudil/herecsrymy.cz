@@ -11,12 +11,10 @@ return call_user_func(function () {
 	}
 
 	\Tester\Environment::setup();
-	@mkdir($tempDir = __DIR__ . '/temp', 0777, TRUE);
-	\Tester\Helpers::purge($tempDir);
 
 	$configurator = new \Nette\Configurator;
 
-	$configurator->setTempDirectory($tempDir);
+	$configurator->setTempDirectory(__DIR__ . '/temp');
 	$configurator->setDebugMode(FALSE);
 
 	$configurator->addParameters([

@@ -47,7 +47,7 @@ class Album extends BaseEntity
 	protected $cover;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Song", mappedBy="album")
+	 * @ORM\OneToMany(targetEntity="Song", mappedBy="album", cascade={"persist"})
 	 * @ORM\OrderBy({"albumPosition" = "ASC"})
 	 * @var Song[]|ArrayCollection
 	 */

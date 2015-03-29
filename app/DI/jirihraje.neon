@@ -1,4 +1,0 @@
-services:
-	# routing
-	- JiriHraje\Application\Routers\RouterFactory
-	router: @JiriHraje\Application\Routers\RouterFactory::createRouter

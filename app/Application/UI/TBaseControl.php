@@ -1,6 +1,6 @@
 <?php
 
-namespace JiriHraje\Application\UI;
+namespace Slovotepec\Application\UI;
 
 use Kdyby\Autowired\AutowireComponentFactories;
 use Nette\Application\UI\PresenterComponent;

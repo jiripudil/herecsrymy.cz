@@ -1,10 +1,10 @@
 <?php
 
-namespace JiriHraje\Doctrine\Dql;
+namespace Slovotepec\Doctrine\Dql;
 
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\ORM\Query;
-use JiriHraje\NotImplementedException;
+use Slovotepec\NotImplementedException;
 
 
 /**

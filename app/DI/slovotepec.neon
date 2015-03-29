@@ -1,0 +1,13 @@
+services:
+	# routing
+	- Slovotepec\Application\Routers\RouterFactory
+	router: @Slovotepec\Application\Routers\RouterFactory::createRouter
+
+	# templating
+	- Slovotepec\Texy\TexyFactory
+
+	# factories
+	- Slovotepec\FrontModule\Components\Head\IHeadControlFactory
+	- Slovotepec\FrontModule\Components\Header\IHeaderControlFactory
+	- Slovotepec\FrontModule\Components\MainMenu\IMainMenuControlFactory
+	- Slovotepec\FrontModule\Components\Paging\IPagingControlFactory

@@ -4,11 +4,11 @@
  * @testCase
  */
 
-namespace JiriHrajeTests\Doctrine;
+namespace HerecSeSlovyTests\Doctrine;
 
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
-use JiriHraje\Doctrine\Geo\Point;
-use JiriHraje\Doctrine\Types\PointType;
+use HerecSeSlovy\Doctrine\Geo\Point;
+use HerecSeSlovy\Doctrine\Types\PointType;
 use Nette\PhpGenerator as Code;
 use Tester;
 use Tester\Assert;

@@ -1,6 +1,6 @@
 <?php
 
-namespace JiriHraje;
+namespace Slovotepec;
 
 
 class MemberAccessException extends \LogicException

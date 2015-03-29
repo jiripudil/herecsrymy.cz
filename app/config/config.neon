@@ -6,33 +6,29 @@ nette:
 	application:
 		errorPresenter: Error
 		mapping:
-			*: JiriHraje\*Module\Presenters\*Presenter
+			*: Slovotepec\*Module\Presenters\*Presenter
 	session:
 		expiration: 14 days
 
 
 extensions:
 	autowired: Kdyby\Autowired\DI\AutowiredExtension
-	links: Librette\LinkBuilder\DI\LinkBuilderExtension
 	console: Kdyby\Console\DI\ConsoleExtension
 	events: Kdyby\Events\DI\EventsExtension
 	annotations: Kdyby\Annotations\DI\AnnotationsExtension
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
-	jirihraje: JiriHraje\DI\JiriHrajeExtension
+	jirihraje: Slovotepec\DI\SlovotepecExtension
 
 
 doctrine:
 	metadata:
-		JiriHraje: %appDir%
-	types:
-		point: JiriHraje\Doctrine\Types\PointType
+		Slovotepec: %appDir%/Entities
 	dql:
 		string:
-			isNull: JiriHraje\Doctrine\Dql\IsNull
-			distance: JiriHraje\Doctrine\Dql\EarthDistance
+			isNull: Slovotepec\Doctrine\Dql\IsNull
 
 
 migrations:
-	namespace: JiriHraje\Migrations
+	namespace: Slovotepec\Migrations

@@ -1,0 +1,64 @@
+<?php
+
+namespace Slovotepec\Entities;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Kdyby\Doctrine\Entities\Attributes\Identifier;
+use Kdyby\Doctrine\Entities\BaseEntity;
+
+
+/**
+ * @ORM\Entity()
+ */
+class Attachment extends BaseEntity
+{
+
+	use Identifier;
+
+
+	const TYPE_DOCUMENT = 1;
+	const TYPE_AUDIO = 2;
+	const TYPE_VIDEO = 3;
+
+
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
+	protected $name;
+
+	/**
+	 * @ORM\Column(type="smallint")
+	 * @var int
+	 */
+	protected $type;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="File", mappedBy="attachment")
+	 * @var File[]|ArrayCollection
+	 */
+	protected $files;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Post", inversedBy="attachments")
+	 * @ORM\JoinColumn(nullable=FALSE)
+	 * @var Post
+	 */
+	protected $post;
+
+
+	/**
+	 * @param string $name
+	 * @param int $type
+	 * @param Post $post
+	 */
+	public function __construct($name, $type, Post $post)
+	{
+		$this->name = $name;
+		$this->type = $type;
+		$this->post = $post;
+		$this->files = new ArrayCollection();
+	}
+
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace JiriHraje\Doctrine\Geo;
+namespace Slovotepec\Doctrine\Geo;
 
 
 class Point
