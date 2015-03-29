@@ -9,6 +9,7 @@ nette:
 			*: Slovotepec\*Module\Presenters\*Presenter
 	session:
 		expiration: 14 days
+		cookieSecure: on
 
 
 extensions:
