@@ -1,0 +1,24 @@
+{layout none}
+{contentType xml}
+{='<'|noescape}?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		{if $category !== NULL}
+			<title>{$category->title} - Jiří Pudil, herec s rýmy</title>
+			<link>{link //Category:default $category}</link>
+			<description>{$category->description}</description>
+		{else}
+			<title>Všechny příspěvky - Jiří Pudil, herec s rýmy</title>
+			<link>{link //Homepage:}</link>
+			<description />
+		{/if}
+	</channel>
+
+	<item n:foreach="$posts as $post">
+		<title>{$post->title}</title>
+		<link>{link //Post:default $post}</link>
+		<comments>{link //Post:default#disqus_thread $post}</comments>
+		<description>{$post->description}</description>
+		<pubDate>{$post->publishedOn|date:'D, d M Y H:i:s O'}</pubDate>
+	</item>
+</rss>
