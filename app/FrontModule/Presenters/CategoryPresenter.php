@@ -31,7 +31,9 @@ class CategoryPresenter extends Presenter
 
 	public function actionDefault(Category $category)
 	{
-		$query = (new PostsQuery())->onlyPublished();
+		$query = (new PostsQuery())
+			->onlyPublished()
+			->ofCategory($category);
 
 		/** @var Paginator $paginator */
 		$paginator = $this['paging']->getPaginator();
