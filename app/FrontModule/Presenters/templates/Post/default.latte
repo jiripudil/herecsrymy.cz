@@ -2,14 +2,14 @@
 <div class="post">
 	<h1 class="post-title post-title--top">{$post->title}</h1>
 	<div class="post-info">
-		<span class="fa fa-info-circle" title="Popisek"></span> {$post->description}
+		{$post->description}
 		•
-		<span class="fa fa-calendar" title="Publikováno"></span> <time datetime="{$post->publishedOn|date:'j.n.Y H:i'}" title="{$post->publishedOn|czechDate}">{$post->publishedOn|ago}</time>
+		<span class="fa fa-calendar" title="Publikováno"></span> <time datetime="{$post->publishedOn|date:'Y-m-d H:i'}" title="{$post->publishedOn|czechDate}">{$post->publishedOn|ago}</time>
 		•
 		<span class="fa fa-comments" title="Komentáře"></span> <a href="#disqus_thread" data-disqus-identifier="{$post->id}">0 komentářů</a>
 	</div>
 	<div class="post-body js-focus-overlay">
-		<!-- po najetí překrýt ostatní prvky mléčným poloprůhledným overlayem pro maximální soustředění na text -->
+		{* TODO po najetí překrýt ostatní prvky mléčným poloprůhledným overlayem pro maximální soustředění na text *}
 		{$post->text|texy|noescape}
 	</div>
 

@@ -5,12 +5,12 @@
 <div class="sep cf"></div>
 
 {foreach $posts as $post}
-	<div class="post">
+	<div class="post post--list">
 		<h2 class="post-title post-title--top"><a n:href="Post:default $post">{$post->title}</a></h2>
 		<div class="post-info">
 			{$post->description}
 			•
-			<span class="fa fa-calendar" title="Publikováno"></span> <time datetime="{$post->publishedOn|date:'j.n.Y H:i'}" title="{$post->publishedOn|czechDate}">{$post->publishedOn|ago}</time>
+			<span class="fa fa-calendar" title="Publikováno"></span> <time datetime="{$post->publishedOn|date:'Y-m-d H:i'}" title="{$post->publishedOn|czechDate}">{$post->publishedOn|ago}</time>
 			•
 			<span class="fa fa-comments" title="Komentáře"></span> <a n:href="Post:default#disqus_thread $post" data-disqus-identifier="{$post->id}">0 komentářů</a>
 		</div>
