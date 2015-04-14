@@ -68,4 +68,15 @@ class CategoryPresenter extends Presenter
 		return $factory->create();
 	}
 
+
+	protected function createComponentNewsletter(INewsletterControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onSubscribe[] = function () {
+			$this->redirect('this');
+		};
+
+		return $control;
+	}
+
 }
