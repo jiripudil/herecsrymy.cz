@@ -1,0 +1,8 @@
+{block #content}
+<h1>Odhlášení z odběru novinek</h1>
+
+{if $subscription !== NULL}
+	<div class="flash flash--success">E-mail {$subscription->email} byl odhlášen od odběru novinek. Mrzí mě to a doufám, že mi i&nbsp;přesto nadále zachováte přízeň.</div>
+{else}
+	<div class="flash flash--error">Nepodařilo se dohledat a ověřit přihlášení k&nbsp;odběru novinek. Ujistěte se prosím, že jste zadali správnou a úplnou internetovou adresu.</div>
+{/if}

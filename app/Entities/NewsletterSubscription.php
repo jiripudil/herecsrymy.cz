@@ -73,4 +73,18 @@ class NewsletterSubscription extends BaseEntity
 		$this->unsubscribeHash = Random::generate(32);
 	}
 
+
+	public function unsubscribe()
+	{
+		$this->active = FALSE;
+		$this->unsubscribedOn = new \DateTime();
+		$this->unsubscribeHash = NULL;
+	}
+
+
+	public function getUnsubscribeHash()
+	{
+		return $this->unsubscribeHash . md5($this->email);
+	}
+
 }
