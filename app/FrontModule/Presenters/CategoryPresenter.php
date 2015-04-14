@@ -10,6 +10,7 @@ use Herecsrymy\Entities\Post;
 use Herecsrymy\Entities\Queries\PostQuery;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
+use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
 
 

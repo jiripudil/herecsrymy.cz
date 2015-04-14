@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Newsletter;
+namespace Herecsrymy\FrontModule\Components\Newsletter;
 
 
 interface INewsletterControlFactory

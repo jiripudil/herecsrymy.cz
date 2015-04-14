@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title n:inner-block="title">Nový příspěvek {$post->title} na herecsrymy.cz</title>
+</head>
+<body>
+	<h1>{include #title}</h1>
+
+	<p>Ahoj, píšu vám, protože jste se přihlásili k&nbsp;odběru nových příspěvků na herecsrymy.cz. Zrovna před chvílí jsem vydal nový příspěvek s&nbsp;názvem {$post->title}.</p>
+	<p>Příspěvek je zařazený v kategorii {$post->category->title|lower} a je to&nbsp;{$post->description}. Přečíst si ho můžete tady: <a n:href="Post: post => $post">{link Post: post => $post}</a></p>
+	<p>S&nbsp;přáním, ať vám můj výtvor přinese dobré pocity<br>Jiří Pudil,<br>brněnský herec s&nbsp;rýmy</p>
+
+	<p style="font-size: .9em; color: #424242">
+		Jestli podobné e-maily už nechcete dostávat, klikněte na následující odkaz a budete od odběru novinek odhlášeni:
+		<a n:href="Newsletter:unsubscribe hash => $subscription->getUnsubscribeHash()">{link Newsletter:unsubscribe hash => $subscription->getUnsubscribeHash()}</a>
+	</p>
+</body>
+</html>

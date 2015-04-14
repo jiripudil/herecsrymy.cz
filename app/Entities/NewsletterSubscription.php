@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\Entities;
+namespace Herecsrymy\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;

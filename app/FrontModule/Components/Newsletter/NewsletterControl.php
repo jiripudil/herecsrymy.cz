@@ -1,12 +1,12 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Newsletter;
+namespace Herecsrymy\FrontModule\Components\Newsletter;
 
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
-use Slovotepec\Application\UI\TBaseControl;
-use Slovotepec\Entities\NewsletterSubscription;
+use Herecsrymy\Application\UI\TBaseControl;
+use Herecsrymy\Entities\NewsletterSubscription;
 
 
 /**
