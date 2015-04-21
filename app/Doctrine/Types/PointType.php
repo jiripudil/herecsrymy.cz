@@ -1,10 +1,10 @@
 <?php
 
-namespace Slovotepec\Doctrine\Types;
+namespace Herecsrymy\Doctrine\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use Slovotepec\Doctrine\Geo;
+use Herecsrymy\Doctrine\Geo;
 
 
 class PointType extends Type

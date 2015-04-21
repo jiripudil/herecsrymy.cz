@@ -1,11 +1,11 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\MainMenu;
+namespace Herecsrymy\FrontModule\Components\MainMenu;
 
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
-use Slovotepec\Application\UI\TBaseControl;
-use Slovotepec\Entities\Category;
+use Herecsrymy\Application\UI\TBaseControl;
+use Herecsrymy\Entities\Category;
 
 
 class MainMenuControl extends Control

@@ -1,11 +1,11 @@
 <?php
 
-namespace Slovotepec\Presenters;
+namespace Herecsrymy\Presenters;
 
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
-use Slovotepec\Application\UI\TBasePresenter;
-use Slovotepec\FrontModule\Components\Header\IHeaderControlFactory;
+use Herecsrymy\Application\UI\TBasePresenter;
+use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Tracy\Debugger;
 
 

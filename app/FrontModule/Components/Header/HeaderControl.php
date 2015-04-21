@@ -1,9 +1,9 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Header;
+namespace Herecsrymy\FrontModule\Components\Header;
 
 use Nette\Application\UI\Control;
-use Slovotepec\Application\UI\TBaseControl;
+use Herecsrymy\Application\UI\TBaseControl;
 
 
 class HeaderControl extends Control

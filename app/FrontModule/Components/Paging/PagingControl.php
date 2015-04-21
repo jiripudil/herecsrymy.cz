@@ -1,12 +1,12 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Paging;
+namespace Herecsrymy\FrontModule\Components\Paging;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\Paginator;
-use Slovotepec\Application\UI\TBaseControl;
-use Slovotepec\FrontModule\Components\Head\HeadControl;
+use Herecsrymy\Application\UI\TBaseControl;
+use Herecsrymy\FrontModule\Components\Head\HeadControl;
 
 
 class PagingControl extends Control

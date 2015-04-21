@@ -1,10 +1,10 @@
 <?php
 
-namespace Slovotepec\Entities\Queries;
+namespace Herecsrymy\Entities\Queries;
 
 use Kdyby;
 use Kdyby\Doctrine\QueryObject;
-use Slovotepec\Entities\Category;
+use Herecsrymy\Entities\Category;
 
 
 class PostsQuery extends QueryObject

@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\Doctrine\Dql;
+namespace Herecsrymy\Doctrine\Dql;
 
 use Doctrine\ORM\Query;
 

@@ -1,0 +1,13 @@
+services:
+	# routing
+	- Herecsrymy\Application\Routers\RouterFactory
+	router: @Herecsrymy\Application\Routers\RouterFactory::createRouter
+
+	# templating
+	- Herecsrymy\Texy\TexyFactory
+
+	# factories
+	- Herecsrymy\FrontModule\Components\Head\IHeadControlFactory
+	- Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory
+	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
+	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory

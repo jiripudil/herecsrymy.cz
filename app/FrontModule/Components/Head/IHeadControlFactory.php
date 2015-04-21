@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Head;
+namespace Herecsrymy\FrontModule\Components\Head;
 
 
 interface IHeadControlFactory

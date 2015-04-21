@@ -1,11 +1,11 @@
 <?php
 
-namespace Slovotepec\Latte;
+namespace Herecsrymy\Latte;
 
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
 use Nette\Object;
-use Slovotepec\Texy\TexyFactory;
+use Herecsrymy\Texy\TexyFactory;
 
 
 class Filters extends Object

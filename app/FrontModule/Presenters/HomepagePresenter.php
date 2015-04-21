@@ -1,11 +1,11 @@
 <?php
 
-namespace Slovotepec\FrontModule\Presenters;
+namespace Herecsrymy\FrontModule\Presenters;
 
 use Nette\Application\UI\Presenter;
-use Slovotepec\Application\UI\TBasePresenter;
-use Slovotepec\FrontModule\Components\Head\HeadControl;
-use Slovotepec\FrontModule\Components\Header\IHeaderControlFactory;
+use Herecsrymy\Application\UI\TBasePresenter;
+use Herecsrymy\FrontModule\Components\Head\HeadControl;
+use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 
 
 class HomepagePresenter extends Presenter

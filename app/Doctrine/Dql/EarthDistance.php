@@ -1,10 +1,10 @@
 <?php
 
-namespace Slovotepec\Doctrine\Dql;
+namespace Herecsrymy\Doctrine\Dql;
 
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\ORM\Query;
-use Slovotepec\NotImplementedException;
+use Herecsrymy\NotImplementedException;
 
 
 /**

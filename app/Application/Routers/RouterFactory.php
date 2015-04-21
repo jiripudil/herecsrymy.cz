@@ -1,12 +1,12 @@
 <?php
 
-namespace Slovotepec\Application\Routers;
+namespace Herecsrymy\Application\Routers;
 
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\Routers as NRouters;
-use Slovotepec\Entities\Category;
-use Slovotepec\Entities\Post;
+use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\Post;
 
 
 class RouterFactory extends Nette\Object

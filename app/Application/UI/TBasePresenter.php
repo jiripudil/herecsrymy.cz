@@ -1,10 +1,10 @@
 <?php
 
-namespace Slovotepec\Application\UI;
+namespace Herecsrymy\Application\UI;
 
-use Slovotepec\FrontModule\Components\Head\HeadControl;
-use Slovotepec\FrontModule\Components\Head\IHeadControlFactory;
-use Slovotepec\FrontModule\Components\MainMenu\IMainMenuControlFactory;
+use Herecsrymy\FrontModule\Components\Head\HeadControl;
+use Herecsrymy\FrontModule\Components\Head\IHeadControlFactory;
+use Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory;
 use Kdyby\Autowired\AutowireComponentFactories;
 use Nextras\Application\UI\SecuredLinksPresenterTrait;
 

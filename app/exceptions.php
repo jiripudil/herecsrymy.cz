@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec;
+namespace Herecsrymy;
 
 
 class MemberAccessException extends \LogicException

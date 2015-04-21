@@ -1,13 +1,13 @@
 <?php
 
-namespace Slovotepec\FrontModule\Presenters;
+namespace Herecsrymy\FrontModule\Presenters;
 
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
-use Slovotepec\Application\UI\TBasePresenter;
-use Slovotepec\Entities\Category;
-use Slovotepec\Entities\Post;
-use Slovotepec\Entities\Queries\PostsQuery;
+use Herecsrymy\Application\UI\TBasePresenter;
+use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\Post;
+use Herecsrymy\Entities\Queries\PostsQuery;
 
 
 class FeedPresenter extends Presenter

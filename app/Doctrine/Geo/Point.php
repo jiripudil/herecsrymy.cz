@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\Doctrine\Geo;
+namespace Herecsrymy\Doctrine\Geo;
 
 
 class Point

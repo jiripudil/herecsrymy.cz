@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\FrontModule\Components\Paging;
+namespace Herecsrymy\FrontModule\Components\Paging;
 
 
 interface IPagingControlFactory

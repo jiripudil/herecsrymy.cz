@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\Texy;
+namespace Herecsrymy\Texy;
 
 use Nette\Object;
 

@@ -6,7 +6,7 @@ nette:
 	application:
 		errorPresenter: Error
 		mapping:
-			*: Slovotepec\*Module\Presenters\*Presenter
+			*: Herecsrymy\*Module\Presenters\*Presenter
 	session:
 		expiration: 14 days
 		cookieSecure: on
@@ -20,16 +20,16 @@ extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
-	jirihraje: Slovotepec\DI\SlovotepecExtension
+	jirihraje: Herecsrymy\DI\HerecsrymyExtension
 
 
 doctrine:
 	metadata:
-		Slovotepec: %appDir%/Entities
+		Herecsrymy: %appDir%/Entities
 	dql:
 		string:
-			isNull: Slovotepec\Doctrine\Dql\IsNull
+			isNull: Herecsrymy\Doctrine\Dql\IsNull
 
 
 migrations:
-	namespace: Slovotepec\Migrations
+	namespace: Herecsrymy\Migrations
