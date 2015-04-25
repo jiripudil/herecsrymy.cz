@@ -11,3 +11,4 @@ services:
 	- Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory
 	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
+	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
