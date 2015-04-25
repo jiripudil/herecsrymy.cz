@@ -331,6 +331,36 @@ blockquote {
 }
 
 
+/***** chordline *****/
+
+// by Petr pixy Staníček
+// http://wellstyled.com/singlelang.php?lang=en&page=css-chords-formatting.html
+
+p.chordline {
+	line-height: 2.6;
+	margin-bottom: 2em;
+}
+
+.chordline span {
+	position: relative;
+}
+
+.chordline span strong {
+	position: absolute;
+	top: -1em;
+	left: 0;
+	font-family: @sans-font;
+	font-weight: bold;
+	font-size: .9em;
+	line-height: 1;
+	color: @blue-dark;
+}
+
+.chordline span strong span {
+	display: none;
+}
+
+
 
 /***** license footer *****/
 
