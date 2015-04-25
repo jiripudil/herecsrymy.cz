@@ -12,6 +12,8 @@
 		"kdyby/translation": "~2.0.3",
 		"kdyby/validator": "dev-master",
 		"kdyby/doctrine-forms": "dev-master",
+		"kdyby/rabbitmq": "~1.0.0",
+		"kdyby/monolog": "dev-master",
 		"doctrine/migrations": "1.0.0-ALPHA1 as 1.0.99-dev",
 		"zenify/doctrine-migrations": "~2.0.2",
 		"majkl578/nette-identity-doctrine": "dev-nette-23-fix",

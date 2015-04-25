@@ -8,6 +8,9 @@ use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Events\Subscriber;
+use Kdyby\RabbitMq\Connection;
+use PhpAmqpLib\Exception\AMQPExceptionInterface;
+use Tracy\Debugger;
 
 
 class NewsletterListener implements Subscriber
@@ -16,14 +19,14 @@ class NewsletterListener implements Subscriber
 	/** @var EntityManager */
 	private $em;
 
-	/** @var NewsletterSender */
-	private $sender;
+	/** @var Connection */
+	private $rabbit;
 
 
-	public function __construct(EntityManager $em, NewsletterSender $sender)
+	public function __construct(EntityManager $em, Connection $rabbit)
 	{
 		$this->em = $em;
-		$this->sender = $sender;
+		$this->rabbit = $rabbit;
 	}
 
 
@@ -42,10 +45,21 @@ class NewsletterListener implements Subscriber
 			return;
 		}
 
+		$producer = $this->rabbit->getProducer('sendNewsletter');
+
 		$subscriptions = $this->em->getRepository(NewsletterSubscription::class)->findBy(['active' => TRUE]);
 		foreach ($subscriptions as $subscription) {
-			// TODO put it into some queue and process asynchronously
-			$this->sender->sendNewsletter($subscription, $post);
+			$message = [
+				NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->id,
+				NewsletterSender::MESSAGE_POST_KEY => $post->id,
+			];
+
+			try {
+				$producer->publish(serialize($message));
+
+			} catch (AMQPExceptionInterface $e) {
+				Debugger::log($e, 'newsletter');
+			}
 		}
 	}
 

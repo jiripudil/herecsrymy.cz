@@ -2,16 +2,26 @@
 
 namespace Herecsrymy\Newsletter;
 
+use Kdyby\Doctrine\EntityManager;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Mail\IMailer;
 use Nette\Mail\Message;
 use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
+use Nette\Mail\SmtpException;
+use PhpAmqpLib\Message\AMQPMessage;
+use Tracy\Debugger;
 
 
 class NewsletterSender
 {
+
+	const MESSAGE_SUBSCRIPTION_KEY = 'subscription';
+	const MESSAGE_POST_KEY = 'post';
+
+	/** @var EntityManager */
+	private $em;
 
 	/** @var IMailer */
 	private $mailer;
@@ -23,8 +33,9 @@ class NewsletterSender
 	private $templateFactory;
 
 
-	public function __construct(IMailer $mailer, LinkGenerator $linkGenerator, ITemplateFactory $templateFactory)
+	public function __construct(EntityManager $em, IMailer $mailer, LinkGenerator $linkGenerator, ITemplateFactory $templateFactory)
 	{
+		$this->em = $em;
 		$this->mailer = $mailer;
 		$this->linkGenerator = $linkGenerator;
 		$this->templateFactory = $templateFactory;
@@ -32,11 +43,14 @@ class NewsletterSender
 
 
 	/**
-	 * @param NewsletterSubscription $subscription
-	 * @param Post $post
+	 * @param AMQPMessage $amqpMessage
 	 */
-	public function sendNewsletter(NewsletterSubscription $subscription, Post $post)
+	public function sendNewsletter(AMQPMessage $amqpMessage)
 	{
+		$data = unserialize($amqpMessage->body);
+		$subscription = $this->em->find(NewsletterSubscription::class, $data[self::MESSAGE_SUBSCRIPTION_KEY]);
+		$post = $this->em->find(Post::class, $data[self::MESSAGE_POST_KEY]);
+
 		$message = (new Message())
 			->setFrom('me@jiripudil.cz', 'Jiří Pudil')
 			->addTo($subscription->email);
@@ -48,7 +62,13 @@ class NewsletterSender
 		$template->setFile(__DIR__ . '/templates/newPost.latte');
 
 		$message->setHtmlBody($template);
-		$this->mailer->send($message);
+
+		try {
+			$this->mailer->send($message);
+
+		} catch (SmtpException $e) {
+			Debugger::log($e, 'newsletter');
+		}
 	}
 
 }
