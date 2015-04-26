@@ -3,7 +3,7 @@
 namespace Herecsrymy\Newsletter;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
+use Kdyby\Doctrine\Events;
 use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
 use Kdyby\Doctrine\EntityManager;

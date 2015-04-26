@@ -1,6 +1,6 @@
 <?php
 
-namespace Slovotepec\Migrations;
+namespace Herecsrymy\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration,
 	Doctrine\DBAL\Schema\Schema;
