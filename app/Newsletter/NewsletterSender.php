@@ -51,13 +51,19 @@ class NewsletterSender
 		$subscription = $this->em->find(NewsletterSubscription::class, $data[self::MESSAGE_SUBSCRIPTION_KEY]);
 		$post = $this->em->find(Post::class, $data[self::MESSAGE_POST_KEY]);
 
+		$unsubscribeLink = $this->linkGenerator->link('Front:Newsletter:unsubscribe', [
+			'hash' => $subscription->getUnsubscribeHash(),
+		]);
+
 		$message = (new Message())
 			->setFrom('me@jiripudil.cz', 'Jiří Pudil')
-			->addTo($subscription->email);
+			->addTo($subscription->email)
+			->setHeader('List-Unsubscribe', $unsubscribeLink);
 
 		$template = $this->templateFactory->createTemplate();
 		$template->subscription = $subscription;
 		$template->post = $post;
+		$template->unsubscribeLink = $unsubscribeLink;
 		$template->_control = $this->linkGenerator;
 		$template->setFile(__DIR__ . '/templates/newPost.latte');
 
