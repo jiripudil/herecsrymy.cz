@@ -12,3 +12,8 @@ services:
 	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
+
+	# sitemap
+	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)
+	- {class: Herecsrymy\Sitemap\SitemapListener, tags: [kdyby.subscriber]}
+	- {class: Herecsrymy\Console\GenerateSitemapCommand, tags: [kdyby.console.command]}
