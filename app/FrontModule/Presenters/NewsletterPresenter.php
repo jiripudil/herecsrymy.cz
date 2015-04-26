@@ -1,13 +1,13 @@
 <?php
 
-namespace Slovotepec\FrontModule\Presenters;
+namespace Herecsrymy\FrontModule\Presenters;
 
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Doctrine\EntityRepository;
 use Nette\Application\UI\Presenter;
-use Slovotepec\Application\UI\TBasePresenter;
-use Slovotepec\Entities\NewsletterSubscription;
-use Slovotepec\FrontModule\Components\Header\IHeaderControlFactory;
+use Herecsrymy\Application\UI\TBasePresenter;
+use Herecsrymy\Entities\NewsletterSubscription;
+use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 
 
 class NewsletterPresenter extends Presenter
