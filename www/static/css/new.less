@@ -378,3 +378,33 @@ p.chordline {
 	max-width: 32px;
 	vertical-align: middle;
 }
+
+
+
+/***** print *****/
+
+.onlyprint {
+	display: none;
+}
+
+@media print {
+	.noprint {
+		display: none;
+	}
+
+	.onlyprint {
+		display: inline-block;
+	}
+
+	p {
+		page-break-inside: avoid;
+	}
+
+	.license {
+		font-size: .8em;
+
+		img {
+			max-width: 16px;
+		}
+	}
+}
