@@ -39,14 +39,14 @@ rabbitmq:
 	producers:
 		sendNewsletter:
 			connection: default
-			exchange: {name: send-newsletter, type: direct}
-			queue: {name: send-newsletter}
+			exchange: {name: herecsrymy, type: direct}
+			queue: {name: herecsrymy}
 
 	consumers:
 		sendNewsletter:
 			connection: default
-			exchange: {name: send-newsletter, type: direct}
-			queue: {name: send-newsletter}
+			exchange: {name: herecsrymy, type: direct}
+			queue: {name: herecsrymy}
 			callback: [@Herecsrymy\Newsletter\NewsletterSender, sendNewsletter]
 
 
