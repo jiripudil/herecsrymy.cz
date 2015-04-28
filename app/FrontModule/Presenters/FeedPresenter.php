@@ -7,7 +7,7 @@ use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
-use Herecsrymy\Entities\Queries\PostsQuery;
+use Herecsrymy\Entities\Queries\PostQuery;
 
 
 class FeedPresenter extends Presenter
@@ -31,7 +31,7 @@ class FeedPresenter extends Presenter
 
 	public function actionDefault(Category $category = NULL)
 	{
-		$query = (new PostsQuery())
+		$query = (new PostQuery())
 			->onlyPublished();
 
 		if ($category !== NULL) {

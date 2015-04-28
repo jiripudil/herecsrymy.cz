@@ -54,7 +54,7 @@ class Post extends BaseEntity
 	protected $publishedOn;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Category")
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
 	 * @ORM\JoinColumn(nullable=FALSE)
 	 * @var Category
 	 */

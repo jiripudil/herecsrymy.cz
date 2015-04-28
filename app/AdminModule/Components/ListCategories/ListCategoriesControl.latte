@@ -1,0 +1,30 @@
+<a href="{plink Category:edit}" class="btn"><span class="fa fa-plus" title="Add new category"></span> Add new category</a>
+<div class="sep"></div>
+
+<div>
+	<table width="100%">
+		<thead><tr>
+			<th>Title</th>
+			<th>Published</th>
+			<th>Posts</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+			<tr n:foreach="$categories as $category">
+				<td width="60%">
+					<span title="{$category[0]->description}">{$category[0]->title}</span>
+				</td>
+				<td>
+					<span n:class="fa, $category[0]->published ? fa-eye : fa-eye-slash" title="{$category[0]->published ? 'Published' : 'Unpublished'}"></span>
+				</td>
+				<td>
+					{$category['postsCount']}
+				</td>
+				<td>
+					<a href="{plink Category:edit $category[0]->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+					<a n:href="delete! $category[0]->id" data-confirm="Do you really want to delete this category?"><span class="fa fa-remove" title="Delete"></span></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

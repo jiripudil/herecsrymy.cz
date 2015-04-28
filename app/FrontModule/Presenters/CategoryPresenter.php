@@ -7,7 +7,7 @@ use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
-use Herecsrymy\Entities\Queries\PostsQuery;
+use Herecsrymy\Entities\Queries\PostQuery;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
@@ -31,7 +31,7 @@ class CategoryPresenter extends Presenter
 
 	public function actionDefault(Category $category)
 	{
-		$query = (new PostsQuery())
+		$query = (new PostQuery())
 			->onlyPublished()
 			->ofCategory($category);
 

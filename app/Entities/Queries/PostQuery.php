@@ -7,7 +7,7 @@ use Kdyby\Doctrine\QueryObject;
 use Herecsrymy\Entities\Category;
 
 
-class PostsQuery extends QueryObject
+class PostQuery extends QueryObject
 {
 
 	/** @var callable[] */
@@ -15,7 +15,7 @@ class PostsQuery extends QueryObject
 
 
 	/**
-	 * @return PostsQuery
+	 * @return PostQuery
 	 */
 	public function onlyPublished()
 	{
@@ -30,12 +30,26 @@ class PostsQuery extends QueryObject
 
 	/**
 	 * @param Category $category
-	 * @return PostsQuery
+	 * @return PostQuery
 	 */
 	public function ofCategory(Category $category)
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($category) {
 			$builder->andWhere('p.category = :category', $category);
+		};
+
+		return $this;
+	}
+
+
+	/**
+	 * @return PostQuery
+	 */
+	public function joinCategories()
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->innerJoin('p.category', 'c')
+				->addSelect('c');
 		};
 
 		return $this;

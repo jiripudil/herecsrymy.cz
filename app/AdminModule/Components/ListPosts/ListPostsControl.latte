@@ -1,0 +1,31 @@
+<a href="{plink Post:edit}" class="btn"><span class="fa fa-plus" title="Add new post"></span> Add new post</a>
+<div class="sep"></div>
+
+<table width="100%">
+	<thead><tr>
+		<th>Title</th>
+		<th>Category</th>
+		<th>Published</th>
+		<th></th>
+	</tr></thead>
+	<tbody>
+		<tr n:foreach="$posts as $post">
+			<td width="60%">
+				<span title="{$post->description}">{$post->title}</span>
+			</td>
+			<td>
+				{$post->category->title}
+			</td>
+			<td>
+				<span n:class="fa, $post->isPublic() ? fa-eye : fa-eye-slash" title="{$post->isPublic() ? 'Published' : 'Unpublished'}"></span>
+				{$post->publishedOn|date:'Y-m-d'}
+			</td>
+			<td>
+				<a href="{plink Post:edit $post->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+				<a n:href="delete! $post->id" data-confirm="Do you really want to delete this post?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+{control paging}

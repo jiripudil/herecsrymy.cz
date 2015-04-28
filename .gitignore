@@ -1,5 +1,4 @@
 .idea
-composer.lock
 app/config/local.neon
 log/*
 temp/*

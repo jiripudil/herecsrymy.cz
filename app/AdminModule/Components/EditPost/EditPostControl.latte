@@ -1,0 +1,36 @@
+{form form class => 'adminForm'}
+	<div n:foreach="$form->errors as $error" class="flash flash--error">
+		<span class="fa fa-exclamation-triangle"></span> {$error}
+	</div>
+
+	<p>
+		{label title /}
+		{input title}
+	</p>
+	<p>
+		{label slug /}
+		{input slug}
+	</p>
+	<p>
+		{label description /}
+		{input description}
+	</p>
+	<p>
+		{label text /}
+		{input text}
+	</p>
+	<p>
+		{input published}
+	</p>
+	<p>
+		{label publishedOn /}
+		{input publishedOn}
+	</p>
+	<p>
+		{label category /}
+		{input category}
+	</p>
+	<p>
+		{input save class => 'btn'}
+	</p>
+{/form}
