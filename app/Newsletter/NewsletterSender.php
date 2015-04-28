@@ -45,12 +45,18 @@ class NewsletterSender
 	/**
 	 * @param AMQPMessage $amqpMessage
 	 */
-	public function sendNewsletter(AMQPMessage $amqpMessage)
+	public function sendNewsletterFromAMQP(AMQPMessage $amqpMessage)
 	{
 		$data = unserialize($amqpMessage->body);
 		$subscription = $this->em->find(NewsletterSubscription::class, $data[self::MESSAGE_SUBSCRIPTION_KEY]);
 		$post = $this->em->find(Post::class, $data[self::MESSAGE_POST_KEY]);
 
+		$this->sendNewsletter($subscription, $post);
+	}
+
+
+	public function sendNewsletter(NewsletterSubscription $subscription, Post $post)
+	{
 		$unsubscribeLink = $this->linkGenerator->link('Front:Newsletter:unsubscribe', [
 			'hash' => $subscription->getUnsubscribeHash(),
 		]);

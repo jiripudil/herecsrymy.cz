@@ -47,7 +47,7 @@ rabbitmq:
 			connection: default
 			exchange: {name: herecsrymy, type: direct}
 			queue: {name: herecsrymy}
-			callback: [@Herecsrymy\Newsletter\NewsletterSender, sendNewsletter]
+			callback: [@Herecsrymy\Newsletter\NewsletterSender, sendNewsletterFromAMQP]
 
 
 monolog:

@@ -33,5 +33,6 @@ services:
 
 	# newsletter
 	- Herecsrymy\Newsletter\NewsletterSender
+	- {class: Herecsrymy\Console\SendNewsletterCommand, tags: [kdyby.console.command]}
 	- {class: Herecsrymy\Newsletter\NewsletterListener, tags: [kdyby.subscriber]}
 	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory
