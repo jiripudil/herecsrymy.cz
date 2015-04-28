@@ -30,3 +30,9 @@ services:
 	# security
 	- Herecsrymy\Security\Authenticator
 	- {class: Herecsrymy\Console\CreateUserCommand, tags: [kdyby.console.command]}
+
+	# newsletter
+	- Herecsrymy\Newsletter\NewsletterSender
+	- {class: Herecsrymy\Console\SendNewsletterCommand, tags: [kdyby.console.command]}
+	- {class: Herecsrymy\Newsletter\NewsletterListener, tags: [kdyby.subscriber]}
+	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory

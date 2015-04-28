@@ -22,6 +22,8 @@ extensions:
 	translation: Kdyby\Translation\DI\TranslationExtension
 	validator: Kdyby\Validator\DI\ValidatorExtension
 	doctrineForms: Kdyby\DoctrineForms\DI\FormsExtension
+	rabbitmq: Kdyby\RabbitMq\DI\RabbitMqExtension
+	monolog: Kdyby\Monolog\DI\MonologExtension
 	jirihraje: Herecsrymy\DI\HerecsrymyExtension
 
 
@@ -31,6 +33,28 @@ doctrine:
 	dql:
 		string:
 			isNull: Herecsrymy\Doctrine\Dql\IsNull
+
+
+rabbitmq:
+	producers:
+		sendNewsletter:
+			connection: default
+			exchange: {name: herecsrymy, type: direct}
+			queue: {name: herecsrymy}
+
+	consumers:
+		sendNewsletter:
+			connection: default
+			exchange: {name: herecsrymy, type: direct}
+			queue: {name: herecsrymy}
+			callback: [@Herecsrymy\Newsletter\NewsletterSender, sendNewsletterFromAMQP]
+
+
+monolog:
+	name: herecsrymy
+	handlers:
+		- Monolog\Handler\StreamHandler(%appDir%/../log/error.log)
+		- Monolog\Handler\SyslogHandler(herecsrymy, local4)
 
 
 migrations:

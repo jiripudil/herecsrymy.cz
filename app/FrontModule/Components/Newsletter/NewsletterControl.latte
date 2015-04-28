@@ -1,0 +1,8 @@
+<div class="newsletterSubscription">
+	Chcete vědět úplně o&nbsp;všem, co je tu nového? Dejte mi svůj e-mail a já vám napíšu, když něco napíšu :)
+	{form subscriptionForm}
+		{input email}{input subscribe class => 'btn'}
+		<div n:foreach="$form['email']->errors as $error" class="flash flash--error">{$error}</div>
+	{/form}
+	<div n:foreach="$flashes as $flash" class="flash flash--{$flash->type}">{$flash->message}</div>
+</div>

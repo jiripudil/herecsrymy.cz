@@ -10,6 +10,7 @@ use Herecsrymy\Entities\Post;
 use Herecsrymy\Entities\Queries\PostQuery;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
+use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
 
 
@@ -66,6 +67,17 @@ class CategoryPresenter extends Presenter
 	protected function createComponentPaging(IPagingControlFactory $factory)
 	{
 		return $factory->create();
+	}
+
+
+	protected function createComponentNewsletter(INewsletterControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onSubscribe[] = function () {
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 }
