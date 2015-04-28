@@ -13,7 +13,20 @@ services:
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
 
+	# admin
+	- {implement: Herecsrymy\Forms\IEntityFormFactory, inject: yes, setup: [addProtection]}
+	- Herecsrymy\AdminModule\Components\LoginForm\ILoginFormControlFactory
+	- Herecsrymy\AdminModule\Components\FlashMessages\IFlashMessagesControlFactory
+	- Herecsrymy\AdminModule\Components\ListPosts\IListPostsControlFactory
+	- Herecsrymy\AdminModule\Components\EditPost\IEditPostControlFactory
+	- Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory
+	- Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory
+
 	# sitemap
 	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)
 	- {class: Herecsrymy\Sitemap\SitemapListener, tags: [kdyby.subscriber]}
 	- {class: Herecsrymy\Console\GenerateSitemapCommand, tags: [kdyby.console.command]}
+
+	# security
+	- Herecsrymy\Security\Authenticator
+	- {class: Herecsrymy\Console\CreateUserCommand, tags: [kdyby.console.command]}

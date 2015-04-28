@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\BaseEntity;
@@ -49,6 +50,12 @@ class Category extends BaseEntity
 	 */
 	protected $sort;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
+	 * @var ArrayCollection|Post[]
+	 */
+	protected $posts;
+
 
 	/**
 	 * @param string $title
@@ -56,6 +63,7 @@ class Category extends BaseEntity
 	public function __construct($title)
 	{
 		$this->title = $title;
+		$this->posts = new ArrayCollection();
 	}
 
 }

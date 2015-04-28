@@ -20,6 +20,8 @@ extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
+	validator: Kdyby\Validator\DI\ValidatorExtension
+	doctrineForms: Kdyby\DoctrineForms\DI\FormsExtension
 	jirihraje: Herecsrymy\DI\HerecsrymyExtension
 
 

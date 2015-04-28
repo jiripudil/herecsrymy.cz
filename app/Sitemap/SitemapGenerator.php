@@ -4,7 +4,7 @@ namespace Herecsrymy\Sitemap;
 
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
-use Herecsrymy\Entities\Queries\PostsQuery;
+use Herecsrymy\Entities\Queries\PostQuery;
 use Kdyby\Doctrine\EntityDao;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\LinkGenerator;
@@ -41,7 +41,7 @@ class SitemapGenerator
 		$sitemap = fopen($this->fileName, 'wb');
 		fwrite($sitemap, '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL);
 
-		$posts = $this->postRepo->fetch((new PostsQuery())->onlyPublished());
+		$posts = $this->postRepo->fetch((new PostQuery())->onlyPublished());
 		$categories = $this->categoryRepo->findBy(['published' => TRUE], ['sort' => 'ASC', 'title' => 'ASC']);
 
 		$home = Html::el('url');

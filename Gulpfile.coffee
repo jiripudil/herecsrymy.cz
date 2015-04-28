@@ -28,6 +28,7 @@ gulp.task 'scripts', ->
 			'bower_components/jquery/dist/jquery.min.js'
 			'bower_components/nette-forms/src/assets/netteForms.js'
 			'bower_components/nette.ajax.js/nette.ajax.js'
+			'bower_components/html.sortable/dist/html.sortable.min.js'
 		])
 		gulp.src 'www/static/js/*.coffee'
 			.pipe plugins.plumber()
