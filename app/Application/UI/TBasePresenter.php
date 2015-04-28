@@ -41,7 +41,7 @@ trait TBasePresenter
 		$head->addScript('static/js/scripts.js');
 		$head->addFeed(HeadControl::FEED_RSS, $this->link(':Front:Feed:'), 'Všechny příspěvky – Jiří Pudil, herec s rýmy');
 
-		$head->setFavicon('favicon.ico');
+		$head->setFavicon('favicon-32.png');
 
 		$head->addMeta('http-equiv', 'X-UA-Compatible', 'IE=edge,chrome=1');
 		$head->addMeta('viewport', 'width=device-width');
