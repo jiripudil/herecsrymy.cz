@@ -62,7 +62,7 @@ class NewsletterSender
 		]);
 
 		$message = (new Message())
-			->setFrom('me@jiripudil.cz', 'Jiří Pudil')
+			->setFrom('system@jiripudil.cz', 'Jiří Pudil')
 			->addTo($subscription->email)
 			->setHeader('List-Unsubscribe', $unsubscribeLink);
 
