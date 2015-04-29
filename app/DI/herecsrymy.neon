@@ -21,6 +21,7 @@ services:
 	- Herecsrymy\AdminModule\Components\EditPost\IEditPostControlFactory
 	- Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory
 	- Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory
+	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
 
 	# sitemap
 	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)
