@@ -12,6 +12,11 @@ services:
 	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
+	-
+		implement: Herecsrymy\FrontModule\Components\GoogleAnalytics\IGoogleAnalyticsControlFactory
+		arguments:
+			uaKey: UA-61323350-1
+			enabled: %productionMode%
 
 	# admin
 	- {implement: Herecsrymy\Forms\IEntityFormFactory, inject: yes, setup: [addProtection]}
