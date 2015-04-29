@@ -12,6 +12,9 @@
 			• <span class="fa fa-comments" title="Komentáře"></span> <a href="#disqus_thread" data-disqus-identifier="{$post->id}">0 komentářů</a>
 		</span>
 	</div>
+	<div n:if=" ! $post->isPublic()" class="flash flash--info">
+		<span class="fa fa-eye-slash"></span> Preview alert! This post is not published.
+	</div>
 	<div class="post-body js-focus-overlay">
 		{$post->text|texy|noescape}
 	</div>

@@ -11,7 +11,9 @@
 	<tbody>
 		<tr n:foreach="$posts as $post">
 			<td width="60%">
-				<span title="{$post->description}">{$post->title}</span>
+				<a href="{plink :Front:Post: $post}">
+					<span title="{$post->description}">{$post->title}</span>
+				</a>
 			</td>
 			<td>
 				{$post->category->title}
