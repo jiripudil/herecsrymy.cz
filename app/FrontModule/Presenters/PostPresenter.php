@@ -3,6 +3,7 @@
 namespace Herecsrymy\FrontModule\Presenters;
 
 use Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory;
+use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Post;
@@ -56,6 +57,17 @@ class PostPresenter extends Presenter
 			$this->post->title,
 			$this->link('//this')
 		);
+	}
+
+
+	protected function createComponentNewsletter(INewsletterControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onSubscribe[] = function () {
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 }
