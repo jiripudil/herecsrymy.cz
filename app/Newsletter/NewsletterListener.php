@@ -34,6 +34,7 @@ class NewsletterListener implements Subscriber
 	{
 		return [
 			Events::postPersist,
+			// TODO preUpdate unpublished -> published
 		];
 	}
 
@@ -41,7 +42,7 @@ class NewsletterListener implements Subscriber
 	public function postPersist(LifecycleEventArgs $args)
 	{
 		$post = $args->getEntity();
-		if ( ! $post instanceof Post) {
+		if ( ! $post instanceof Post || ! $post->isPublic()) {
 			return;
 		}
 
