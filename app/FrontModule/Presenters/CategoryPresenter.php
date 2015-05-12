@@ -12,6 +12,7 @@ use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
+use Nette\Utils\Paginator;
 
 
 class CategoryPresenter extends Presenter
@@ -34,7 +35,7 @@ class CategoryPresenter extends Presenter
 	{
 		$query = (new PostQuery())
 			->onlyPublished()
-			->ofCategory($category);
+			->inCategory($category);
 
 		/** @var Paginator $paginator */
 		$paginator = $this['paging']->getPaginator();

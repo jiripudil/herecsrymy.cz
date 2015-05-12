@@ -32,7 +32,7 @@ class PostQuery extends QueryObject
 	 * @param Category $category
 	 * @return PostQuery
 	 */
-	public function ofCategory(Category $category)
+	public function inCategory(Category $category)
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($category) {
 			$builder->andWhere('p.category = :category', $category);

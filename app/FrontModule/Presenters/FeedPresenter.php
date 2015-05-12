@@ -35,7 +35,7 @@ class FeedPresenter extends Presenter
 			->onlyPublished();
 
 		if ($category !== NULL) {
-			$query->ofCategory($category);
+			$query->inCategory($category);
 		}
 
 		$this->posts = $this->em->getRepository(Post::class)
