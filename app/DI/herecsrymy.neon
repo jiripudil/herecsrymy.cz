@@ -11,6 +11,8 @@ services:
 	- Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory
 	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
+	- Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory
+	- Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
 	-
 		implement: Herecsrymy\FrontModule\Components\GoogleAnalytics\IGoogleAnalyticsControlFactory

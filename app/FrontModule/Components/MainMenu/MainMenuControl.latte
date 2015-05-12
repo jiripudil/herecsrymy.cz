@@ -1,6 +1,7 @@
 <div class="menu noprint">
 	<ul>
 		<li><a href="{plink :Front:Homepage:}" n:class="$presenter->isLinkCurrent(':Front:Homepage:*') ? active">O&nbsp;mně</a></li>
+		{*<li><a href="{plink :Front:Events:}" n:class="$presenter->isLinkCurrent(':Front:Events:*') ? active">Události</a></li>*}
 		<li n:foreach="$categories as $category">
 			<a href="{plink :Front:Category: $category}" n:class="$category === $currentCategory ? active">
 				{$category->title}

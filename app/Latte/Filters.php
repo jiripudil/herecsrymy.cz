@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\Latte;
 
+use Herecsrymy\Entities\Event;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
 use Nette\Object;
@@ -72,6 +73,26 @@ class Filters extends Object
 		return $this->cache->load($input, function () use ($input) {
 			return $this->texy->process($input);
 		});
+	}
+
+
+	public function map(Event $event)
+	{
+		$point = $event->locationPoint;
+
+		return 'https://www.google.com/maps/place/'
+			. urlencode($event->location)
+			. '/@'
+			. $point->getLatitude()
+			. ','
+			. $point->getLongitude()
+			. ',16z';
+	}
+
+
+	public function price($price)
+	{
+		return $price . ' Kč';
 	}
 
 }

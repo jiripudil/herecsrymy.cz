@@ -1,0 +1,22 @@
+{if $event === NULL}
+	<p>V&nbsp;nejbližší době bohužel nic nechystám.</p>
+{else}
+	<ul class="eventsList">
+		<li class="event event--list">
+			<h3 class="event-title event-title--small">{$event->name}</h3>
+			<div class="event-datetime">
+				<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
+					<span class="event-date">{$event->datetime|czechDate}</span>
+					<span class="event-time">{$event->datetime|date:'G:i'}</span>
+				</time>
+			</div>
+			<div class="event-info event-info--small">
+				<span class="fa fa-map-marker" title="Místo"></span> {$event->location}
+				{if $event->locationPoint}
+					(<a href="{$event|map}">mapa</a>)
+				{/if}
+			</div>
+		</li>
+	</ul>
+	<a href="{plink Events:}" class="btn">Další události</a>
+{/if}

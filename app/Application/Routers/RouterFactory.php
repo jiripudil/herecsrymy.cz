@@ -40,6 +40,9 @@ class RouterFactory extends Nette\Object
 		// odhlášení newsletteru
 		$router[] = new NRouters\Route('odhlaseni-newsletteru', 'Front:Newsletter:unsubscribe');
 
+		// události
+		// $router[] = new NRouters\Route('udalosti', 'Front:Events:default');
+
 		// RSS feeds
 		$router[] = new NRouters\Route('rss[/<category>]', [
 			'module' => 'Front',

@@ -2,6 +2,8 @@
 
 namespace Herecsrymy\FrontModule\Presenters;
 
+use Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory;
+use Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory;
 use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
@@ -29,6 +31,18 @@ class HomepagePresenter extends Presenter
 		/** @var HeadControl $head */
 		$head = $this['head'];
 		$head->setTitle('Jiří Pudil, brněnský herec s rýmy');
+	}
+
+
+	protected function createComponentRecentPosts(IRecentPostsControlFactory $factory)
+	{
+		return $factory->create();
+	}
+
+
+	protected function createComponentUpcomingEvents(IUpcomingEventsControlFactory $factory)
+	{
+		return $factory->create();
 	}
 
 }

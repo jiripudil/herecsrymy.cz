@@ -5,6 +5,23 @@
 
 <div class="sep cf"></div>
 
+<div class="flex-container">
+	<div class="flex-item">
+		<h2>Poslední tvorba</h2>
+		{control recentPosts}
+	</div>
+	{*<div class="flex-item">
+		<h2>Nejbližší událost</h2>
+		{control upcomingEvents}
+	</div>*}
+	<div class="flex-item">
+		<h2>Facebook</h2>
+		<div class="fb-page" data-href="https://www.facebook.com/herecsrymy" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/herecsrymy"><a href="https://www.facebook.com/herecsrymy">Jiří Pudil, herec s rýmy</a></blockquote></div></div>
+	</div>
+</div>
+
+<div class="sep cf"></div>
+
 <div>
 	<h2>Střípky informací</h2>
 	<img src="{$basePath}/static/images/jiri.jpg" alt="Jiří Pudil, procítěně hrající a zpívající" title="Jiří Pudil, procítěně hrající a zpívající" class="photo">
@@ -19,3 +36,14 @@
 	<h2>Kontakt</h2>
 	<p>Pokud mi potřebujete něco sdělit, pište na <a href="mailto:me&#64;jiripudil.cz">me&#64;jiripudil.cz</a>, v urgentních situacích zkuste vytočit <a href="tel:+420606351567">+420 606 351 567</a>. Najdete mě taky na <span class="fa fa-facebook-square" title="Facebook"></span>&nbsp;<a href="https://facebook.com/jiri.pudil">Facebooku</a> a <span class="fa fa-twitter-square" title="Twitter"></span>&nbsp;<a href="https://twitter.com/jiripudil">Twitteru</a>.</p>
 </div>
+
+<div id="fb-root"></div>
+<script n:syntax="off">
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&appId=273296596032549&version=v2.3";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>

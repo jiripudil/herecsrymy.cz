@@ -1,0 +1,10 @@
+<ul class="postsList">
+	<li class="post post--list" n:foreach="$posts as $post">
+		<h3 class="post-title post-title--small"><a href="{plink Post:default $post}">{$post->title}</a></h3>
+		<div class="post-info post-info--small">
+			<span class="fa fa-tag" title="Kategorie"></span> {$post->category->title}
+			•
+			<span class="fa fa-calendar" title="Publikováno"></span> <time datetime="{$post->publishedOn|date:'Y-m-d H:i'}" title="{$post->publishedOn|czechDate}">{$post->publishedOn|ago}</time>
+		</div>
+	</li>
+</ul>

@@ -226,6 +226,32 @@ blockquote {
 	}
 }
 
+.flex-container {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 580px) {
+		display: block;
+	}
+}
+
+.flex-item {
+	flex: 0 1 49%;
+
+	@media (max-width: 580px) {
+		margin-bottom: 3em;
+	}
+}
+
+.postsList, .eventsList {
+	padding: 0;
+
+	li {
+		list-style-type: none;
+		margin-bottom: 1em;
+	}
+}
+
 
 
 /***** category header *****/
@@ -240,6 +266,10 @@ blockquote {
 
 .category--description {
 	.post-info;
+
+	@media (max-width: 580px) {
+		display: block;
+	}
 }
 
 
@@ -265,41 +295,24 @@ blockquote {
 
 
 
-/***** blog feature *****/
+/***** posts & events *****/
 
-.feature {
-	margin: 0 -1.5em;
-	border-bottom: 1px solid #ccc;
-
-	@media (max-width: 640px) {
-		margin: 0;
-	}
-}
-
-.feature-heading {
-	font-size: 1em;
-	line-height: 1;
-	color: #ccc;
-	font-weight: normal;
-	font-family: @serif-font;
-	border-bottom: 1px solid #ccc;
-}
-
-.feature-more {
-	text-align: right;
-}
-
-.post-title {
+.post-title, .event-title {
 	font-family: @sans-font;
 	font-size: 1.67em;
 	margin: 0;
 }
 
-.post-title--top {
+.post-title--top, .event-title--top {
 	font-size: 1.8em;
 }
 
-.post-info {
+.post-title--small, .event-title--small {
+	font-size: 1.2em;
+	line-height: 1;
+}
+
+.post-info, .event-info {
 	font-family: @sans-font;
 	font-size: .8em;
 	line-height: 1;
@@ -307,7 +320,20 @@ blockquote {
 	margin: 1em 0 3em;
 }
 
-.post--list {
+.event-datetime {
+	font-family: @sans-font;
+}
+
+.event-date {
+	color: @blue;
+	font-weight: bold;
+}
+
+.post-info--small, .event-info--small {
+	margin: 0 0 1em;
+}
+
+.post--list, .event--list {
 	border-bottom: 1px solid #ccc;
 }
 
@@ -409,7 +435,7 @@ p.chordline {
 }
 
 @media print {
-	.noprint {
+	.noprint, audio {
 		display: none;
 	}
 
