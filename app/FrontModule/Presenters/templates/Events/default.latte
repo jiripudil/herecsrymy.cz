@@ -1,0 +1,33 @@
+{block #content}
+<h1>Události</h1>
+
+<div class="sep cf"></div>
+
+{foreach $events as $event}
+	<div class="event event--list">
+		<h2 class="event-title event-title--top">{$event->name}</h2>
+		<div class="event-datetime">
+			<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
+				<span class="event-date">{$event->datetime|czechDate}</span>
+				<span class="event-time">{$event->datetime|date:'G:i'}</span>
+			</time>
+		</div>
+		<div class="event-info">
+			{$event->note}
+			• <span class="fa fa-map-marker" title="Místo"></span> {$event->location}
+			{if $event->locationPoint}
+				(<a href="{$event|map}">mapa</a>)
+			{/if}
+			{if $event->ticketsPrice > 0 && $event->ticketsLink}
+				• <span class="fa fa-ticket" title="Vstupenky"></span> <a href="{$event->ticketsLink}">Koupit vstupenky ({$event->ticketsPrice|price})</a>
+			{/if}
+			{if $event->facebookUrl}
+				• <span class="fa fa-facebook-square" title="Facebook"></span> <a href="{$event->facebookUrl}">FB událost</a>
+			{/if}
+		</div>
+	</div>
+
+	<div class="sep cf"></div>
+{/foreach}
+
+{control newsletter}

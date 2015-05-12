@@ -26,6 +26,8 @@ services:
 	- Herecsrymy\AdminModule\Components\EditPost\IEditPostControlFactory
 	- Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory
 	- Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory
+	- Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory
+	- Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory
 	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
 
 	# sitemap

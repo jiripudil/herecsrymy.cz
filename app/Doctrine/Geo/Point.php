@@ -3,7 +3,7 @@
 namespace Herecsrymy\Doctrine\Geo;
 
 
-class Point
+class Point implements \ArrayAccess
 {
 
 	/** @var float */
@@ -59,6 +59,50 @@ class Point
 	{
 		list($longitude, $latitude) = explode(',', trim($value, '()'));
 		return new static($longitude, $latitude);
+	}
+
+
+	public function offsetExists($offset)
+	{
+		return in_array($offset, ['lat', 'lng', 'address']);
+	}
+
+
+	public function offsetGet($offset)
+	{
+		switch ($offset) {
+			case 'lat':
+				return $this->getLatitude();
+
+			case 'lng':
+				return $this->getLongitude();
+
+			case 'address':
+			default:
+				return NULL;
+		}
+	}
+
+
+	public function offsetSet($offset, $value)
+	{
+		switch ($offset) {
+			case 'lat':
+				$this->latitude = $value;
+				break;
+
+			case 'lng':
+				$this->longitude = $value;
+				break;
+
+			default:
+				return;
+		}
+	}
+
+
+	public function offsetUnset($offset) {
+		// intentionally empty
 	}
 
 }

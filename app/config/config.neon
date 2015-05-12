@@ -24,15 +24,19 @@ extensions:
 	doctrineForms: Kdyby\DoctrineForms\DI\FormsExtension
 	rabbitmq: Kdyby\RabbitMq\DI\RabbitMqExtension
 	monolog: Kdyby\Monolog\DI\MonologExtension
-	jirihraje: Herecsrymy\DI\HerecsrymyExtension
+	gpsPicker: VojtechDobes\NetteForms\GpsPickerExtension
+	herecsrymy: Herecsrymy\DI\HerecsrymyExtension
 
 
 doctrine:
 	metadata:
 		Herecsrymy: %appDir%/Entities
+	types:
+		point: Herecsrymy\Doctrine\Types\PointType
 	dql:
 		string:
 			isNull: Herecsrymy\Doctrine\Dql\IsNull
+			distance: Herecsrymy\Doctrine\Dql\EarthDistance
 
 
 rabbitmq:

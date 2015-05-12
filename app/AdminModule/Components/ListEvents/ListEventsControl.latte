@@ -1,0 +1,30 @@
+<a href="{plink Event:edit}" class="btn"><span class="fa fa-plus" title="Add new event"></span> Add new event</a>
+<div class="sep"></div>
+
+<div>
+	<table width="100%">
+		<thead><tr>
+			<th>Date</th>
+			<th>Name</th>
+			<th>Location</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+		<tr n:foreach="$events as $event">
+			<td>
+				{$event->datetime|date:'d.m.y'}
+			</td>
+			<td width="60%">
+				<span title="{$event->note}">{$event->name}</span>
+			</td>
+			<td>
+				{$event->location}
+			</td>
+			<td>
+				<a href="{plink Event:edit $event->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+				<a n:href="delete! $event->id" data-confirm="Do you really want to delete this event?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
