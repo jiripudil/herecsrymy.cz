@@ -22,7 +22,7 @@ class RecentPostsControl extends Control
 	public function __construct(EntityManager $em)
 	{
 		$query = (new PostQuery())->onlyPublished();
-		$this->posts = $em->getRepository(Post::class)->fetch($query)->applyPaging(0, 3);
+		$this->posts = $em->getRepository(Post::class)->fetch($query)->applyPaging(0, 7);
 	}
 
 
