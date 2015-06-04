@@ -1,0 +1,59 @@
+{form form class => 'adminForm'}
+	<div n:foreach="$form->errors as $error" class="flash flash--error">
+		<span class="fa fa-exclamation-triangle"></span> {$error}
+	</div>
+
+	<p>
+		{label name /}
+		{input name}
+	</p>
+	<p>
+		{label type /}
+		{input type}
+	</p>
+	<p>
+		{input save class => 'btn'}
+	</p>
+{/form}
+
+
+{if ! $isManaged}
+	<div class="flash flash--info">
+		<span class="fa fa-save"></span> You need to save the attachment before uploading files to it.
+	</div>
+{else}
+	<div class="sep"></div>
+	<h2>Files</h2>
+
+	<table width="100%">
+		<thead><tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Size</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+		<tr n:foreach="$files as $file">
+			<td width="60%">{$file->fileName}</td>
+			<td>{$file->fileType}</td>
+			<td>{$file->fileSize|bytes}</td>
+			<td>
+				<a n:href="deleteFile! $file->id" data-confirm="Do you really want to delete this file?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	{form fileUploadForm class => 'adminForm'}
+		<div n:foreach="$form->errors as $error" class="flash flash--error">
+			<span class="fa fa-exclamation-triangle"></span> {$error}
+		</div>
+
+		<p>
+			{input files}
+		</p>
+		<p>
+			{input upload class => 'btn'}
+		</p>
+	{/form}
+{/if}

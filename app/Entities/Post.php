@@ -67,7 +67,7 @@ class Post extends BaseEntity
 	protected $category;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Attachment", mappedBy="post")
+	 * @ORM\OneToMany(targetEntity="Attachment", mappedBy="post", indexBy="id")
 	 * @var Attachment[]|ArrayCollection
 	 */
 	protected $attachments;

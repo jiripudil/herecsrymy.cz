@@ -1,0 +1,13 @@
+<div class="attachment">
+	<video controls preload="auto">
+		<source n:foreach="$attachment->files as $file" src="{$file|webPath}">
+	</video>
+
+	<div class="attachment--download">
+		Stáhnout:
+		{foreach $attachment->files as $file}
+			<a href="{plink File: $file}">{$file->getExtension()|upper}</a> ({$file->fileSize|bytes})
+			{sep} &bull; {/sep}
+		{/foreach}
+	</div>
+</div>

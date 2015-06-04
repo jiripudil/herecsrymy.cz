@@ -13,6 +13,7 @@ services:
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
 	- Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory
 	- Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory
+	- Herecsrymy\FrontModule\Components\Attachments\IAttachmentsControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
 	-
 		implement: Herecsrymy\FrontModule\Components\GoogleAnalytics\IGoogleAnalyticsControlFactory
@@ -31,6 +32,11 @@ services:
 	- Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory
 	- Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory
 	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
+	- Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory
+	- Herecsrymy\AdminModule\Components\EditAttachment\IEditAttachmentControlFactory
+
+	# files
+	- Herecsrymy\Files\FileUploader(%wwwDir%, uploads)
 
 	# sitemap
 	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)

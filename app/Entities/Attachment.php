@@ -20,6 +20,7 @@ class Attachment extends BaseEntity
 	const TYPE_DOCUMENT = 1;
 	const TYPE_AUDIO = 2;
 	const TYPE_VIDEO = 3;
+	const TYPE_PHOTOS = 4;
 
 
 	/**
@@ -59,6 +60,12 @@ class Attachment extends BaseEntity
 		$this->type = $type;
 		$this->post = $post;
 		$this->files = new ArrayCollection();
+	}
+
+
+	public function getDirectoryName()
+	{
+		return substr(md5($this->id), 0, 4);
 	}
 
 }

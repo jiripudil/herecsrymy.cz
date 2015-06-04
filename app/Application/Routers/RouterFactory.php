@@ -2,11 +2,12 @@
 
 namespace Herecsrymy\Application\Routers;
 
+use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\File;
+use Herecsrymy\Entities\Post;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\Routers as NRouters;
-use Herecsrymy\Entities\Category;
-use Herecsrymy\Entities\Post;
 
 
 class RouterFactory extends Nette\Object
@@ -54,6 +55,21 @@ class RouterFactory extends Nette\Object
 				},
 				NRouters\Route::FILTER_OUT => function (Category $category) {
 					return $category->slug;
+				}
+			]
+		]);
+
+		// attachments
+		$router[] = new NRouters\Route('file/<file>', [
+			'module' => 'Front',
+			'presenter' => 'File',
+			'action' => 'default',
+			'file' => [
+				NRouters\Route::FILTER_IN => function ($file) {
+					return $this->em->getRepository(File::class)->find($file);
+				},
+				NRouters\Route::FILTER_OUT => function (File $file) {
+					return $file->id;
 				}
 			]
 		]);

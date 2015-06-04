@@ -1,0 +1,11 @@
+<div class="attachment">
+	<div class="attachment--title">{$attachment->name}</div>
+
+	<div class="attachment--download">
+		Stáhnout:
+		{foreach $attachment->files as $file}
+			<a href="{plink File: $file}">{$file->getExtension()|upper}</a> ({$file->fileSize|bytes})
+			{sep} &bull; {/sep}
+		{/foreach}
+	</div>
+</div>

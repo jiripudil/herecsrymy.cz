@@ -29,6 +29,12 @@ class File extends BaseEntity
 	protected $fileType;
 
 	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $fileSize;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="Attachment", inversedBy="files")
 	 * @ORM\JoinColumn(nullable=FALSE)
 	 * @var Attachment
@@ -36,11 +42,24 @@ class File extends BaseEntity
 	protected $attachment;
 
 
-	public function __construct($fileName, Attachment $attachment)
+	/**
+	 * @param string $fileName
+	 * @param string $fileType
+	 * @param int $fileSize
+	 * @param Attachment $attachment
+	 */
+	public function __construct($fileName, $fileType, $fileSize, Attachment $attachment)
 	{
 		$this->fileName = $fileName;
-		$this->fileType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+		$this->fileType = $fileType;
 		$this->attachment = $attachment;
+		$this->fileSize = $fileSize;
+	}
+
+
+	public function getExtension()
+	{
+		return pathinfo($this->fileName, PATHINFO_EXTENSION);
 	}
 
 }

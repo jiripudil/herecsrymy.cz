@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\AdminModule\Components\EditPost;
 
+use Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory;
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Post;
 use Herecsrymy\Forms\Controls\DateTimeInput;
@@ -75,6 +76,17 @@ class EditPostControl extends Control
 		$form->bindEntity($this->post);
 
 		return $form;
+	}
+
+
+	protected function createComponentListAttachments(IListAttachmentsControlFactory $factory)
+	{
+		$control = $factory->create($this->post);
+		$control->onAdd[] = $control->onDelete[] = function () {
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 

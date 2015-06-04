@@ -1,0 +1,46 @@
+<div class="sep"></div>
+
+<h2>Attachments</h2>
+
+{if ! $isPostManaged}
+	<div class="flash flash--info">
+		<span class="fa fa-save"></span> You need to save the post before attaching something to it.
+	</div>
+{else}
+	<div>
+		Add new:
+		<a href="{plink Attachment:edit post => $post->id, type => \Herecsrymy\Entities\Attachment::TYPE_DOCUMENT}" class="btn">
+			<span class="fa fa-file" title="Document"></span>
+		</a>
+		<a href="{plink Attachment:edit post => $post->id, type => \Herecsrymy\Entities\Attachment::TYPE_AUDIO}" class="btn">
+			<span class="fa fa-volume-up" title="Audio"></span>
+		</a>
+		<a href="{plink Attachment:edit post => $post->id, type => \Herecsrymy\Entities\Attachment::TYPE_VIDEO}" class="btn">
+			<span class="fa fa-video-camera" title="Video"></span>
+		</a>
+		<a href="{plink Attachment:edit post => $post->id, type => \Herecsrymy\Entities\Attachment::TYPE_PHOTOS}" class="btn">
+			<span class="fa fa-picture-o" title="Photo gallery"></span>
+		</a>
+	</div>
+	<div class="sep"></div>
+
+	<table width="100%">
+		<thead><tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Files</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+		<tr n:foreach="$attachments as $attachment">
+			<td width="60%">{$attachment->name}</td>
+			<td>{$attachment->type|attachmentType}</td>
+			<td>{count($attachment->files)}</td>
+			<td>
+				<a href="{plink Attachment:edit $attachment->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+				<a n:href="delete! $attachment->id" data-confirm="Do you really want to delete this attachment?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+{/if}

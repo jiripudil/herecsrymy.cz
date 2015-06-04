@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\FrontModule\Presenters;
 
+use Herecsrymy\FrontModule\Components\Attachments\IAttachmentsControlFactory;
 use Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory;
 use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Nette\Application\UI\Presenter;
@@ -57,6 +58,12 @@ class PostPresenter extends Presenter
 			$this->post->title,
 			$this->link('//this')
 		);
+	}
+
+
+	protected function createComponentAttachments(IAttachmentsControlFactory $factory)
+	{
+		return $factory->create($this->post);
 	}
 
 

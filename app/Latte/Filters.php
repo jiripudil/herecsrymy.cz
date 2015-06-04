@@ -2,9 +2,13 @@
 
 namespace Herecsrymy\Latte;
 
+use Herecsrymy\Entities\Attachment;
 use Herecsrymy\Entities\Event;
+use Herecsrymy\Entities\File;
+use Herecsrymy\Files\FileUploader;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
+use Nette\Http\IRequest;
 use Nette\Object;
 use Herecsrymy\Texy\TexyFactory;
 
@@ -18,11 +22,19 @@ class Filters extends Object
 	/** @var Cache */
 	private $cache;
 
+	/** @var FileUploader */
+	private $uploader;
 
-	public function __construct(TexyFactory $texyFactory, IStorage $cacheStorage)
+	/** @var IRequest */
+	private $httpRequest;
+
+
+	public function __construct(TexyFactory $texyFactory, IStorage $cacheStorage, FileUploader $uploader, IRequest $httpRequest)
 	{
 		$this->texy = $texyFactory->create();
 		$this->cache = new Cache($cacheStorage, __CLASS__);
+		$this->uploader = $uploader;
+		$this->httpRequest = $httpRequest;
 	}
 
 
@@ -93,6 +105,30 @@ class Filters extends Object
 	public function price($price)
 	{
 		return $price . ' Kč';
+	}
+
+
+	public function webPath(File $file)
+	{
+		return $this->httpRequest->getUrl()->getBasePath() . $this->uploader->getDirName() . '/' . $file->attachment->getDirectoryName() . '/' . $file->fileName;
+	}
+
+
+	public function attachmentType($type)
+	{
+		switch ($type) {
+			case Attachment::TYPE_DOCUMENT:
+				return "Document";
+
+			case Attachment::TYPE_AUDIO:
+				return "Audio";
+
+			case Attachment::TYPE_VIDEO:
+				return "Video";
+
+			case Attachment::TYPE_PHOTOS:
+				return "Gallery";
+		}
 	}
 
 }

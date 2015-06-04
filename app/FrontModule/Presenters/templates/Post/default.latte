@@ -15,6 +15,9 @@
 	<div n:if=" ! $post->isPublic()" class="flash flash--info">
 		<span class="fa fa-eye-slash"></span> Preview alert! This post is not published.
 	</div>
+
+	{control attachments}
+
 	<div class="post-body js-focus-overlay">
 		{$post->text|texy|noescape}
 	</div>
