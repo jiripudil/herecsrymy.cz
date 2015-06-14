@@ -28,8 +28,6 @@ gulp.task 'scripts', ->
 			'bower_components/jquery/dist/jquery.min.js'
 			'bower_components/nette-forms/src/assets/netteForms.js'
 			'bower_components/nette.ajax.js/nette.ajax.js'
-			'vendor/vojtech-dobes/nette-forms-gpspicker/client/nette.gpsPicker.js'
-			'bower_components/html.sortable/dist/html.sortable.min.js'
 		])
 		gulp.src 'www/static/js/*.coffee'
 			.pipe plugins.plumber()
@@ -41,6 +39,29 @@ gulp.task 'scripts', ->
 	]
 	.pipe plugins.sourcemaps.init {loadMaps: yes}
 	.pipe plugins.concat 'scripts.js'
+	.pipe plugins.uglify()
+	.pipe plugins.sourcemaps.write '.'
+	.pipe gulp.dest 'www/static/js'
+
+
+gulp.task 'scripts-admin', ->
+	streamee.concatenate [
+		gulp.src([
+			'bower_components/jquery/dist/jquery.min.js'
+			'bower_components/nette-forms/src/assets/netteForms.js'
+			'bower_components/nette.ajax.js/nette.ajax.js'
+			'vendor/vojtech-dobes/nette-forms-gpspicker/client/nette.gpsPicker.js'
+		])
+		gulp.src 'www/static/js/*.coffee'
+		.pipe plugins.plumber()
+		.pipe plugins.sourcemaps.init()
+		.pipe plugins.coffee()
+		.on 'error', gutil.log
+		.pipe plugins.sourcemaps.write()
+		.pipe plugins.plumber.stop()
+	]
+	.pipe plugins.sourcemaps.init {loadMaps: yes}
+	.pipe plugins.concat 'admin.js'
 	.pipe plugins.uglify()
 	.pipe plugins.sourcemaps.write '.'
 	.pipe gulp.dest 'www/static/js'

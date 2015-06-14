@@ -39,7 +39,7 @@ trait TAdminPresenter
 		$head->addTitlePart('Admin');
 		$head->setTitleReversed(TRUE);
 		$head->addStyle('static/css/admin.css');
-		$head->addScript('static/js/scripts.js');
+		$head->addScript('static/js/admin.js');
 
 		$head->setFavicon('favicon.ico');
 
