@@ -48,7 +48,11 @@ class AttachmentPresenter extends Presenter
 
 		$this['editAttachment']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');
-			$this->redirect('this');
+			$this->redirect('this', [
+				'id' => $this->attachment->id,
+				'post' => NULL,
+				'type' => NULL,
+			]);
 		};
 	}
 
