@@ -41,6 +41,8 @@ class TexyFactory extends Object
 		}
 
 		$el = \TexyHtml::el('span');
+		$el->class = 'chord';
+
 		$strong = $el->create('strong');
 		$strong->create('span')->setText('[');
 		$strong->add($content);
