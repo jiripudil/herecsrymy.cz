@@ -54,6 +54,12 @@ class Post extends BaseEntity
 	protected $publishedOn;
 
 	/**
+	 * @ORM\Column(type="boolean", options={"default":"0"})
+	 * @var bool
+	 */
+	protected $containsChords;
+
+	/**
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
 	 * @ORM\JoinColumn(nullable=FALSE)
 	 * @var Category

@@ -378,9 +378,25 @@ blockquote {
 }
 
 
-/***** chordline *****/
+/***** chords *****/
 
-// by Petr pixy Staníček
+.post-chords-controls {
+	font-family: @sans-font;
+	font-size: .9em;
+	margin-bottom: 1.5em;
+
+	a {
+		color: @blue;
+
+		&:hover {
+			color: @blue-dark;
+			background: transparent;
+			text-decoration: underline;
+		}
+	}
+}
+
+// inspired by Petr pixy Staníček
 // http://wellstyled.com/singlelang.php?lang=en&page=css-chords-formatting.html
 
 .chord strong {

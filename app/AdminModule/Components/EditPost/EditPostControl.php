@@ -55,6 +55,8 @@ class EditPostControl extends Control
 		$form->addTextArea('text', 'Text')
 			->setRequired('Please enter text.');
 
+		$form->addCheckbox('containsChords', 'Show chords controls');
+
 		$form->addSelect('category', 'Category')
 			->setRequired('Please select category.')
 			->setOption(IComponentMapper::ITEMS_TITLE, 'title');

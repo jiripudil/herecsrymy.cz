@@ -53,6 +53,29 @@
 			window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
 		</script>
 	</div>
+
+	<script n:if="$post->containsChords">
+		$(function () {
+			var $controls = $('<div class="post-chords-controls"><a href="#" class="js-toggle-chords">Skrýt akordy</a></div>');
+			$('.post-body').before($controls);
+
+			var hidden = false;
+			$('.js-toggle-chords').on('click', function (e) {
+				if (hidden) {
+					$('.chord').show();
+					$(this).html('Skrýt akordy');
+					hidden = false;
+
+				} else {
+					$('.chord').hide();
+					$(this).html('Zobrazit akordy');
+					hidden = true;
+				}
+
+				e.preventDefault();
+			});
+		});
+	</script>
 </div>
 
 {include ../@license.latte}
