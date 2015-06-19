@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\AdminModule\Components\ListPosts;
 
+use Herecsrymy\AdminModule\Components\FilterPosts\IFilterPostsControlFactory;
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Post;
 use Herecsrymy\Entities\Queries\PostQuery;
@@ -29,9 +30,16 @@ class ListPostsControl extends Control
 	public function __construct(EntityManager $em)
 	{
 		$this->em = $em;
+	}
+
+
+	protected function attached($parent)
+	{
+		parent::attached($parent);
 
 		$query = (new PostQuery())
-			->joinCategories();
+			->joinCategories()
+			->filtered($this['filter']->getFilter());
 		$this->posts = $this->em->getRepository(Post::class)->fetch($query);
 	}
 
@@ -53,6 +61,12 @@ class ListPostsControl extends Control
 
 
 	protected function createComponentPaging(IPagingControlFactory $factory)
+	{
+		return $factory->create();
+	}
+
+
+	protected function createComponentFilter(IFilterPostsControlFactory $factory)
 	{
 		return $factory->create();
 	}

@@ -57,6 +57,26 @@ class PostQuery extends QueryObject
 
 
 	/**
+	 * @param PostFilter $filter
+	 * @return PostQuery
+	 */
+	public function filtered(PostFilter $filter)
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($filter) {
+			if ($filter->getCategory() !== NULL) {
+				$builder->andWhere('p.category = :category', $filter->getCategory());
+			}
+
+			if ($filter->getPublished() !== NULL) {
+				$builder->andWhere('p.published = :published', $filter->getPublished());
+			}
+		};
+
+		return $this;
+	}
+
+
+	/**
 	 * @param Kdyby\Persistence\Queryable $dao
 	 * @return \Doctrine\ORM\Query|Kdyby\Doctrine\QueryBuilder
 	 */

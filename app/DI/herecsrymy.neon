@@ -26,6 +26,7 @@ services:
 	- Herecsrymy\AdminModule\Components\LoginForm\ILoginFormControlFactory
 	- Herecsrymy\AdminModule\Components\FlashMessages\IFlashMessagesControlFactory
 	- Herecsrymy\AdminModule\Components\ListPosts\IListPostsControlFactory
+	- Herecsrymy\AdminModule\Components\FilterPosts\IFilterPostsControlFactory
 	- Herecsrymy\AdminModule\Components\EditPost\IEditPostControlFactory
 	- Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory
 	- Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory
