@@ -39,6 +39,7 @@ class ListPostsControl extends Control
 
 		$query = (new PostQuery())
 			->joinCategories()
+			->joinAttachments()
 			->filtered($this['filter']->getFilter());
 		$this->posts = $this->em->getRepository(Post::class)->fetch($query);
 	}

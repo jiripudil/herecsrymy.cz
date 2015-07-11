@@ -57,6 +57,20 @@ class PostQuery extends QueryObject
 
 
 	/**
+	 * @return PostQuery
+	 */
+	public function joinAttachments()
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->leftJoin('p.attachments', 'a')
+				->addSelect('a');
+		};
+
+		return $this;
+	}
+
+
+	/**
 	 * @param PostFilter $filter
 	 * @return PostQuery
 	 */

@@ -18,9 +18,8 @@
 			</tr>
 			<tr n:foreach="$posts as $post">
 				<td width="60%">
-					<a href="{plink :Front:Post: $post}">
-						<span title="{$post->description}">{$post->title}</span>
-					</a>
+					<a href="{plink :Front:Post: $post}"><span title="{$post->description}">{$post->title}</span></a>
+					<span n:if="count($post->attachments) > 0" class="fa fa-paperclip" title="Has attachments"></span>
 				</td>
 				<td>
 					{$post->category->title}
