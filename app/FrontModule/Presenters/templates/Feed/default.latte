@@ -12,13 +12,14 @@
 			<link>{link //Homepage:}</link>
 			<description />
 		{/if}
-	</channel>
 
-	<item n:foreach="$posts as $post">
-		<title>{$post->title}</title>
-		<link>{link //Post:default $post}</link>
-		<comments>{link //Post:default#disqus_thread $post}</comments>
-		<description>{$post->description}</description>
-		<pubDate>{$post->publishedOn|date:'D, d M Y H:i:s O'}</pubDate>
-	</item>
+		<item n:foreach="$posts as $post">
+			<title>{$post->title}</title>
+			<link>{link //Post:default $post}</link>
+			<comments>{link //Post:default#disqus_thread $post}</comments>
+			<description>{$post->description}</description>
+			<category>{$post->category->title}</category>
+			<pubDate>{$post->publishedOn|date:'D, d M Y H:i:s O'}</pubDate>
+		</item>
+	</channel>
 </rss>
