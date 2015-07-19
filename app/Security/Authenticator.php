@@ -34,7 +34,7 @@ class Authenticator
 		/** @var User $user */
 		$user = $this->repository->findOneBy(['email' => $email]);
 
-		if ($user === NULL ||  ! Passwords::verify($password, $user->password)) {
+		if ($user === NULL || ! Passwords::verify($password, $user->password)) {
 			throw new AuthenticationException();
 		}
 

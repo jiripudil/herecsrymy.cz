@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d0546f32de02ea710f0fc7eb8ef3b6ba",
+    "hash": "6e3e9680db4cb808161c81559149760e",
     "packages": [
         {
             "name": "dg/texy",
@@ -1143,7 +1143,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/DoctrineForms/zipball/51ba5bcea2d72d27a2076c97e0d4fdb288b17556",
+                "url": "https://api.github.com/repos/Kdyby/DoctrineForms/zipball/4d13fd94e808fba3ad2201f9481fe1a6ab230a22",
                 "reference": "51ba5bcea2d72d27a2076c97e0d4fdb288b17556",
                 "shasum": ""
             },
@@ -1315,7 +1315,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Monolog/zipball/8625d3e9bc825ce031d5b172194077feada95f0a",
+                "url": "https://api.github.com/repos/Kdyby/Monolog/zipball/4c9873966c21b3c7fce35e4e619240e2ff2a1e82",
                 "reference": "8625d3e9bc825ce031d5b172194077feada95f0a",
                 "shasum": ""
             },
@@ -1573,7 +1573,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Validator/zipball/f69620c0e66da583f3a35d7b868031fa9ef6641f",
+                "url": "https://api.github.com/repos/Kdyby/Validator/zipball/4e9fa62ba04b655eb0c3d069432198ef967ac965",
                 "reference": "f69620c0e66da583f3a35d7b868031fa9ef6641f",
                 "shasum": ""
             },
@@ -1711,29 +1711,33 @@
         },
         {
             "name": "majkl578/nette-identity-doctrine",
-            "version": "dev-nette-23-fix",
+            "version": "v2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lookyman/nette-identity-doctrine.git",
-                "reference": "1a6eed2b71648067c3981a127a59a922ad46bd4d"
+                "url": "https://github.com/Majkl578/nette-identity-doctrine.git",
+                "reference": "2e005a80a35cd61699a923c0d9fe4d66e7cdae63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lookyman/nette-identity-doctrine/zipball/1a6eed2b71648067c3981a127a59a922ad46bd4d",
-                "reference": "1a6eed2b71648067c3981a127a59a922ad46bd4d",
+                "url": "https://api.github.com/repos/Majkl578/nette-identity-doctrine/zipball/2e005a80a35cd61699a923c0d9fe4d66e7cdae63",
+                "reference": "2e005a80a35cd61699a923c0d9fe4d66e7cdae63",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "~2.3",
-                "nette/nette": "~2.0",
+                "nette/nette": "~2.1",
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "kdyby/doctrine": "~2.0"
             },
             "type": "nette-addon",
             "autoload": {
-                "psr-0": {
-                    "Majkl578\\NetteAddons\\Doctrine2Identity\\": "lib/"
+                "psr-4": {
+                    "Majkl578\\NetteAddons\\Doctrine2Identity\\": "lib"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1744,17 +1748,14 @@
             ],
             "description": "Integration of entities implementing IIdentity in Nette 2",
             "keywords": [
-                "authentication",
+                "Authentication",
                 "doctrine",
                 "identity",
                 "nette",
                 "orm",
                 "security"
             ],
-            "support": {
-                "source": "https://github.com/lookyman/nette-identity-doctrine/tree/nette-23-fix"
-            },
-            "time": "2015-03-06 13:31:12"
+            "time": "2015-07-12 19:14:41"
         },
         {
             "name": "monolog/monolog",
@@ -3653,6 +3654,51 @@
     ],
     "packages-dev": [
         {
+            "name": "hamcrest/hamcrest-php",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamcrest/hamcrest-php.git",
+                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/b37020aa976fa52d3de9aa904aa2522dc518f79c",
+                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "replace": {
+                "cordoval/hamcrest-php": "*",
+                "davedevelopment/hamcrest-php": "*",
+                "kodova/hamcrest-php": "*"
+            },
+            "require-dev": {
+                "phpunit/php-file-iterator": "1.3.3",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "hamcrest"
+                ],
+                "files": [
+                    "hamcrest/Hamcrest.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "description": "This is the PHP port of Hamcrest Matchers",
+            "keywords": [
+                "test"
+            ],
+            "time": "2015-05-11 14:41:42"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -3740,16 +3786,16 @@
         },
         {
             "name": "jakub-onderka/php-parallel-lint",
-            "version": "v0.8",
+            "version": "v0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JakubOnderka/PHP-Parallel-Lint.git",
-                "reference": "2b242dcdbdd7369d2a746518ac31bb30c514b728"
+                "reference": "1b693fb455201cacf595163c92bfb1adfa2158d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/2b242dcdbdd7369d2a746518ac31bb30c514b728",
-                "reference": "2b242dcdbdd7369d2a746518ac31bb30c514b728",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/1b693fb455201cacf595163c92bfb1adfa2158d8",
+                "reference": "1b693fb455201cacf595163c92bfb1adfa2158d8",
                 "shasum": ""
             },
             "require": {
@@ -3783,37 +3829,102 @@
             ],
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
-            "time": "2014-10-05 10:19:39"
+            "time": "2015-06-16 10:17:07"
         },
         {
-            "name": "nette/tester",
-            "version": "v1.3.2",
+            "name": "mockery/mockery",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/tester.git",
-                "reference": "2ce1cd9a6d7012ba059efa08613d5cd6e50c6560"
+                "url": "https://github.com/padraic/mockery.git",
+                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/2ce1cd9a6d7012ba059efa08613d5cd6e50c6560",
-                "reference": "2ce1cd9a6d7012ba059efa08613d5cd6e50c6560",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/70bba85e4aabc9449626651f48b9018ede04f86b",
+                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b",
+                "shasum": ""
+            },
+            "require": {
+                "hamcrest/hamcrest-php": "~1.1",
+                "lib-pcre": ">=7.0",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                },
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+            "homepage": "http://github.com/padraic/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "time": "2015-04-02 19:54:00"
+        },
+        {
+            "name": "nette/tester",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/tester.git",
+                "reference": "0807e28b615af7a51acb6903d9f562ccab15fb51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/tester/zipball/0807e28b615af7a51acb6903d9f562ccab15fb51",
+                "reference": "0807e28b615af7a51acb6903d9f562ccab15fb51",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "bin": [
-                "Tester/tester"
+                "src/tester"
             ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
                 "classmap": [
-                    "Tester/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3839,7 +3950,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2015-02-08 04:13:28"
+            "time": "2015-07-16 02:05:19"
         }
     ],
     "aliases": [
@@ -3855,8 +3966,7 @@
         "kdyby/validator": 20,
         "kdyby/doctrine-forms": 20,
         "kdyby/monolog": 20,
-        "doctrine/migrations": 15,
-        "majkl578/nette-identity-doctrine": 20
+        "doctrine/migrations": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

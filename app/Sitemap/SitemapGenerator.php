@@ -5,8 +5,8 @@ namespace Herecsrymy\Sitemap;
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
 use Herecsrymy\Entities\Queries\PostQuery;
-use Kdyby\Doctrine\EntityDao;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\Doctrine\EntityRepository;
 use Nette\Application\LinkGenerator;
 use Nette\Utils\Html;
 
@@ -17,10 +17,10 @@ class SitemapGenerator
 	/** @var string */
 	private $fileName;
 
-	/** @var EntityDao */
+	/** @var EntityRepository */
 	private $categoryRepo;
 
-	/** @var EntityDao */
+	/** @var EntityRepository */
 	private $postRepo;
 
 	/** @var LinkGenerator */
@@ -66,7 +66,7 @@ class SitemapGenerator
 			fwrite($sitemap, $postTag . PHP_EOL);
 		}
 
-		fwrite($sitemap, '</urlset>');
+		fwrite($sitemap, '</urlset>' . PHP_EOL);
 		fclose($sitemap);
 	}
 

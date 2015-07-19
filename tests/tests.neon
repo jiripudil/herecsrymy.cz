@@ -1,3 +1,12 @@
-doctrine:
-	driver: pdo_sqlite
-	memory: yes
+#doctrine:
+#	driver: pdo_sqlite
+#	memory: yes
+
+
+rabbitmq:
+	connection:
+		host: localhost
+		port: 5672
+		user: test
+		password: test
+		vhost: /

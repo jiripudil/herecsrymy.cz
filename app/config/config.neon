@@ -29,6 +29,7 @@ extensions:
 
 
 doctrine:
+	defaultRepositoryClass: Kdyby\Doctrine\EntityRepository
 	metadata:
 		Herecsrymy: %appDir%/Entities
 	types:

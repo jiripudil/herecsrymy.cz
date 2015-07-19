@@ -1,33 +1,17 @@
 <?php
 
-return call_user_func(function () {
-	/** @var \Composer\Autoload\ClassLoader $composer */
-	$composer = require_once __DIR__ . '/../vendor/autoload.php';
-	$composer->add('JiriHrajeTests', __DIR__);
+/** @var \Composer\Autoload\ClassLoader $composer */
+$composer = require_once __DIR__ . '/../vendor/autoload.php';
+$composer->addPsr4('Herecsrymy\\', __DIR__ . '/../app');
+$composer->add('HerecsrymyTests', __DIR__);
 
-	if ( ! class_exists('Tester\Assert')) {
-		echo 'Install Nette Tester using `composer install --dev`';
-		exit(1);
-	}
+if ( ! class_exists('Tester\Assert')) {
+	echo 'Install Nette Tester using `composer update --dev`';
+	exit(1);
+}
 
-	\Tester\Environment::setup();
+Tester\Environment::setup();
+date_default_timezone_set('Europe/Prague');
 
-	$configurator = new \Nette\Configurator;
-
-	$configurator->setTempDirectory(__DIR__ . '/temp');
-	$configurator->setDebugMode(FALSE);
-
-	$configurator->addParameters([
-		'appDir' => __DIR__ . '/../app',
-	]);
-
-	$robotLoader = $configurator->createRobotLoader()
-		->addDirectory(__DIR__ . '/../app')
-		->register();
-	$composer->addClassMap($robotLoader->getIndexedClasses());
-
-	$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
-	$configurator->addConfig(__DIR__ . '/tests.neon');
-
-	return $configurator->createContainer();
-});
+define('TEMP_DIR', __DIR__ . '/temp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
+Tester\Helpers::purge(TEMP_DIR);

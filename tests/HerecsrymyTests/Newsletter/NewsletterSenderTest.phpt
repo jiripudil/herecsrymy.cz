@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @testCase
+ */
+
+namespace HerecsrymyTests\Newsletter;
+
+use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\NewsletterSubscription;
+use Herecsrymy\Entities\Post;
+use Herecsrymy\Newsletter\NewsletterSender;
+use HerecsrymyTests\CreateContainer;
+use Kdyby\Doctrine\EntityManager;
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\ITemplateFactory;
+use Nette\Mail\IMailer;
+use Nette\Mail\Message;
+use Tester\Assert;
+use Tester\TestCase;
+
+
+require_once __DIR__ . '/../../bootstrap.php';
+
+
+class NewsletterSenderTest extends TestCase
+{
+
+	use CreateContainer;
+
+
+	public function testSendNewsletter()
+	{
+		$subscription = new NewsletterSubscription('john.doe@example.com');
+		$subscription->unsubscribeHash = 'acbd18db4cc2f85cedef654fccc4a4d8';
+
+		$category = new Category('foo');
+		$category->slug = 'foo';
+
+		$post = new Post('Foo');
+		$post->slug = 'foo';
+		$post->description = 'foo bar baz';
+		$post->category = $category;
+
+		$mailer = \Mockery::mock(IMailer::class);
+		$mailer->shouldReceive('send')
+			->andReturnUsing(function (Message $message) {
+				Assert::same(['john.doe@example.com' => NULL], $message->getHeader('To'));
+				Assert::same(['system@jiripudil.cz' => 'Jiří Pudil'], $message->getFrom());
+				Assert::same('Nový příspěvek Foo na herecsrymy.cz', $message->getSubject());
+				Assert::same('http://example.com/newsletter/unsubscribe?hash=acbd18db4cc2f85cedef654fccc4a4d88eb1b522f60d11fa897de1dc6351b7e8', $message->getHeader('List-Unsubscribe'));
+				Assert::same(file_get_contents(__DIR__ . '/newPost.html'), $message->getHtmlBody());
+			});
+
+		$linkGenerator = \Mockery::mock(LinkGenerator::class);
+		$linkGenerator->shouldReceive('link')
+			->andReturnUsing(function ($destination, array $params = []) {
+				$refUri = 'http://example.com';
+
+				if ($destination === 'Front:Newsletter:unsubscribe') {
+					return $refUri . '/newsletter/unsubscribe?hash=' . $params['hash'];
+
+				} elseif ($destination === 'Front:Post:') {
+					return $refUri . '/' . $params['post']->category->slug . '/' . $params['post']->slug;
+				}
+			});
+
+		$em = \Mockery::mock(EntityManager::class);
+
+		$templateFactory = $this->createContainer()->getByType(ITemplateFactory::class);
+
+		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory);
+		$sender->sendNewsletter($subscription, $post);
+	}
+
+
+	protected function tearDown()
+	{
+		\Mockery::close();
+	}
+
+}
+
+
+(new NewsletterSenderTest())->run();

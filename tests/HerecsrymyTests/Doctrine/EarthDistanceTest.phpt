@@ -4,30 +4,33 @@
  * @testCase
  */
 
-namespace HerecSeSlovyTests\Doctrine;
+namespace HerecsrymyTests\Doctrine;
 
 use Doctrine;
-use HerecSeSlovy;
-use HerecSeSlovy\Doctrine\Geo;
+use Herecsrymy;
+use Herecsrymy\Doctrine\Geo;
+use HerecsrymyTests\CreateContainer;
 use Kdyby;
 use Nette\DI\Container;
 use Tester;
 use Tester\Assert;
 
 
-$container = require_once __DIR__ . '/../../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 
 class EarthDistanceTest extends Tester\TestCase
 {
 
+	use CreateContainer;
+
 	/** @var Kdyby\Doctrine\EntityManager */
 	private $em;
 
 
-	public function __construct(Container $container)
+	protected function setUp()
 	{
-		$this->em = $container->getByType(Kdyby\Doctrine\EntityManager::class);
+		$this->em = $this->createContainer()->getByType(Kdyby\Doctrine\EntityManager::class);
 	}
 
 
@@ -40,7 +43,7 @@ class EarthDistanceTest extends Tester\TestCase
 		$to = new Geo\Point(-3, 4);
 
 		$qb = $this->em->createQueryBuilder()
-			->select('e.id')->from(HerecSeSlovy\Model\Concerts\Concert::class, 'e')
+			->select('e.id')->from(Herecsrymy\Entities\Event::class, 'e')
 			->where('DISTANCE(e.location_point, :to) = :distance')
 			->setParameters([
 				'to' => $to,
@@ -48,7 +51,7 @@ class EarthDistanceTest extends Tester\TestCase
 			]);
 
 		self::assertQuery(
-			'SELECT e.id FROM HerecSeSlovy\Model\Concerts\Concert e WHERE DISTANCE(e.location_point, :to) = :distance',
+			'SELECT e.id FROM Herecsrymy\Entities\Event e WHERE DISTANCE(e.location_point, :to) = :distance',
 			[
 				'to' => $to,
 				'distance' => 42,
@@ -68,7 +71,7 @@ class EarthDistanceTest extends Tester\TestCase
 		$to = new Geo\Point(-3, 4);
 
 		$qb = $this->em->createQueryBuilder()
-			->select('e.id')->from(HerecSeSlovy\Model\Concerts\Concert::class, 'e')
+			->select('e.id')->from(Herecsrymy\Entities\Event::class, 'e')
 			->where('DISTANCE(:from, :to) = :distance')
 			->setParameters([
 				'from' => $from,
@@ -77,7 +80,7 @@ class EarthDistanceTest extends Tester\TestCase
 			]);
 
 		self::assertQuery(
-			'SELECT e.id FROM HerecSeSlovy\Model\Concerts\Concert e WHERE DISTANCE(:from, :to) = :distance',
+			'SELECT e.id FROM Herecsrymy\Entities\Event e WHERE DISTANCE(:from, :to) = :distance',
 			[
 				'from' => $from,
 				'to' => $to,
@@ -106,4 +109,4 @@ class EarthDistanceTest extends Tester\TestCase
 }
 
 
-(new EarthDistanceTest($container))->run();
+(new EarthDistanceTest())->run();
