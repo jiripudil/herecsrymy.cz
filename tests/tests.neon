@@ -1,6 +1,8 @@
-#doctrine:
-#	driver: pdo_sqlite
-#	memory: yes
+doctrine:
+	driver: pdo_pgsql
+	user: postgres
+	password:
+	dbname: herecsrymy_test
 
 
 rabbitmq:
