@@ -1,0 +1,11 @@
+doctrine:
+	driver: pdo_pgsql
+	user: postgres
+	password:
+	dbname: herecsrymy_test
+
+
+rabbitmq:
+	connection:
+		user: guest
+		password: guest

@@ -22,6 +22,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source --dev
   - php ./vendor/bin/parallel-lint -e php,phpt --exclude ./vendor .
   - psql -c 'create database herecsrymy_test;' -U postgres
+  - cp ./tests/travis.neon ./app/config/local.neon
 
 script: ./vendor/bin/tester -c ./tests/php-unix.ini ./tests/HerecsrymyTests
 
