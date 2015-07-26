@@ -37,7 +37,9 @@ class AttachmentsControl extends Control
 	public function render()
 	{
 		foreach ($this->attachments as $attachment) {
-			$this['attachment-' . $attachment->id]->render();
+			if ($attachment->displayed) {
+				$this['attachment-' . $attachment->id]->render();
+			}
 		}
 	}
 

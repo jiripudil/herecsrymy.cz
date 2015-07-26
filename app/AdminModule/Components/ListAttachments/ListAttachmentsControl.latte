@@ -33,7 +33,10 @@
 		</tr></thead>
 		<tbody>
 		<tr n:foreach="$attachments as $attachment">
-			<td width="60%">{$attachment->name}</td>
+			<td width="60%">
+				<span n:class="fa, $attachment->displayed ? fa-eye : fa-eye-slash" title="{$attachment->displayed ? 'Displayed publicly' : 'Hidden from public'}"></span>
+				{$attachment->name}
+			</td>
 			<td>{$attachment->type|attachmentType}</td>
 			<td>{count($attachment->files)}</td>
 			<td>

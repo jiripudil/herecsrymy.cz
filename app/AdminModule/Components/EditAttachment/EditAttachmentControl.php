@@ -69,6 +69,7 @@ class EditAttachmentControl extends Control
 			Attachment::TYPE_VIDEO => 'Video',
 			Attachment::TYPE_PHOTOS => 'Gallery',
 		])->setRequired('Please select type.');
+		$form->addCheckbox('displayed', 'Displayed publicly');
 
 		$form->addSubmit('save', 'Save');
 		$form->onSuccess[] = function (EntityForm $form) {

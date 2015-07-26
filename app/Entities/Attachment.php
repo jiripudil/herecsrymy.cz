@@ -36,6 +36,12 @@ class Attachment extends BaseEntity
 	protected $type;
 
 	/**
+	 * @ORM\Column(type="boolean", nullable=TRUE)
+	 * @var bool
+	 */
+	protected $displayed;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="File", mappedBy="attachment")
 	 * @var File[]|ArrayCollection
 	 */
@@ -60,6 +66,7 @@ class Attachment extends BaseEntity
 		$this->type = $type;
 		$this->post = $post;
 		$this->files = new ArrayCollection();
+		$this->displayed = TRUE;
 	}
 
 

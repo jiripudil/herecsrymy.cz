@@ -12,6 +12,10 @@
 		{input type}
 	</p>
 	<p>
+		{label displayed /}
+		{input displayed}
+	</p>
+	<p>
 		{input save class => 'btn'}
 	</p>
 {/form}
@@ -34,7 +38,7 @@
 		</tr></thead>
 		<tbody>
 		<tr n:foreach="$files as $file">
-			<td width="60%">{$file->fileName}</td>
+			<td width="60%">{$file|webPath}</td>
 			<td>{$file->fileType}</td>
 			<td>{$file->fileSize|bytes}</td>
 			<td>
