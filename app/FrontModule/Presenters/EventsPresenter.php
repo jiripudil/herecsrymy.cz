@@ -48,6 +48,12 @@ class EventsPresenter extends Presenter
 	}
 
 
+	public function renderExport(Event $event)
+	{
+		$this->template->event = $event;
+	}
+
+
 	protected function createComponentHeader(IHeaderControlFactory $factory)
 	{
 		return $factory->create('small');

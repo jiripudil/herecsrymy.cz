@@ -1,0 +1,19 @@
+{contentType text/calendar; charset=utf-8}
+{layout none}
+{contentType text/calendar; charset=utf-8}
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//example.org//iCal 4.0.3//CS
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:{$event->datetime|date:'Ymd\THis'}-{md5($event->id)}@herecsrymy.cz
+DTSTAMP:{$event->datetime|date:'Ymd\THis'}
+DTSTART;TZID=Europe/Prague:{$event->datetime|date:'Ymd\THis'}
+DURATION:PT2H
+SUMMARY;LANGUAGE=cs:{$event->name}
+DESCRIPTION:{$event->note}
+LOCATION:{$event->location}
+{if $event->locationPoint}GEO:{$event->locationPoint->getLatitude()};{$event->locationPoint->getLongitude()}{/if}
+CLASS:PUBLIC
+END:VEVENT
+END:VCALENDAR

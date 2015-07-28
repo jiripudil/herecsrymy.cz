@@ -3,6 +3,7 @@
 namespace Herecsrymy\Application\Routers;
 
 use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\File;
 use Herecsrymy\Entities\Post;
 use Kdyby\Doctrine\EntityManager;
@@ -42,7 +43,19 @@ class RouterFactory extends Nette\Object
 		$router[] = new NRouters\Route('odhlaseni-newsletteru', 'Front:Newsletter:unsubscribe');
 
 		// události
-		$router[] = new NRouters\Route('udalosti', 'Front:Events:default');
+		$router[] = new NRouters\Route('udalosti[/<action>/<event>]', [
+			'module' => 'Front',
+			'presenter' => 'Events',
+			'action' => 'default',
+			'event' => [
+				NRouters\Route::FILTER_IN => function ($event) {
+					return $this->em->getRepository(Event::class)->find($event);
+				},
+				NRouters\Route::FILTER_OUT => function (Event $event) {
+					return $event->id;
+				}
+			]
+		]);
 
 		// RSS feeds
 		$router[] = new NRouters\Route('rss[/<category>]', [
