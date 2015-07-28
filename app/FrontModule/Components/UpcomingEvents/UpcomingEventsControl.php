@@ -15,20 +15,20 @@ class UpcomingEventsControl extends Control
 	use TBaseControl;
 
 
-	/** @var Event[] */
-	private $events;
+	/** @var Event */
+	private $event;
 
 
 	public function __construct(EntityManager $em)
 	{
 		$query = (new EventQuery())->upcoming();
-		$this->events = $em->getRepository(Event::class)->fetch($query)->applyPaging(0, 3);
+		$this->event = $em->getRepository(Event::class)->fetchOne($query);
 	}
 
 
 	public function render()
 	{
-		$this->template->events = $this->events;
+		$this->template->event = $this->event;
 		$this->template->render(__DIR__ . '/UpcomingEventsControl.latte');
 	}
 

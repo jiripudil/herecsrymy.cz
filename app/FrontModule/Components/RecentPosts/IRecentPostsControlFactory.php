@@ -5,6 +5,9 @@ namespace Herecsrymy\FrontModule\Components\RecentPosts;
 
 interface IRecentPostsControlFactory
 {
-	/** @return RecentPostsControl */
-	function create();
+	/**
+	 * @param int $numberOfPosts
+	 * @return RecentPostsControl
+	 */
+	function create($numberOfPosts);
 }

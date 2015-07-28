@@ -36,7 +36,7 @@ class HomepagePresenter extends Presenter
 
 	protected function createComponentRecentPosts(IRecentPostsControlFactory $factory)
 	{
-		return $factory->create();
+		return $factory->create(3);
 	}
 
 
