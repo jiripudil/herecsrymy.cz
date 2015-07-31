@@ -50,6 +50,12 @@ class SitemapGenerator
 		$home->create('priority')->setText('0.5');
 		fwrite($sitemap, $home . PHP_EOL);
 
+		$eventsTag = Html::el('url');
+		$eventsTag->create('loc')->setText($this->linkGenerator->link('Front:Events:'));
+		$eventsTag->create('changefreq')->setText('weekly');
+		$eventsTag->create('priority')->setText('0.6');
+		fwrite($sitemap, $eventsTag . PHP_EOL);
+
 		foreach ($categories as $category) {
 			$categoryTag = Html::el('url');
 			$categoryTag->create('loc')->setText($this->linkGenerator->link('Front:Category:', ['category' => $category]));

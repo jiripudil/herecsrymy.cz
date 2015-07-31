@@ -69,13 +69,16 @@ class SitemapGeneratorTest extends TestCase
 
 		$linkGenerator = \Mockery::mock(LinkGenerator::class);
 		$linkGenerator->shouldReceive('link')
-			->times(6)
+			->times(7)
 			->andReturnUsing(function ($destination, array $params = []) {
 				$refUri = 'http://example.com';
 
 				switch ($destination) {
 					case 'Front:Homepage:':
 						return $refUri;
+
+					case 'Front:Events:':
+						return $refUri . '/udalosti';
 
 					case 'Front:Category:':
 						return $refUri . '/' . $params['category']->slug;
