@@ -61,7 +61,7 @@ class SendNewsletterCommand extends Command
 
 		$counter = 0;
 		foreach ($subscriptions as $subscription) {
-			$this->sender->sendNewsletter($subscription, $post);
+			$this->sender->sendPostNewsletter($subscription, $post);
 			$counter++;
 		}
 

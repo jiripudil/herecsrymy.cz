@@ -3,6 +3,7 @@
 namespace Herecsrymy\Newsletter;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Herecsrymy\Entities\Event;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Kdyby\Doctrine\Events;
@@ -20,8 +21,8 @@ class NewsletterListener implements Subscriber
 	/** @var Connection */
 	private $rabbit;
 
-	/** @var Post */
-	private $scheduledPost;
+	/** @var Post|Event */
+	private $scheduledEntity;
 
 
 	public function __construct(Connection $rabbit)
@@ -42,12 +43,12 @@ class NewsletterListener implements Subscriber
 
 	public function postPersist(LifecycleEventArgs $args)
 	{
-		$post = $args->getEntity();
-		if ( ! $post instanceof Post || ! $post->isPublic()) {
+		$entity = $args->getEntity();
+		if ( ! $entity instanceof Event && ( ! $entity instanceof Post || ! $entity->isPublic())) {
 			return;
 		}
 
-		$this->scheduledPost = $post;
+		$this->scheduledEntity = $entity;
 	}
 
 
@@ -63,13 +64,13 @@ class NewsletterListener implements Subscriber
 			return;
 		}
 
-		$this->scheduledPost = $post;
+		$this->scheduledEntity = $post;
 	}
 
 
 	public function postFlush(PostFlushEventArgs $args)
 	{
-		if ($this->scheduledPost === NULL) {
+		if ($this->scheduledEntity === NULL) {
 			return;
 		}
 
@@ -81,10 +82,7 @@ class NewsletterListener implements Subscriber
 			->findBy(['active' => TRUE]);
 
 		foreach ($subscriptions as $subscription) {
-			$message = [
-				NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->getId(),
-				NewsletterSender::MESSAGE_POST_KEY => $this->scheduledPost->getId(),
-			];
+			$message = $this->buildMessage($this->scheduledEntity, $subscription);
 
 			try {
 				$producer->publish(serialize($message));
@@ -93,6 +91,18 @@ class NewsletterListener implements Subscriber
 				Debugger::log($e, 'newsletter');
 			}
 		}
+	}
+
+
+	private function buildMessage($entity, $subscription)
+	{
+		$type = $entity instanceof Event ? NewsletterSender::TYPE_EVENT : NewsletterSender::TYPE_POST;
+
+		return [
+			NewsletterSender::MESSAGE_TYPE_KEY => $type,
+			NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->id,
+			NewsletterSender::MESSAGE_ENTITY_KEY => $entity->id,
+		];
 	}
 
 }

@@ -2,8 +2,10 @@
 
 namespace Herecsrymy\Newsletter;
 
+use Herecsrymy\Entities\Event;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\LinkGenerator;
+use Nette\Application\UI\ITemplate;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Mail\IMailer;
 use Nette\Mail\Message;
@@ -17,8 +19,12 @@ use Tracy\Debugger;
 class NewsletterSender
 {
 
+	const TYPE_POST = 'post';
+	const TYPE_EVENT = 'event';
+
+	const MESSAGE_TYPE_KEY = 'type';
 	const MESSAGE_SUBSCRIPTION_KEY = 'subscription';
-	const MESSAGE_POST_KEY = 'post';
+	const MESSAGE_ENTITY_KEY = 'entity';
 
 	/** @var EntityManager */
 	private $em;
@@ -49,13 +55,56 @@ class NewsletterSender
 	{
 		$data = unserialize($amqpMessage->body);
 		$subscription = $this->em->find(NewsletterSubscription::class, $data[self::MESSAGE_SUBSCRIPTION_KEY]);
-		$post = $this->em->find(Post::class, $data[self::MESSAGE_POST_KEY]);
 
-		$this->sendNewsletter($subscription, $post);
+		if ($data[self::MESSAGE_TYPE_KEY] === self::TYPE_POST) {
+			$post = $this->em->find(Post::class, $data[self::MESSAGE_ENTITY_KEY]);
+			$this->sendPostNewsletter($subscription, $post);
+
+		} else {
+			$event = $this->em->find(Event::class, $data[self::MESSAGE_ENTITY_KEY]);
+			$this->sendEventNewsletter($subscription, $event);
+		}
 	}
 
 
-	public function sendNewsletter(NewsletterSubscription $subscription, Post $post)
+	public function sendPostNewsletter(NewsletterSubscription $subscription, Post $post)
+	{
+		$message = $this->createMessage($subscription, function (ITemplate $template) use ($post) {
+			$template->post = $post;
+			$template->setFile(__DIR__ . '/templates/newPost.latte');
+		});
+
+		try {
+			$this->mailer->send($message);
+
+		} catch (SmtpException $e) {
+			Debugger::log($e, 'newsletter');
+		}
+	}
+
+
+	public function sendEventNewsletter(NewsletterSubscription $subscription, Event $event)
+	{
+		$message = $this->createMessage($subscription, function (ITemplate $template) use ($event) {
+			$template->event = $event;
+			$template->setFile(__DIR__ . '/templates/newEvent.latte');
+		});
+
+		try {
+			$this->mailer->send($message);
+
+		} catch (SmtpException $e) {
+			Debugger::log($e, 'newsletter');
+		}
+	}
+
+
+	/**
+	 * @param NewsletterSubscription $subscription
+	 * @param callable $templateConfigurator
+	 * @return Message
+	 */
+	private function createMessage(NewsletterSubscription $subscription, callable $templateConfigurator = NULL)
 	{
 		$unsubscribeLink = $this->linkGenerator->link('Front:Newsletter:unsubscribe', [
 			'hash' => $subscription->getUnsubscribeHash(),
@@ -68,19 +117,16 @@ class NewsletterSender
 
 		$template = $this->templateFactory->createTemplate();
 		$template->subscription = $subscription;
-		$template->post = $post;
 		$template->unsubscribeLink = $unsubscribeLink;
 		$template->_control = $this->linkGenerator;
-		$template->setFile(__DIR__ . '/templates/newPost.latte');
+
+		if ($templateConfigurator !== NULL) {
+			call_user_func($templateConfigurator, $template);
+		}
 
 		$message->setHtmlBody($template);
 
-		try {
-			$this->mailer->send($message);
-
-		} catch (SmtpException $e) {
-			Debugger::log($e, 'newsletter');
-		}
+		return $message;
 	}
 
 }
