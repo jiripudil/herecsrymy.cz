@@ -59,7 +59,7 @@
 
 	<script n:if="$post->containsChords">
 		$(function () {
-			var $controls = $('<div class="post-chords-controls"><a href="#" class="js-toggle-chords">Skrýt akordy</a></div>');
+			var $controls = $('<div class="post-chords-controls noprint"><a href="#" class="js-toggle-chords">Skrýt akordy</a></div>');
 			$('.post-body').before($controls);
 
 			var hidden = false;
