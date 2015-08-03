@@ -5,7 +5,8 @@
 
 {foreach $events as $event}
 	<div class="event event--list">
-		<h2 class="event-title event-title--top">{$event->name}</h2>
+		<h2 class="event-title event-title--top" id="{$event->datetime|date:'Y-m-d'}">{$event->name}</h2>
+		<div>{$event->note}</div>
 		<div class="event-datetime">
 			<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
 				<span class="event-date">{$event->datetime|czechDate}</span>
@@ -13,18 +14,19 @@
 			</time>
 		</div>
 		<div class="event-info">
-			{$event->note}
-			• <span class="fa fa-map-marker" title="Místo"></span> {$event->location}
+			<span class="fa fa-map-marker" title="Místo"></span> {$event->location}
 			{if $event->locationPoint}
 				(<a href="{$event|map}">mapa</a>)
 			{/if}
-			{if $event->ticketsPrice > 0 && $event->ticketsLink}
-				• <span class="fa fa-ticket" title="Vstupenky"></span> <a href="{$event->ticketsLink}">Koupit vstupenky ({$event->ticketsPrice|price})</a>
-			{/if}
-			{if $event->facebookUrl}
-				• <span class="fa fa-facebook-square" title="Facebook"></span> <a href="{$event->facebookUrl}">FB událost</a>
-			{/if}
-			• <span class="fa fa-download" title="Exportovat"></span> <a n:href="export $event">ICS</a>
+			<div class="event-buttons">
+				{if $event->ticketsPrice > 0 && $event->ticketsLink}
+					<a href="{$event->ticketsLink}" class="btn"><span class="fa fa-ticket" title="Vstupenky"></span> Koupit vstupenky ({$event->ticketsPrice|price})</a>
+				{/if}
+				{if $event->facebookUrl}
+					<a href="{$event->facebookUrl}" class="btn"><span class="fa fa-facebook-square" title="Facebook"></span> Událost na Facebooku</a>
+				{/if}
+				<a n:href="export $event" class="btn"><span class="fa fa-download" title="Exportovat"></span> Export do iCal</a>
+			</div>
 		</div>
 	</div>
 

@@ -3,7 +3,7 @@
 {else}
 	<ul class="eventsList">
 		<li class="event event--list">
-			<h3 class="event-title event-title--small">{$event->name}</h3>
+			<h3 class="event-title event-title--small">{$event->name} <a n:if="$event->facebookUrl" href="{$event->facebookUrl}"><span class="fa fa-facebook-square" title="Událost na Facebooku"></span></a></h3>
 			<div class="event-datetime">
 				<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
 					<span class="event-date">{$event->datetime|czechDate}</span>
