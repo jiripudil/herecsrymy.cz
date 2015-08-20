@@ -3,10 +3,11 @@
 namespace Herecsrymy\Newsletter;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PostFlushEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Kdyby\Doctrine\Events;
 use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
-use Kdyby\Doctrine\EntityManager;
 use Kdyby\Events\Subscriber;
 use Kdyby\RabbitMq\Connection;
 use PhpAmqpLib\Exception\AMQPExceptionInterface;
@@ -16,16 +17,15 @@ use Tracy\Debugger;
 class NewsletterListener implements Subscriber
 {
 
-	/** @var EntityManager */
-	private $em;
-
 	/** @var Connection */
 	private $rabbit;
 
+	/** @var Post */
+	private $scheduledPost;
 
-	public function __construct(EntityManager $em, Connection $rabbit)
+
+	public function __construct(Connection $rabbit)
 	{
-		$this->em = $em;
 		$this->rabbit = $rabbit;
 	}
 
@@ -34,7 +34,8 @@ class NewsletterListener implements Subscriber
 	{
 		return [
 			Events::postPersist,
-			// TODO preUpdate unpublished -> published
+			Events::preUpdate,
+			Events::postFlush,
 		];
 	}
 
@@ -46,13 +47,43 @@ class NewsletterListener implements Subscriber
 			return;
 		}
 
+		$this->scheduledPost = $post;
+	}
+
+
+	public function preUpdate(PreUpdateEventArgs $args)
+	{
+		$post = $args->getEntity();
+		if ( ! $post instanceof Post
+			|| ! $post->isPublic()
+			|| ! $args->hasChangedField('published')
+			|| $args->getOldValue('published') === TRUE
+			|| $args->getNewValue('published') === FALSE) {
+
+			return;
+		}
+
+		$this->scheduledPost = $post;
+	}
+
+
+	public function postFlush(PostFlushEventArgs $args)
+	{
+		if ($this->scheduledPost === NULL) {
+			return;
+		}
+
 		$producer = $this->rabbit->getProducer('sendNewsletter');
 
-		$subscriptions = $this->em->getRepository(NewsletterSubscription::class)->findBy(['active' => TRUE]);
+		/** @var NewsletterSubscription[] $subscriptions */
+		$subscriptions = $args->getEntityManager()
+			->getRepository(NewsletterSubscription::class)
+			->findBy(['active' => TRUE]);
+
 		foreach ($subscriptions as $subscription) {
 			$message = [
-				NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->id,
-				NewsletterSender::MESSAGE_POST_KEY => $post->id,
+				NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->getId(),
+				NewsletterSender::MESSAGE_POST_KEY => $this->scheduledPost->getId(),
 			];
 
 			try {
