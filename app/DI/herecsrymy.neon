@@ -41,15 +41,15 @@ services:
 
 	# sitemap
 	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)
-	- {class: Herecsrymy\Sitemap\SitemapListener, tags: [kdyby.subscriber]}
-	- {class: Herecsrymy\Console\GenerateSitemapCommand, tags: [kdyby.console.command]}
+	- Herecsrymy\Sitemap\SitemapListener
+	- Herecsrymy\Console\GenerateSitemapCommand
 
 	# security
 	- Herecsrymy\Security\Authenticator
-	- {class: Herecsrymy\Console\CreateUserCommand, tags: [kdyby.console.command]}
+	- Herecsrymy\Console\CreateUserCommand
 
 	# newsletter
 	- Herecsrymy\Newsletter\NewsletterSender
-	- {class: Herecsrymy\Console\SendNewsletterCommand, tags: [kdyby.console.command]}
-	- {class: Herecsrymy\Newsletter\NewsletterListener, tags: [kdyby.subscriber]}
+	- Herecsrymy\Console\SendNewsletterCommand
+	- Herecsrymy\Newsletter\NewsletterListener
 	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory

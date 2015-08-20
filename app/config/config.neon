@@ -2,14 +2,15 @@ php:
 	date.timezone: Europe/Prague
 
 
-nette:
-	application:
-		errorPresenter: Error
-		mapping:
-			*: Herecsrymy\*Module\Presenters\*Presenter
-	session:
-		expiration: 14 days
-		cookieSecure: on
+application:
+	errorPresenter: Error
+	mapping:
+		*: Herecsrymy\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+	cookieSecure: on
 
 
 extensions:
@@ -64,3 +65,10 @@ monolog:
 
 migrations:
 	namespace: Herecsrymy\Migrations
+
+
+decorator:
+	Kdyby\Events\Subscriber:
+		tags: [kdyby.subscriber]
+	Symfony\Component\Console\Command\Command:
+		tags: [kdyby.console.command]
