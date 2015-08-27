@@ -36,7 +36,7 @@ class EventPresenter extends Presenter
 
 		$this['editEvent']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');
-			$this->redirect(':Dashboard:');
+			$this->redirect('Dashboard:');
 		};
 	}
 
