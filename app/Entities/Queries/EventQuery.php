@@ -15,6 +15,19 @@ class EventQuery extends QueryObject
 
 
 	/**
+	 * @return EventQuery
+	 */
+	public function onlyPublished()
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->andWhere('e.published = :published', TRUE);
+		};
+
+		return $this;
+	}
+
+
+	/**
 	 * @param Geo\Point $point
 	 * @return EventQuery
 	 */

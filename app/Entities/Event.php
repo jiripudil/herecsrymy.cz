@@ -12,7 +12,9 @@ use VojtechDobes\NetteForms\GpsPoint;
 /**
  * @ORM\Entity()
  * @ORM\Table(indexes={
- *   @ORM\Index(columns={"datetime"})
+ *   @ORM\Index(columns={"datetime", "published"}),
+ *   @ORM\Index(columns={"datetime"}),
+ *   @ORM\Index(columns={"published"})
  * })
  */
 class Event extends BaseEntity
@@ -69,6 +71,12 @@ class Event extends BaseEntity
 	 */
 	protected $facebookUrl;
 
+	/**
+	 * @ORM\Column(type="boolean", options={"default":"1"})
+	 * @var bool
+	 */
+	protected $published;
+
 
 	/**
 	 * @param string $name
@@ -88,6 +96,14 @@ class Event extends BaseEntity
 		}
 
 		$this->locationPoint = $point;
+	}
+
+
+	public function __clone()
+	{
+		$this->datetime = clone $this->datetime;
+		$this->locationPoint = $this->locationPoint !== NULL ? clone $this->locationPoint : NULL;
+		$this->published = FALSE;
 	}
 
 }

@@ -30,9 +30,17 @@ class EventPresenter extends Presenter
 	}
 
 
-	public function actionEdit($id = NULL)
+	public function actionEdit($id = NULL, $repeat = NULL)
 	{
-		$this->event = $id !== NULL ? $this->em->find(Event::class, $id) : new Event('Untitled', new \DateTime());
+		if ($id !== NULL) {
+			$this->event = $this->em->find(Event::class, $id);
+
+		} elseif ($repeat !== NULL) {
+			$this->event = clone $this->em->find(Event::class, $repeat);
+
+		} else {
+			$this->event = new Event('Untitled', new \DateTime());
+		}
 
 		$this['editEvent']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');

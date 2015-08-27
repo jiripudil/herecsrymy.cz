@@ -14,14 +14,16 @@
 			<td>
 				{$event->datetime|date:'d.m.y'}
 			</td>
-			<td width="60%">
+			<td width="50%">
+				<span n:class="fa, $event->published ? fa-eye : fa-eye-slash" title="{$event->published ? 'Published' : 'Unpublished'}"></span>
 				<span title="{$event->note}">{$event->name}</span>
 			</td>
 			<td>
 				{$event->location}
 			</td>
-			<td>
+			<td width="10%">
 				<a href="{plink Event:edit $event->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+				<a href="{plink Event:edit repeat => $event->id}"><span class="fa fa-repeat" title="Repeat"></span></a>
 				<a n:href="delete! $event->id" data-confirm="Do you really want to delete this event?"><span class="fa fa-remove" title="Delete"></span></a>
 			</td>
 		</tr>

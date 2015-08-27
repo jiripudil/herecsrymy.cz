@@ -44,7 +44,9 @@ class NewsletterListener implements Subscriber
 	public function postPersist(LifecycleEventArgs $args)
 	{
 		$entity = $args->getEntity();
-		if ( ! $entity instanceof Event && ( ! $entity instanceof Post || ! $entity->isPublic())) {
+		if (( ! $entity instanceof Event || ! $entity->published)
+			&& ( ! $entity instanceof Post || ! $entity->isPublic())) {
+
 			return;
 		}
 

@@ -33,7 +33,7 @@ class EventsPresenter extends Presenter
 
 	public function actionDefault()
 	{
-		$query = (new EventQuery())->upcoming();
+		$query = (new EventQuery())->onlyPublished()->upcoming();
 		$this->events = $this->em->getRepository(Event::class)->fetch($query);
 	}
 

@@ -60,6 +60,8 @@ class EditEventControl extends Control
 		$form->addText('ticketsLink', 'Tickets link');
 		$form->addText('facebookUrl', 'Facebook URL');
 
+		$form->addCheckbox('published', 'Published');
+
 		$form->addSubmit('save', 'Save');
 		$form->onSuccess[] = function (EntityForm $form) {
 			$this->em->persist($event = $form->getEntity())->flush();
