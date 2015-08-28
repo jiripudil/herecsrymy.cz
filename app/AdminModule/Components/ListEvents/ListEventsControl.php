@@ -5,6 +5,7 @@ namespace Herecsrymy\AdminModule\Components\ListEvents;
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\Queries\EventQuery;
+use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
 
@@ -32,7 +33,7 @@ class ListEventsControl extends Control
 	{
 		$this->em = $em;
 
-		$query = (new EventQuery())->upcoming();
+		$query = (new EventQuery())->newestFirst();
 		$this->events = $this->em->getRepository(Event::class)->fetch($query);
 	}
 
@@ -48,8 +49,14 @@ class ListEventsControl extends Control
 
 	public function render()
 	{
-		$this->template->events = $this->events;
+		$this->template->events = $this->events->applyPaginator($this['paging']->getPaginator(), 10);
 		$this->template->render(__DIR__ . '/ListEventsControl.latte');
+	}
+
+
+	protected function createComponentPaging(IPagingControlFactory $factory)
+	{
+		return $factory->create();
 	}
 
 }

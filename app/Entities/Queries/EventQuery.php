@@ -71,6 +71,19 @@ class EventQuery extends QueryObject
 
 
 	/**
+	 * @return EventQuery
+	 */
+	public function newestFirst()
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->orderBy('e.datetime', 'DESC');
+		};
+
+		return $this;
+	}
+
+
+	/**
 	 * @param \Kdyby\Persistence\Queryable $repository
 	 * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
 	 */
