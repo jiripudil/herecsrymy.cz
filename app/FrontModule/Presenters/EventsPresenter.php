@@ -50,6 +50,10 @@ class EventsPresenter extends Presenter
 
 	public function renderExport(Event $event)
 	{
+		if ( ! $event->published) {
+			$this->error();
+		}
+
 		$this->template->event = $event;
 	}
 
