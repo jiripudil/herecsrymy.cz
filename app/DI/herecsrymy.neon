@@ -13,6 +13,7 @@ services:
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
 	- Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory
 	- Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory
+	- Herecsrymy\FrontModule\Components\Calendar\ICalendarControlFactory
 	- Herecsrymy\FrontModule\Components\Attachments\IAttachmentsControlFactory
 	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
 	-

@@ -5,6 +5,7 @@ namespace Herecsrymy\FrontModule\Presenters;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\Queries\EventQuery;
+use Herecsrymy\FrontModule\Components\Calendar\ICalendarControlFactory;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
@@ -55,6 +56,12 @@ class EventsPresenter extends Presenter
 		}
 
 		$this->template->event = $event;
+	}
+
+
+	protected function createComponentCalendar(ICalendarControlFactory $factory)
+	{
+		return $factory->create();
 	}
 
 

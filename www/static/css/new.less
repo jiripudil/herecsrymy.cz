@@ -349,6 +349,53 @@ blockquote {
 }
 
 
+/***** calendar *****/
+
+.calendar {
+	float: right;
+	width: 33%;
+	box-sizing: border-box;
+	padding-left: 2em;
+	background: #fff;
+}
+
+.calendar-table {
+	text-align: right;
+	border-collapse: collapse;
+
+	.calendar-dayName {
+		background: #eee;
+		padding: .2em;
+	}
+
+	.calendar-day {
+		width: 14.3%;
+		padding: .2em;
+
+		&.calendar-day--isPast {
+			color: #999;
+		}
+
+		&.calendar-day--isToday {
+			color: @blue-dark;
+			font-weight: bold;
+		}
+
+		&.calendar-day--hasEvent {
+			font-weight: bold;
+			background: @blue;
+
+			a {
+				text-decoration: none;
+				display: block;
+				color: #fff;
+				background: inherit;
+			}
+		}
+	}
+}
+
+
 /***** blog *****/
 
 .post-perex {
