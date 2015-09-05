@@ -2,9 +2,11 @@
 
 namespace Herecsrymy\AdminModule\Presenters;
 
-use Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory;
-use Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory;
-use Herecsrymy\AdminModule\Components\ListPosts\IListPostsControlFactory;
+use Herecsrymy\Entities\Category;
+use Herecsrymy\Entities\Event;
+use Herecsrymy\Entities\NewsletterSubscription;
+use Herecsrymy\Entities\Post;
+use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
 
 
@@ -15,39 +17,26 @@ class DashboardPresenter extends Presenter
 	use TSecuredPresenter;
 
 
-	protected function createComponentListPosts(IListPostsControlFactory $factory)
-	{
-		$control = $factory->create();
-		$control->onDelete[] = function () {
-			$this['flashes']->flashMessage('The post has been deleted.', 'success');
-			$this->redirect('this');
-		};
+	/**
+	 * @var EntityManager
+	 */
+	private $em;
 
-		return $control;
+
+	public function __construct(EntityManager $em)
+	{
+		$this->em = $em;
 	}
 
 
-	protected function createComponentListCategories(IListCategoriesControlFactory $factory)
+	public function renderDefault()
 	{
-		$control = $factory->create();
-		$control->onDelete[] = function () {
-			$this['flashes']->flashMessage('The category has been deleted.', 'success');
-			$this->redirect('this');
-		};
-
-		return $control;
-	}
-
-
-	protected function createComponentListEvents(IListEventsControlFactory $factory)
-	{
-		$control = $factory->create();
-		$control->onDelete[] = function () {
-			$this['flashes']->flashMessage('The event has been deleted.', 'success');
-			$this->redirect('this');
-		};
-
-		return $control;
+		$this->template->summary = [
+			'posts' => $this->em->getRepository(Post::class)->countBy(),
+			'categories' => $this->em->getRepository(Category::class)->countBy(),
+			'events' => $this->em->getRepository(Event::class)->countBy(['datetime >' => new \DateTime()]),
+			'subscriptions' => $this->em->getRepository(NewsletterSubscription::class)->countBy(['active' => TRUE]),
+		];
 	}
 
 }

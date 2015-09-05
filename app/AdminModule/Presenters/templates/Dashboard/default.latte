@@ -2,15 +2,20 @@
 
 <h1>Dashboard</h1>
 
-<h2>Posts</h2>
-{control listPosts}
-
-<div class="sep"></div>
-
-<h2>Categories</h2>
-{control listCategories}
-
-<div class="sep"></div>
-
-<h2>Events</h2>
-{control listEvents}
+<ul>
+	<li>
+		<a n:href="Post:"><strong>{$summary['posts']}</strong> post{if $summary['posts'] !== 1}s{/if}</a>
+		<a n:href="Post:edit"><span class="fa fa-plus" title="Add new post"></span></a>
+	</li>
+	<li>
+		<a n:href="Category:"><strong>{$summary['categories']}</strong> categorie{if $summary['categories'] !== 1}s{/if}</a>
+		<a n:href="Category:edit"><span class="fa fa-plus" title="Add new category"></span></a>
+	</li>
+	<li>
+		<a n:href="Event:"><strong>{$summary['events']}</strong> upcoming event{if $summary['events'] !== 1}s{/if}</a>
+		<a n:href="Event:edit"><span class="fa fa-plus" title="Add new event"></span></a>
+	</li>
+	<li>
+		<a n:href="Post:"><strong>{$summary['subscriptions']}</strong> newsletter subscription{if $summary['subscriptions'] !== 1}s{/if}</a>
+	</li>
+</ul>

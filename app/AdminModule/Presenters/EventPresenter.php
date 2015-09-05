@@ -3,6 +3,7 @@
 namespace Herecsrymy\AdminModule\Presenters;
 
 use Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory;
+use Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory;
 use Herecsrymy\Entities\Event;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
@@ -44,7 +45,7 @@ class EventPresenter extends Presenter
 
 		$this['editEvent']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');
-			$this->redirect('Dashboard:');
+			$this->redirect('default');
 		};
 	}
 
@@ -53,6 +54,18 @@ class EventPresenter extends Presenter
 	{
 		$this['head']->addScript('//maps.googleapis.com/maps/api/js?libraries=places&sensor=false');
 		$this->baseBeforeRender();
+	}
+
+
+	protected function createComponentListEvents(IListEventsControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onDelete[] = function () {
+			$this['flashes']->flashMessage('The event has been deleted.', 'success');
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 

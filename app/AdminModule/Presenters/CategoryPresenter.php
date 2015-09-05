@@ -3,6 +3,7 @@
 namespace Herecsrymy\AdminModule\Presenters;
 
 use Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory;
+use Herecsrymy\AdminModule\Components\ListCategories\IListCategoriesControlFactory;
 use Herecsrymy\Entities\Category;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
@@ -34,8 +35,20 @@ class CategoryPresenter extends Presenter
 
 		$this['editCategory']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');
-			$this->redirect('Dashboard:');
+			$this->redirect('default');
 		};
+	}
+
+
+	protected function createComponentListCategories(IListCategoriesControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onDelete[] = function () {
+			$this['flashes']->flashMessage('The category has been deleted.', 'success');
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 

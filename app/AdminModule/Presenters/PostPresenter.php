@@ -3,6 +3,7 @@
 namespace Herecsrymy\AdminModule\Presenters;
 
 use Herecsrymy\AdminModule\Components\EditPost\IEditPostControlFactory;
+use Herecsrymy\AdminModule\Components\ListPosts\IListPostsControlFactory;
 use Herecsrymy\Entities\Post;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
@@ -34,8 +35,20 @@ class PostPresenter extends Presenter
 
 		$this['editPost']->onSave[] = function () {
 			$this['flashes']->flashMessage('Saved.', 'success');
-			$this->redirect('Dashboard:');
+			$this->redirect('default');
 		};
+	}
+
+
+	protected function createComponentListPosts(IListPostsControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onDelete[] = function () {
+			$this['flashes']->flashMessage('The post has been deleted.', 'success');
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 
