@@ -30,6 +30,10 @@ class CalendarControl extends Control
 
 	public function render()
 	{
+		if (empty($this->events)) {
+			return;
+		}
+
 		$today = new \DateTime();
 
 		$startDay = new \DateTime('last Monday');
