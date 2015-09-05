@@ -10,7 +10,7 @@
 			<th></th>
 		</tr></thead>
 		<tbody>
-		<tr n:foreach="$events as $event">
+		<tr n:foreach="$events as $event" n:class="$event->datetime < new \DateTime() ? event-past">
 			<td>
 				{$event->datetime|date:'d.m.y'}
 			</td>
