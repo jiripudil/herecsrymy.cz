@@ -2,8 +2,7 @@
 
 namespace Herecsrymy\FrontModule\Presenters;
 
-use Kdyby\Doctrine\EntityManager;
-use Nette\Application\UI\Presenter;
+use Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
@@ -12,6 +11,8 @@ use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory;
+use Kdyby\Doctrine\EntityManager;
+use Nette\Application\UI\Presenter;
 use Nette\Utils\Paginator;
 
 
@@ -62,6 +63,12 @@ class CategoryPresenter extends Presenter
 	protected function createComponentHeader(IHeaderControlFactory $factory)
 	{
 		return $factory->create('small');
+	}
+
+
+	protected function createComponentDisqus(IDisqusControlFactory $factory)
+	{
+		return $factory->create();
 	}
 
 

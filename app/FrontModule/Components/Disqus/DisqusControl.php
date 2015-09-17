@@ -36,11 +36,28 @@ class DisqusControl extends Control
 
 	public function render()
 	{
+		$this->beforeRender();
+		$this->template->render(__DIR__ . '/DisqusControl.latte');
+	}
+
+
+	/**
+	 * @param string $scriptName
+	 */
+	public function renderScript($scriptName = 'embed')
+	{
+		$this->beforeRender();
+		$this->template->scriptName = $scriptName;
+		$this->template->render(__DIR__ . '/DisqusControl.script.latte');
+	}
+
+
+	private function beforeRender()
+	{
 		$this->template->shortname = $this->shortname;
 		$this->template->identifier = $this->identifier;
 		$this->template->title = $this->title;
 		$this->template->url = $this->url;
-		$this->template->render(__DIR__ . '/DisqusControl.latte');
 	}
 
 }
