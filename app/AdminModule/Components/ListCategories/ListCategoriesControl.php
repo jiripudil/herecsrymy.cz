@@ -50,6 +50,7 @@ class ListCategoriesControl extends Control
 	public function render()
 	{
 		$this->template->categories = $this->categories;
+		$this->template->postsLink = $this->presenter->lazyLink('Post:default');
 		$this->template->render(__DIR__ . '/ListCategoriesControl.latte');
 	}
 

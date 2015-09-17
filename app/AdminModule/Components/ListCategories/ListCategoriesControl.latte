@@ -18,7 +18,9 @@
 					<span n:class="fa, $category[0]->published ? fa-eye : fa-eye-slash" title="{$category[0]->published ? 'Published' : 'Unpublished'}"></span>
 				</td>
 				<td>
-					{$category['postsCount']}
+					<a href="{$postsLink->setParameter('listPosts-filter-category', $category[0]->id)}">
+						{$category['postsCount']}
+					</a>
 				</td>
 				<td>
 					<a href="{plink Category:edit $category[0]->id}"><span class="fa fa-pencil" title="Edit"></span></a>
