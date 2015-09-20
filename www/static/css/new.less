@@ -1,15 +1,25 @@
-@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700;Lora:400,700&subset=latin,latin-ext);
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
-
 @blue: #3390e6;
 @blue-dark: darken(@blue, 20%);
 
-@serif-font: 'Lora', Georgia, Times, serif;
-@sans-font: 'PT Sans', Arial, Helvetica, sans-serif;
+.serif {
+	font-family: Georgia, Times, serif;
+
+	.wf-active & {
+		font-family: 'Lora', Georgia, Times, serif;
+	}
+}
+
+.sans {
+	font-family: Arial, Helvetica, sans-serif;
+
+	.wf-active & {
+		font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+	}
+}
 
 
 body {
-	font-family: @serif-font;
+	.serif();
 	font-size: 1.2em;
 	line-height: 1.5;
 	padding-top: 3em;
@@ -44,20 +54,20 @@ a {
 }
 
 h1 {
-	font-family: @sans-font;
+	.sans();
 	font-weight: 700;
 	font-size: 2.3em;
 }
 
 h2 {
-	font-family: @sans-font;
+	.sans();
 	font-weight: 700;
 	font-size: 1.5em;
 	line-height: 1;
 }
 
 h3 {
-	font-family: @sans-font;
+	.sans();
 }
 
 p img {
@@ -121,7 +131,7 @@ blockquote {
 }
 
 .header-name {
-	font-family: @sans-font;
+	.sans();
 	font-weight: 700;
 	font-size: 2.5em;
 	line-height: 1;
@@ -129,7 +139,7 @@ blockquote {
 }
 
 .header-motto {
-	font-family: @sans-font;
+	.sans();
 	font-size: 1.5em;
 	line-height: 1;
 	color: @blue;
@@ -142,7 +152,7 @@ blockquote {
 
 .header--inline-name {
 	display: inline-block;
-	font-family: @sans-font;
+	.sans();
 	font-weight: 700;
 	font-size: 1.4em;
 	margin-right: .5em;
@@ -159,7 +169,7 @@ blockquote {
 
 .header--inline-motto {
 	display: inline;
-	font-family: @sans-font;
+	.sans();
 	font-size: 1.2em;
 	color: @blue;
 }
@@ -180,7 +190,7 @@ blockquote {
 
 .menu ul {
 	padding-left: 0;
-	font-family: @sans-font;
+	.sans();
 }
 
 .menu li {
@@ -284,7 +294,7 @@ blockquote {
 	margin: -1em;
 	padding: 1em;
 	background: #eee;
-	font-family: @sans-font;
+	.sans();
 	font-size: .9em;
 
 	input {
@@ -301,7 +311,7 @@ blockquote {
 /***** posts & events *****/
 
 .post-title, .event-title {
-	font-family: @sans-font;
+	.sans();
 	font-size: 1.67em;
 	margin: 0;
 }
@@ -316,7 +326,7 @@ blockquote {
 }
 
 .post-info, .event-info {
-	font-family: @sans-font;
+	.sans();
 	font-size: .8em;
 	line-height: 1;
 	color: #999;
@@ -324,7 +334,7 @@ blockquote {
 }
 
 .event-datetime {
-	font-family: @sans-font;
+	.sans();
 }
 
 .event-date {
@@ -419,7 +429,7 @@ blockquote {
 	}
 
 	p {
-		font-family: @sans-font;
+		.sans();
 		font-size: .8em;
 		color: #999;
 		margin: 0;
@@ -428,7 +438,7 @@ blockquote {
 
 .paginator {
 	text-align: center;
-	font-family: @sans-font;
+	.sans();
 	font-size: .9em;
 	list-style-type: none;
 	padding: 0;
@@ -450,7 +460,7 @@ blockquote {
 /***** chords *****/
 
 .post-chords-controls {
-	font-family: @sans-font;
+	.sans();
 	font-size: .9em;
 	margin-bottom: 1.5em;
 
@@ -469,7 +479,7 @@ blockquote {
 // http://wellstyled.com/singlelang.php?lang=en&page=css-chords-formatting.html
 
 .chord strong {
-	font-family: @sans-font;
+	.sans();
 	font-weight: bold;
 	font-size: .9em;
 	line-height: 1;
@@ -486,7 +496,7 @@ blockquote {
 /***** attachments *****/
 
 .attachment {
-	font-family: @sans-font;
+	.sans();
 	font-size: .9em;
 	margin-bottom: 1.5em;
 }
@@ -500,7 +510,7 @@ blockquote {
 }
 
 .attachment--download {
-	font-family: @sans-font;
+	.sans();
 	font-size: .9em;
 	color: #999;
 }
