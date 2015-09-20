@@ -12,12 +12,11 @@ gulp.task 'less', ->
 		.pipe plugins.less
 			paths: ['bower_components']
 			cleancss: yes
-		.on 'error', gutil.log
 		.pipe plugins.autoprefixer
 			browsers: ['last 2 versions', 'ie >= 8']
 			cascade: no
-		.on 'error', gutil.log
 		.pipe plugins.sourcemaps.write '.'
+		.on 'error', gutil.log
 		.pipe plugins.plumber.stop()
 		.pipe gulp.dest 'www/static/css'
 
@@ -33,8 +32,8 @@ gulp.task 'scripts', ->
 			.pipe plugins.plumber()
 			.pipe plugins.sourcemaps.init()
 			.pipe plugins.coffee()
-			.on 'error', gutil.log
 			.pipe plugins.sourcemaps.write()
+			.on 'error', gutil.log
 			.pipe plugins.plumber.stop()
 	]
 	.pipe plugins.sourcemaps.init {loadMaps: yes}
