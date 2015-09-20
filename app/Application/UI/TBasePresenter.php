@@ -45,7 +45,7 @@ trait TBasePresenter
 		$head->setTitle('Jiří Pudil');
 		$head->setTitleReversed(TRUE);
 		$head->addStyle('static/css/new.css');
-		$head->addScript('static/js/scripts.js');
+		$head->addScript('static/js/scripts.js', TRUE);
 		$head->addFeed(HeadControl::FEED_RSS, $this->link(':Front:Feed:'), 'Všechny příspěvky – Jiří Pudil, herec s rýmy');
 
 		$head->setFavicon('favicon-32.png');
