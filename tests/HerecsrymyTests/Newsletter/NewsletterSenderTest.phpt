@@ -116,6 +116,57 @@ class NewsletterSenderTest extends TestCase
 	}
 
 
+	public function testSendCustomNewsletter()
+	{
+		$subscription = new NewsletterSubscription('john.doe@example.com');
+		$subscription->unsubscribeHash = 'acbd18db4cc2f85cedef654fccc4a4d8';
+
+		$subject = 'Test custom newsletteru';
+		$text = <<<TEXY
+Ahoj, toto je test custom newsletteru.
+
+Obsahuje několik odstavců textu a vzápětí následuje seznam:
+
+- s první položkou,
+- druhou položkou
+- a třetí položkou.
+
+Díky za pozornost a ahoj příště!
+
+Jiří Pudil,
+ brněnský herec s rýmy
+TEXY;
+
+
+		$mailer = \Mockery::mock(IMailer::class);
+		$mailer->shouldReceive('send')
+			->andReturnUsing(function (Message $message) use ($subject, $text) {
+				Assert::same(['john.doe@example.com' => NULL], $message->getHeader('To'));
+				Assert::same(['system@jiripudil.cz' => 'Jiří Pudil'], $message->getFrom());
+				Assert::same($subject . ' – herecsrymy.cz', $message->getSubject());
+				Assert::same('http://example.com/newsletter/unsubscribe?hash=acbd18db4cc2f85cedef654fccc4a4d88eb1b522f60d11fa897de1dc6351b7e8', $message->getHeader('List-Unsubscribe'));
+				Assert::same(file_get_contents(__DIR__ . '/custom.html'), $message->getHtmlBody());
+			});
+
+		$linkGenerator = \Mockery::mock(LinkGenerator::class);
+		$linkGenerator->shouldReceive('link')
+			->andReturnUsing(function ($destination, array $params = []) {
+				$refUri = 'http://example.com';
+
+				if ($destination === 'Front:Newsletter:unsubscribe') {
+					return $refUri . '/newsletter/unsubscribe?hash=' . $params['hash'];
+				}
+			});
+
+		$em = \Mockery::mock(EntityManager::class);
+
+		$templateFactory = $this->createContainer()->getByType(ITemplateFactory::class);
+
+		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory);
+		$sender->sendCustomNewsletter($subscription, $subject, $text);
+	}
+
+
 	protected function tearDown()
 	{
 		\Mockery::close();

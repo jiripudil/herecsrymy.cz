@@ -7,27 +7,23 @@ use Herecsrymy\Entities\Event;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Kdyby\Doctrine\Events;
-use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
 use Kdyby\Events\Subscriber;
-use Kdyby\RabbitMq\Connection;
-use PhpAmqpLib\Exception\AMQPExceptionInterface;
-use Tracy\Debugger;
 
 
 class NewsletterListener implements Subscriber
 {
 
-	/** @var Connection */
-	private $rabbit;
+	/** @var NewsletterQueue */
+	private $queue;
 
 	/** @var Post|Event */
 	private $scheduledEntity;
 
 
-	public function __construct(Connection $rabbit)
+	public function __construct(NewsletterQueue $queue)
 	{
-		$this->rabbit = $rabbit;
+		$this->queue = $queue;
 	}
 
 
@@ -76,35 +72,12 @@ class NewsletterListener implements Subscriber
 			return;
 		}
 
-		$producer = $this->rabbit->getProducer('sendNewsletter');
+		if ($this->scheduledEntity instanceof Post) {
+			$this->queue->enqueuePostNewsletter($this->scheduledEntity);
 
-		/** @var NewsletterSubscription[] $subscriptions */
-		$subscriptions = $args->getEntityManager()
-			->getRepository(NewsletterSubscription::class)
-			->findBy(['active' => TRUE]);
-
-		foreach ($subscriptions as $subscription) {
-			$message = $this->buildMessage($this->scheduledEntity, $subscription);
-
-			try {
-				$producer->publish(serialize($message));
-
-			} catch (AMQPExceptionInterface $e) {
-				Debugger::log($e, 'newsletter');
-			}
+		} else {
+			$this->queue->enqueueEventNewsletter($this->scheduledEntity);
 		}
-	}
-
-
-	private function buildMessage($entity, $subscription)
-	{
-		$type = $entity instanceof Event ? NewsletterSender::TYPE_EVENT : NewsletterSender::TYPE_POST;
-
-		return [
-			NewsletterSender::MESSAGE_TYPE_KEY => $type,
-			NewsletterSender::MESSAGE_SUBSCRIPTION_KEY => $subscription->id,
-			NewsletterSender::MESSAGE_ENTITY_KEY => $entity->id,
-		];
 	}
 
 }

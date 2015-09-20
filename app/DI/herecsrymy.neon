@@ -11,6 +11,7 @@ services:
 	- Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory
 	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
+	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory
 	- Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory
 	- Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory
 	- Herecsrymy\FrontModule\Components\Calendar\ICalendarControlFactory
@@ -34,6 +35,7 @@ services:
 	- Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory
 	- Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory
 	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
+	- Herecsrymy\AdminModule\Components\SendNewsletter\ISendNewsletterControlFactory
 	- Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory
 	- Herecsrymy\AdminModule\Components\EditAttachment\IEditAttachmentControlFactory
 
@@ -53,4 +55,4 @@ services:
 	- Herecsrymy\Newsletter\NewsletterSender
 	- Herecsrymy\Console\SendNewsletterCommand
 	- Herecsrymy\Newsletter\NewsletterListener
-	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory
+	- Herecsrymy\Newsletter\NewsletterQueue

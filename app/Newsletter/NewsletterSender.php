@@ -3,6 +3,7 @@
 namespace Herecsrymy\Newsletter;
 
 use Herecsrymy\Entities\Event;
+use Herecsrymy\InvalidArgumentException;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\ITemplate;
@@ -11,20 +12,13 @@ use Nette\Mail\IMailer;
 use Nette\Mail\Message;
 use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
-use Nette\Mail\SmtpException;
+use Nette\Mail\SendException;
 use PhpAmqpLib\Message\AMQPMessage;
 use Tracy\Debugger;
 
 
 class NewsletterSender
 {
-
-	const TYPE_POST = 'post';
-	const TYPE_EVENT = 'event';
-
-	const MESSAGE_TYPE_KEY = 'type';
-	const MESSAGE_SUBSCRIPTION_KEY = 'subscription';
-	const MESSAGE_ENTITY_KEY = 'entity';
 
 	/** @var EntityManager */
 	private $em;
@@ -53,16 +47,23 @@ class NewsletterSender
 	 */
 	public function sendNewsletterFromAMQP(AMQPMessage $amqpMessage)
 	{
-		$data = unserialize($amqpMessage->body);
-		$subscription = $this->em->find(NewsletterSubscription::class, $data[self::MESSAGE_SUBSCRIPTION_KEY]);
+		/** @var Messages\PostMessage|Messages\EventMessage|Messages\CustomMessage $message */
+		$message = unserialize($amqpMessage->body);
+		$subscription = $this->em->find(NewsletterSubscription::class, $message->getSubscription());
 
-		if ($data[self::MESSAGE_TYPE_KEY] === self::TYPE_POST) {
-			$post = $this->em->find(Post::class, $data[self::MESSAGE_ENTITY_KEY]);
+		if ($message instanceof Messages\PostMessage) {
+			$post = $this->em->find(Post::class, $message->getPost());
 			$this->sendPostNewsletter($subscription, $post);
 
-		} else {
-			$event = $this->em->find(Event::class, $data[self::MESSAGE_ENTITY_KEY]);
+		} elseif ($message instanceof Messages\EventMessage) {
+			$event = $this->em->find(Event::class, $message->getEvent());
 			$this->sendEventNewsletter($subscription, $event);
+
+		} elseif ($message instanceof Messages\CustomMessage) {
+			$this->sendCustomNewsletter($subscription, $message->getSubject(), $message->getText());
+
+		} else {
+			throw new InvalidArgumentException(sprintf("Invalid message type %s", get_class($message)));
 		}
 	}
 
@@ -77,7 +78,7 @@ class NewsletterSender
 		try {
 			$this->mailer->send($message);
 
-		} catch (SmtpException $e) {
+		} catch (SendException $e) {
 			Debugger::log($e, 'newsletter');
 		}
 	}
@@ -93,7 +94,24 @@ class NewsletterSender
 		try {
 			$this->mailer->send($message);
 
-		} catch (SmtpException $e) {
+		} catch (SendException $e) {
+			Debugger::log($e, 'newsletter');
+		}
+	}
+
+
+	public function sendCustomNewsletter(NewsletterSubscription $subscription, $subject, $text)
+	{
+		$message = $this->createMessage($subscription, function (ITemplate $template) use ($subject, $text) {
+			$template->subject = $subject;
+			$template->text = $text;
+			$template->setFile(__DIR__ . '/templates/custom.latte');
+		});
+
+		try {
+			$this->mailer->send($message);
+
+		} catch (SendException $e) {
 			Debugger::log($e, 'newsletter');
 		}
 	}
