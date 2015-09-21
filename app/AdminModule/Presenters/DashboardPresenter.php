@@ -17,9 +17,7 @@ class DashboardPresenter extends Presenter
 	use TSecuredPresenter;
 
 
-	/**
-	 * @var EntityManager
-	 */
+	/** @var EntityManager */
 	private $em;
 
 
