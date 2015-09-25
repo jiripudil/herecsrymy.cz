@@ -68,7 +68,7 @@ gulp.task 'scripts-admin', ->
 
 gulp.task 'watch', ->
 	gulp.watch 'www/static/css/*.less', ['less']
-	gulp.watch 'www/static/js/*.coffee', ['scripts']
+	gulp.watch 'www/static/js/*.coffee', ['scripts', 'scripts-admin']
 
 
-gulp.task 'build', ['less', 'scripts']
+gulp.task 'build', ['less', 'scripts', 'scripts-admin']
