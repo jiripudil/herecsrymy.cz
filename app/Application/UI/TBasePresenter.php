@@ -2,7 +2,6 @@
 
 namespace Herecsrymy\Application\UI;
 
-use Herecsrymy\FrontModule\Components\GoogleAnalytics\IGoogleAnalyticsControlFactory;
 use Herecsrymy\FrontModule\Components\Head\HeadControl;
 use Herecsrymy\FrontModule\Components\Head\IHeadControlFactory;
 use Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory;
@@ -24,12 +23,6 @@ trait TBasePresenter
 
 
 	protected function createComponentHead(IHeadControlFactory $factory)
-	{
-		return $factory->create();
-	}
-
-
-	protected function createComponentGoogleAnalytics(IGoogleAnalyticsControlFactory $factory)
 	{
 		return $factory->create();
 	}
