@@ -13,6 +13,8 @@ use Herecsrymy\Entities\Post;
 use Herecsrymy\Newsletter\NewsletterSender;
 use HerecsrymyTests\CreateContainer;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\Monolog\CustomChannel;
+use Kdyby\Monolog\Logger;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Mail\IMailer;
@@ -70,7 +72,13 @@ class NewsletterSenderTest extends TestCase
 
 		$templateFactory = $this->createContainer()->getByType(ITemplateFactory::class);
 
-		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory);
+		$channel = \Mockery::mock(CustomChannel::class);
+		$channel->shouldReceive('addInfo');
+
+		$logger = \Mockery::mock(Logger::class);
+		$logger->shouldReceive('channel')->with('newsletter')->andReturn($channel);
+
+		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory, $logger);
 		$sender->sendPostNewsletter($subscription, $post);
 	}
 
@@ -111,7 +119,13 @@ class NewsletterSenderTest extends TestCase
 
 		$templateFactory = $this->createContainer()->getByType(ITemplateFactory::class);
 
-		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory);
+		$channel = \Mockery::mock(CustomChannel::class);
+		$channel->shouldReceive('addInfo');
+
+		$logger = \Mockery::mock(Logger::class);
+		$logger->shouldReceive('channel')->with('newsletter')->andReturn($channel);
+
+		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory, $logger);
 		$sender->sendEventNewsletter($subscription, $event);
 	}
 
@@ -162,7 +176,13 @@ TEXY;
 
 		$templateFactory = $this->createContainer()->getByType(ITemplateFactory::class);
 
-		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory);
+		$channel = \Mockery::mock(CustomChannel::class);
+		$channel->shouldReceive('addInfo');
+
+		$logger = \Mockery::mock(Logger::class);
+		$logger->shouldReceive('channel')->with('newsletter')->andReturn($channel);
+
+		$sender = new NewsletterSender($em, $mailer, $linkGenerator, $templateFactory, $logger);
 		$sender->sendCustomNewsletter($subscription, $subject, $text);
 	}
 

@@ -5,6 +5,8 @@ namespace Herecsrymy\Newsletter;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\InvalidArgumentException;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\Monolog\CustomChannel;
+use Kdyby\Monolog\Logger;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\ITemplate;
 use Nette\Application\UI\ITemplateFactory;
@@ -32,13 +34,17 @@ class NewsletterSender
 	/** @var ITemplateFactory */
 	private $templateFactory;
 
+	/** @var CustomChannel */
+	private $logger;
 
-	public function __construct(EntityManager $em, IMailer $mailer, LinkGenerator $linkGenerator, ITemplateFactory $templateFactory)
+
+	public function __construct(EntityManager $em, IMailer $mailer, LinkGenerator $linkGenerator, ITemplateFactory $templateFactory, Logger $logger)
 	{
 		$this->em = $em;
 		$this->mailer = $mailer;
 		$this->linkGenerator = $linkGenerator;
 		$this->templateFactory = $templateFactory;
+		$this->logger = $logger->channel('newsletter');
 	}
 
 
@@ -63,7 +69,7 @@ class NewsletterSender
 			$this->sendCustomNewsletter($subscription, $message->getSubject(), $message->getText());
 
 		} else {
-			throw new InvalidArgumentException(sprintf("Invalid message type %s", get_class($message)));
+			Debugger::log(new InvalidArgumentException(sprintf("Invalid message type %s", get_class($message))), 'newsletter');
 		}
 	}
 
@@ -77,6 +83,7 @@ class NewsletterSender
 
 		try {
 			$this->mailer->send($message);
+			$this->logger->addInfo(sprintf('Sent post newsletter to %s', $subscription->email), ['message' => new Messages\PostMessage($subscription, $post)]);
 
 		} catch (SendException $e) {
 			Debugger::log($e, 'newsletter');
@@ -93,6 +100,7 @@ class NewsletterSender
 
 		try {
 			$this->mailer->send($message);
+			$this->logger->addInfo(sprintf('Sent event newsletter to %s', $subscription->email), ['message' => new Messages\EventMessage($subscription, $event)]);
 
 		} catch (SendException $e) {
 			Debugger::log($e, 'newsletter');
@@ -110,6 +118,7 @@ class NewsletterSender
 
 		try {
 			$this->mailer->send($message);
+			$this->logger->addInfo(sprintf('Sent custom newsletter to %s', $subscription->email), ['message' => new Messages\CustomMessage($subscription, $subject, $text)]);
 
 		} catch (SendException $e) {
 			Debugger::log($e, 'newsletter');
@@ -128,6 +137,7 @@ class NewsletterSender
 			'hash' => $subscription->getUnsubscribeHash(),
 		]);
 
+		/** @var Message $message */
 		$message = (new Message())
 			->setFrom('system@jiripudil.cz', 'Jiří Pudil')
 			->addTo($subscription->email)
