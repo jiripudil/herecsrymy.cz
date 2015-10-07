@@ -29,6 +29,8 @@ services:
 	- Herecsrymy\AdminModule\Components\EditCategory\IEditCategoryControlFactory
 	- Herecsrymy\AdminModule\Components\ListEvents\IListEventsControlFactory
 	- Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory
+	- Herecsrymy\AdminModule\Components\ListLocations\IListLocationsControlFactory
+	- Herecsrymy\AdminModule\Components\EditLocation\IEditLocationControlFactory
 	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
 	- Herecsrymy\AdminModule\Components\SendNewsletter\ISendNewsletterControlFactory
 	- Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory

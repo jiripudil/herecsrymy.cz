@@ -1,0 +1,25 @@
+{form form class => 'adminForm'}
+	<div n:foreach="$form->errors as $error" class="flash flash--error">
+		<span class="fa fa-exclamation-triangle"></span> {$error}
+	</div>
+
+	<p>
+		{label name /}
+		{input name}
+	</p>
+	<p>
+		{label address /}
+		{input address}
+	</p>
+	<p>
+		{label point /}
+		{input point}
+	</p>
+	<p>
+		{input save class => 'btn'}
+	</p>
+{/form}
+
+<script>
+	$('[data-nette-gpspicker]').gpspicker();
+</script>

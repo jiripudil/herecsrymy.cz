@@ -4,12 +4,13 @@ namespace Herecsrymy\AdminModule\Components\EditEvent;
 
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Event;
+use Herecsrymy\Entities\Location;
 use Herecsrymy\Forms\Controls\DateTimeInput;
 use Herecsrymy\Forms\EntityForm;
 use Herecsrymy\Forms\IEntityFormFactory;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\DoctrineForms\IComponentMapper;
 use Nette\Application\UI\Control;
-use VojtechDobes\NetteForms\GpsPositionPicker;
 
 
 /**
@@ -52,11 +53,15 @@ class EditEventControl extends Control
 
 		$form['datetime'] = (new DateTimeInput('Date'))
 			->setRequired('Please enter date and time.');
-		$form->addText('location', 'Location')
-			->setRequired('Please enter location.');
-		$form['locationPoint'] = new GpsPositionPicker('Location coords');
+		$form->addSelect('location', 'Location')
+			->setOption(IComponentMapper::ITEMS_TITLE, function (Location $location) {
+				return sprintf('%s (%s)', $location->name, $location->address);
+			})
+			->setOption(IComponentMapper::ITEMS_ORDER, ['name' => 'ASC'])
+			->setRequired('Please select location.');
 
-		$form->addText('ticketsPrice', 'Tickets price');
+		$form->addText('ticketsPrice', 'Tickets price')
+			->setDefaultValue(0);
 		$form->addText('ticketsLink', 'Tickets link');
 		$form->addText('facebookUrl', 'Facebook URL');
 

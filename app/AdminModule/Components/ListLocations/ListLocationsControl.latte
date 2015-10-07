@@ -1,0 +1,28 @@
+<a href="{plink Location:edit}" class="btn"><span class="fa fa-plus" title="Add new location"></span> Add new location</a>
+<div class="sep"></div>
+
+<div>
+	<table width="100%">
+		<thead><tr>
+			<th>Name</th>
+			<th>Address</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+		<tr n:foreach="$locations as $location">
+			<td width="40%">
+				{$location->name}
+			</td>
+			<td>
+				{$location->address}
+			</td>
+			<td width="10%">
+				<a href="{plink Location:edit $location->id}"><span class="fa fa-pencil" title="Edit"></span></a>
+				<a n:href="delete! $location->id" data-confirm="Do you really want to delete this location?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+{control paging}

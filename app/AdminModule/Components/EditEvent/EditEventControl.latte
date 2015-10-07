@@ -17,11 +17,7 @@
 	</p>
 	<p>
 		{label location /}
-		{input location}
-	</p>
-	<p>
-		{label locationPoint /}
-		{input locationPoint}
+		{input location} <a href="{plink Location:}" title="Manage locations"><span class="fa fa-pencil"></span></a>
 	</p>
 	<p>
 		{label ticketsPrice /}
@@ -42,7 +38,3 @@
 		{input save class => 'btn'}
 	</p>
 {/form}
-
-<script>
-	$('[data-nette-gpspicker]').gpspicker();
-</script>

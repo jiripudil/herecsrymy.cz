@@ -8,7 +8,7 @@
 	<h1>{include #title}</h1>
 
 	<p>Ahoj, píšu vám, protože jste se přihlásili k&nbsp;odběru novinek na herecsrymy.cz. Chci vás pozvat na chystanou událost s&nbsp;názvem {$event->name}.</p>
-	<p>Je to {$event->note} a koná se {$event->datetime|czechDate} v {$event->datetime|date:'G:i'} na místě: {$event->location}. Bližší informace o akci, místě a případně vstupenkách najdete na <a n:href="Front:Events:">webu</a>.</p>
+	<p>Je to {$event->note} a koná se {$event->datetime|czechDate} v {$event->datetime|date:'G:i'} na místě: {$event->location->name}. Bližší informace o akci, místě a případně vstupenkách najdete na <a n:href="Front:Events:">webu</a>.</p>
 	<p>Doufám, že se na události potkáme a těším se na vás.</p>
 	<p>Jiří Pudil,<br>brněnský herec s&nbsp;rýmy</p>
 

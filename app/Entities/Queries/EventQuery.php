@@ -34,7 +34,7 @@ class EventQuery extends QueryObject
 	public function nearestTo(Geo\Point $point)
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $qb) use ($point) {
-			$qb->addSelect('DISTANCE(:point, e.locationPoint) AS HIDDEN distance')
+			$qb->addSelect('DISTANCE(:point, l.point) AS HIDDEN distance')
 				->setParameter('point', $point, 'point')
 				->addOrderBy('distance', 'ASC');
 		};
@@ -90,7 +90,8 @@ class EventQuery extends QueryObject
 	protected function doCreateQuery(Kdyby\Persistence\Queryable $repository)
 	{
 		$qb = $repository->createQueryBuilder('e')
-			->select('e');
+			->select('e, l')
+			->innerJoin('e.location', 'l');
 
 		foreach ($this->filters as $filter) {
 			$filter($qb);

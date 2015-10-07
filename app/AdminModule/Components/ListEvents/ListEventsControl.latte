@@ -19,7 +19,7 @@
 				<span title="{$event->note}">{$event->name}</span>
 			</td>
 			<td>
-				{$event->location}
+				{$event->location->name}
 			</td>
 			<td width="10%">
 				<a href="{plink Event:edit $event->id}"><span class="fa fa-pencil" title="Edit"></span></a>

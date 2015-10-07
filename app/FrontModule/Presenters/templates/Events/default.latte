@@ -16,8 +16,8 @@
 			</time>
 		</div>
 		<div class="event-info">
-			<span class="fa fa-map-marker" title="Místo"></span> {$event->location}
-			{if $event->locationPoint}
+			<span class="fa fa-map-marker" title="Místo"></span> {$event->location->name}, {$event->location->address}
+			{if $event->location->point}
 				(<a href="{$event|map}">mapa</a>)
 			{/if}
 			<div class="event-buttons">

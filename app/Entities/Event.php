@@ -3,10 +3,8 @@
 namespace Herecsrymy\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Herecsrymy\Doctrine\Geo\Point;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\BaseEntity;
-use VojtechDobes\NetteForms\GpsPoint;
 
 
 /**
@@ -42,16 +40,10 @@ class Event extends BaseEntity
 	protected $datetime;
 
 	/**
-	 * @ORM\Column(type="string")
-	 * @var string
+	 * @ORM\ManyToOne(targetEntity="Location", cascade={"persist"})
+	 * @var Location
 	 */
 	protected $location;
-
-	/**
-	 * @ORM\Column(type="point", nullable=TRUE)
-	 * @var Point|NULL
-	 */
-	protected $locationPoint;
 
 	/**
 	 * @ORM\Column(type="smallint")
@@ -89,20 +81,9 @@ class Event extends BaseEntity
 	}
 
 
-	public function setLocationPoint($point)
-	{
-		if ($point instanceof GpsPoint) {
-			$point = new Point($point->getLng(), $point->getLat());
-		}
-
-		$this->locationPoint = $point;
-	}
-
-
 	public function __clone()
 	{
 		$this->datetime = clone $this->datetime;
-		$this->locationPoint = $this->locationPoint !== NULL ? clone $this->locationPoint : NULL;
 		$this->published = FALSE;
 	}
 

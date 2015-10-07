@@ -12,9 +12,7 @@ use Nette\Application\UI\Presenter;
 class EventPresenter extends Presenter
 {
 
-	use TAdminPresenter {
-		beforeRender as baseBeforeRender;
-	}
+	use TAdminPresenter;
 	use TSecuredPresenter;
 
 
@@ -47,13 +45,6 @@ class EventPresenter extends Presenter
 			$this['flashes']->flashMessage('Saved.', 'success');
 			$this->redirect('default');
 		};
-	}
-
-
-	protected function beforeRender()
-	{
-		$this['head']->addScript('//maps.googleapis.com/maps/api/js?libraries=places&sensor=false');
-		$this->baseBeforeRender();
 	}
 
 

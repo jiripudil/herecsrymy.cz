@@ -12,8 +12,8 @@ DTSTART;TZID=Europe/Prague:{$event->datetime|date:'Ymd\THis'}
 DURATION:PT2H
 SUMMARY;LANGUAGE=cs:{$event->name}
 DESCRIPTION:{$event->note}
-LOCATION:{$event->location}
-{if $event->locationPoint}GEO:{$event->locationPoint->getLatitude()};{$event->locationPoint->getLongitude()}{/if}
+LOCATION:{$event->location->name}, {$event->location->address}
+{if $event->location->point}GEO:{$event->location->point->getLatitude()};{$event->location->point->getLongitude()}{/if}
 CLASS:PUBLIC
 END:VEVENT
 END:VCALENDAR

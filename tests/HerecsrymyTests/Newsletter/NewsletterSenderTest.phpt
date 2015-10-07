@@ -8,6 +8,7 @@ namespace HerecsrymyTests\Newsletter;
 
 use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Event;
+use Herecsrymy\Entities\Location;
 use Herecsrymy\Entities\NewsletterSubscription;
 use Herecsrymy\Entities\Post;
 use Herecsrymy\Newsletter\NewsletterSender;
@@ -88,9 +89,12 @@ class NewsletterSenderTest extends TestCase
 		$subscription = new NewsletterSubscription('john.doe@example.com');
 		$subscription->unsubscribeHash = 'acbd18db4cc2f85cedef654fccc4a4d8';
 
+		$location = new Location();
+		$location->name = 'Horní dolní';
+
 		$event = new Event('Foo', new \DateTime('2015-08-08 20:00:00'));
 		$event->note = 'největší party roku';
-		$event->location = 'Horní dolní';
+		$event->location = $location;
 
 		$mailer = \Mockery::mock(IMailer::class);
 		$mailer->shouldReceive('send')

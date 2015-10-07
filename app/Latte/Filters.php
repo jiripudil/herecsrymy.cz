@@ -90,10 +90,10 @@ class Filters extends Object
 
 	public function map(Event $event)
 	{
-		$point = $event->locationPoint;
+		$point = $event->location->point;
 
 		return 'https://www.google.com/maps/place/'
-			. urlencode($event->location)
+			. urlencode($event->location->name . ', ' . $event->location->address)
 			. '/@'
 			. $point->getLatitude()
 			. ','
