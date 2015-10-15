@@ -43,7 +43,7 @@ trait TBasePresenter
 
 		$head->setFavicon('favicon-32.png');
 
-		$head->addMeta('http-equiv', 'X-UA-Compatible', 'IE=edge,chrome=1');
+		$head->addMeta('http-equiv', 'X-UA-Compatible', 'IE=edge');
 		$head->addMeta('viewport', 'width=device-width');
 		$head->addMeta('property', 'fb:admins', '1625947532');
 
