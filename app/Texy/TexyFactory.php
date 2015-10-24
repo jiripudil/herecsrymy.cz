@@ -3,20 +3,21 @@
 namespace Herecsrymy\Texy;
 
 use Nette\Object;
+use Texy;
 
 
 class TexyFactory extends Object
 {
 
 	/**
-	 * @return \Texy
+	 * @return Texy\Texy
 	 */
 	public function create()
 	{
-		$texy = new \Texy();
+		$texy = new Texy\Texy();
 
-		$texy->setOutputMode(\Texy::HTML5);
-		$texy->allowedTags = \Texy::ALL;
+		$texy->setOutputMode(Texy\Texy::HTML5);
+		$texy->allowedTags = Texy\Texy::ALL;
 		$texy->headingModule->top = 2;
 
 		$texy->allowed['phrase/cite'] = TRUE;
@@ -27,20 +28,20 @@ class TexyFactory extends Object
 
 
 	/**
-	 * @param \TexyHandlerInvocation $invocation
+	 * @param Texy\HandlerInvocation $invocation
 	 * @param string $phrase
 	 * @param string $content
-	 * @param \TexyModifier $modifier
-	 * @param \TexyLink|NULL $link
-	 * @return \TexyHtml|string|FALSE
+	 * @param Texy\Modifier $modifier
+	 * @param Texy\Link|NULL $link
+	 * @return Texy\HtmlElement|string|FALSE
 	 */
-	public function chordify(\TexyHandlerInvocation $invocation, $phrase, $content, $modifier, $link)
+	public function chordify(Texy\HandlerInvocation $invocation, $phrase, $content, $modifier, $link)
 	{
 		if ($phrase !== 'phrase/cite') {
 			return $invocation->proceed();
 		}
 
-		$el = \TexyHtml::el('span');
+		$el = Texy\HtmlElement::el('span');
 		$el->class = 'chord';
 
 		$strong = $el->create('strong');

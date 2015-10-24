@@ -6,17 +6,18 @@ use Herecsrymy\Entities\Attachment;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\File;
 use Herecsrymy\Files\FileUploader;
+use Herecsrymy\Texy\TexyFactory;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
 use Nette\Http\IRequest;
 use Nette\Object;
-use Herecsrymy\Texy\TexyFactory;
+use Texy\Texy;
 
 
 class Filters extends Object
 {
 
-	/** @var \Texy */
+	/** @var Texy */
 	private $texy;
 
 	/** @var Cache */
