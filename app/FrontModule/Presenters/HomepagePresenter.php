@@ -2,6 +2,7 @@
 
 namespace Herecsrymy\FrontModule\Presenters;
 
+use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory;
 use Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory;
 use Nette\Application\UI\Presenter;
@@ -43,6 +44,17 @@ class HomepagePresenter extends Presenter
 	protected function createComponentUpcomingEvents(IUpcomingEventsControlFactory $factory)
 	{
 		return $factory->create();
+	}
+
+
+	protected function createComponentNewsletter(INewsletterControlFactory $factory)
+	{
+		$control = $factory->create();
+		$control->onSubscribe[] = function () use ($control) {
+			$this->redirect('this');
+		};
+
+		return $control;
 	}
 
 }
