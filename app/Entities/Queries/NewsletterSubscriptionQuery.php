@@ -19,7 +19,7 @@ class NewsletterSubscriptionQuery extends QueryObject
 	public function onlyActive()
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
-			$builder->andWhere('s.active = :active', TRUE);
+			$builder->andWhere('s.active = TRUE');
 		};
 
 		return $this;
@@ -33,7 +33,8 @@ class NewsletterSubscriptionQuery extends QueryObject
 	public function byEmail($email)
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($email) {
-			$builder->andWhere('s.email = :email', $email);
+			$builder->andWhere('s.email = :email')
+				->setParameter('email', $email);
 		};
 
 		return $this;

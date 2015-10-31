@@ -20,7 +20,7 @@ class EventQuery extends QueryObject
 	public function onlyPublished()
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
-			$builder->andWhere('e.published = :published', TRUE);
+			$builder->andWhere('e.published = TRUE');
 		};
 
 		return $this;

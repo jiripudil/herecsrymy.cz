@@ -20,8 +20,9 @@ class PostQuery extends QueryObject
 	public function onlyPublished()
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
-			$builder->andWhere('p.published = :published', TRUE)
-				->andWhere('p.publishedOn <= :now', new \DateTime());
+			$builder->andWhere('p.published = TRUE')
+				->andWhere('p.publishedOn <= :now')
+				->setParameter('now', new \DateTime());
 		};
 
 		return $this;
@@ -35,7 +36,8 @@ class PostQuery extends QueryObject
 	public function inCategory(Category $category)
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($category) {
-			$builder->andWhere('p.category = :category', $category);
+			$builder->andWhere('p.category = :category')
+				->setParameter('category', $category);
 		};
 
 		return $this;
@@ -78,11 +80,13 @@ class PostQuery extends QueryObject
 	{
 		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($filter) {
 			if ($filter->getCategory() !== NULL) {
-				$builder->andWhere('p.category = :category', $filter->getCategory());
+				$builder->andWhere('p.category = :category')
+					->setParameter('category', $filter->getCategory());
 			}
 
 			if ($filter->getPublished() !== NULL) {
-				$builder->andWhere('p.published = :published', $filter->getPublished());
+				$builder->andWhere('p.published = :published')
+					->setParameter('published', $filter->getPublished());
 			}
 		};
 

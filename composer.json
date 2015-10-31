@@ -18,10 +18,10 @@
 
 		"nextras/secured-links": "~1.3.0",
 		"kdyby/autowired": "~1.3.0",
-		"kdyby/annotations": "~2.2.0",
-		"kdyby/events": "~2.4.0",
-		"kdyby/console": "~2.4.0",
-		"kdyby/doctrine": "~2.3.0",
+		"kdyby/annotations": "~2.3.0",
+		"kdyby/events": "~3.0.0",
+		"kdyby/console": "~2.5.0",
+		"kdyby/doctrine": "~3.0.0",
 		"kdyby/translation": "~2.2.0",
 		"kdyby/validator": "dev-master",
 		"kdyby/doctrine-forms": "dev-master",
@@ -29,7 +29,7 @@
 		"kdyby/fake-session": "~2.0.0",
 		"kdyby/monolog": "dev-master",
 		"doctrine/migrations": "1.0.0-ALPHA1 as 1.0.99-dev",
-		"zenify/doctrine-migrations": "~2.1.0",
+		"zenify/doctrine-migrations": "~2.3.0",
 		"majkl578/nette-identity-doctrine": "~2.2",
 		"dg/texy": "~2.8.0",
 		"vojtech-dobes/nette-forms-gpspicker": "~1.3.0"
