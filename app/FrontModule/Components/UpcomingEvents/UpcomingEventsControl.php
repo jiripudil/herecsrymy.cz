@@ -21,7 +21,7 @@ class UpcomingEventsControl extends Control
 
 	public function __construct(EntityManager $em)
 	{
-		$query = (new EventQuery())->onlyPublished()->upcoming();
+		$query = (new EventQuery())->onlyPublished()->upcoming()->onlyOne();
 		$this->event = $em->getRepository(Event::class)->fetchOne($query);
 	}
 
