@@ -41,6 +41,12 @@ class File extends BaseEntity
 	 */
 	protected $attachment;
 
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $downloadCount;
+
 
 	/**
 	 * @param string $fileName
@@ -54,12 +60,19 @@ class File extends BaseEntity
 		$this->fileType = $fileType;
 		$this->attachment = $attachment;
 		$this->fileSize = $fileSize;
+		$this->downloadCount = 0;
 	}
 
 
 	public function getExtension()
 	{
 		return pathinfo($this->fileName, PATHINFO_EXTENSION);
+	}
+
+
+	public function addDownload()
+	{
+		$this->downloadCount++;
 	}
 
 }
