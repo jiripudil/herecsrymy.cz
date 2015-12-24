@@ -19,6 +19,13 @@ $ ->
 		if ! confirm $(this).data 'confirm'
 			e.preventDefault()
 
+	$(document).on 'click', '.cookieLaw-ok', (e) ->
+		date = new Date()
+		date.setFullYear(date.getFullYear() + 10)
+		document.cookie = 'cookies-allowed=1;path=/;expires=' + date.toUTCString() + ';secure'
+		$('.cookieLaw').css 'display', 'none'
+		e.preventDefault()
+
 	# webfont loader
 	window.WebFontConfig =
 		google:
