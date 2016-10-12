@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/jiripudil
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://herecsrymy.cz
+  * I am jiripudil (https://keybase.io/jiripudil) on keybase.
+  * I have a public key with fingerprint 78A0 8508 7D11 76DD 9F25  24B8 D334 4DC7 AAE0 703D
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010135ce8acab330cf5d0ded8d4f1924c5fee6ad47edd7c2f8acb5dd9321e27f53020a",
+            "fingerprint": "78a085087d1176dd9f2524b8d3344dc7aae0703d",
+            "host": "keybase.io",
+            "key_id": "d3344dc7aae0703d",
+            "kid": "010135ce8acab330cf5d0ded8d4f1924c5fee6ad47edd7c2f8acb5dd9321e27f53020a",
+            "uid": "a4d4a5e5d85af072c21a844a81793119",
+            "username": "jiripudil"
+        },
+        "service": {
+            "hostname": "herecsrymy.cz",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1476259261,
+    "expire_in": 157680000,
+    "prev": "b2a7a3dff11541fa645634791e174957b93302f4263a1df8e073612c5638c6ab",
+    "seqno": 9,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMNHAnicrZJtUFRVGMcXKIQdNWAwlN6Gq8NornTPfb8kRBgzCsWigpJY67n3ngtX
+YHe9uyC4gMs2uiTjphQFRpCBI6CSoQxFgvEyA2FIaEEOYDLOmIzGNDjWNGp1L2Pf
++tj5cuY85/f/n//zzBlYEmAw+l2l3hhsvWGP87vUW1tg2P7o124XJtikYizWheWi
+hQ3lScjhtOQqEhaL4QAHJC0iDopQIElclGkJl5DESZQMeIISaRkhBkoUiySJFQlZ
+AwVakniSAIhgZZrECRxiJkxWrNlItauK1anZshzEORrnWAkAltFwmaAJSuAkkqQo
+SWQhRDiLk5ImzLE5dIUWToAOFKPYtJp2sCzE+w/+f85dsGAHKYmCNKIljoYyzhIi
+ASBHUZADLE8CwOugA6lWmI80ereiKvYCScnDSk2YVi5URKRPVm/lMZKDVCQ61OL8
+4hhxn6a2qzanTbTl6VdOp90Rq0udxXad3YsEy2MXi6BYJW2SmqIQqQ7FZsVigUaK
+TkW3BRTLEDRPMMCEoSK7oiKLohM0y3C4tvR3UKFmKRCQhaQkywDQFJAhQ9EMSbE8
+QICleJoVeG1mhEwRDAmBJHPadEkGEKJGcSIDBUzva4/VhsXyWkyYrVk6lGwrdBao
+CCvt6935hMHPaAh80l//YQZjcMi//85hfupvOfvcePNojSHVNbzWvPSCmvgXcD9f
+1VZ987x/zevfBvYEtk6e8mxsKFnXKJBf/tZxdtYaN5pgHOsN8kVv2RBdUy18sqqR
+idlo/OV0SPZwp+GVH71zB4dC/b8uCzvgFzBiUZ72Dh652V2yb+XLLR1N+UWca97s
+ve34YahkYDI3alNAeVL4Uf+mhE7z8Ifb3MmJcWZ1fC9e1XD40uzuwVvT9Ssci0Xf
+O3fNBDhbO7XnSuWEmlaY2tt4t3/rsob8/bk58+9H1ve8+Oyyzd/fuJhXNBa8fv7B
+/aTf24c3+aa+CEpqSvQeSKsYS4k5mRly1C1OvRDaf6VufXP3cs9PH3yamN7a9t7F
+nur4Hb6ZjDe5RZVN7kNFq+svr/u49/DxyuueOt+DePdHw/HHHxVtm4iYfLv5T3fk
+7eSMsYH206Qtq8wzHXjv1TWtnlt9yS3Hskb6XScq4P3kM0euLzWW9cChGe9DZfGh
+ug3FWS15Z+wgbCSl0QTYlJ4dRIP7zko+6uednrQ7I1dNI+M+2X35tT/e7aDaw21v
+LaqWmV0v1SYs767oi448P32y87nPZ7rKveWbJWNpxYnSrc+MtZ2bqu9a1RfhusZ+
+lZkyfeC7uhpvUnj6Z9vB2m/g3JyZu7BmSUZoY0JAZsxQkH9Y18NTu8JqZ7cctE/w
+6XFR+00Rq1dU8ceCr6n36kZTQ8L+AUSDwsM=
+=GTB6
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jiripudil
+
+==================================================================
+
