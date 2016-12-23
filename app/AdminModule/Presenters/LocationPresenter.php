@@ -18,6 +18,9 @@ class LocationPresenter extends Presenter
 	use TSecuredPresenter;
 
 
+	/** @var string */
+	private $gmapsApiKey;
+
 	/** @var EntityManager */
 	private $em;
 
@@ -25,8 +28,9 @@ class LocationPresenter extends Presenter
 	private $location;
 
 
-	public function __construct(EntityManager $em)
+	public function __construct(string $gmapsApiKey, EntityManager $em)
 	{
+		$this->gmapsApiKey = $gmapsApiKey;
 		$this->em = $em;
 	}
 
@@ -49,7 +53,7 @@ class LocationPresenter extends Presenter
 
 	protected function beforeRender()
 	{
-		$this['head']->addScript('//maps.googleapis.com/maps/api/js?libraries=places&sensor=false');
+		$this['head']->addScript('//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=' . $this->gmapsApiKey);
 		$this->baseBeforeRender();
 	}
 

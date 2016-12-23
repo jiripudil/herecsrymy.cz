@@ -30,7 +30,6 @@ class RouterFactory extends Nette\Object
 	public function createRouter()
 	{
 		$router = new NRouters\RouteList();
-		NRouters\Route::$defaultFlags = NRouters\Route::SECURED;
 
 		// admin
 		$router[] = new NRouters\Route('admin[/<presenter>[/<action>[/<id>]]]', [

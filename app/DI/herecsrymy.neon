@@ -35,6 +35,7 @@ services:
 	- Herecsrymy\AdminModule\Components\SendNewsletter\ISendNewsletterControlFactory
 	- Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory
 	- Herecsrymy\AdminModule\Components\EditAttachment\IEditAttachmentControlFactory
+	- Herecsrymy\AdminModule\Presenters\LocationPresenter(%gmapsApiKey%)
 
 	# files
 	- Herecsrymy\Files\FileUploader(%wwwDir%, uploads)

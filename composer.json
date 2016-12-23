@@ -1,38 +1,37 @@
 {
 	"name": "jiripudil/herecsrymy",
 	"require": {
-		"php": ">= 5.6.0",
+		"php": ">= 7.0.0",
 
-		"nette/application": "~2.3.0",
-		"nette/bootstrap": "~2.3.0",
-		"nette/caching": "~2.4.0",
-		"nette/di": "~2.3.0",
-		"nette/forms": "~2.3.0",
-		"nette/http": "~2.3.0",
-		"nette/mail": "~2.3.0",
+		"nette/application": "~2.4.0",
+		"nette/bootstrap": "~2.4.0",
+		"nette/caching": "~2.5.0",
+		"nette/di": "~2.4.0",
+		"nette/forms": "~2.4.0",
+		"nette/http": "~2.4.0",
+		"nette/mail": "~2.4.0",
 		"nette/safe-stream": "~2.3.0",
-		"nette/security": "~2.3.0",
-		"nette/utils": "~2.3.0",
-		"latte/latte": "~2.3.0",
-		"tracy/tracy": "~2.3.0",
+		"nette/security": "~2.4.0",
+		"nette/utils": "~2.4.0",
+		"latte/latte": "~2.4.0",
+		"tracy/tracy": "~2.4.0",
 
-		"nextras/secured-links": "~1.3.0",
-		"kdyby/autowired": "~1.3.0",
+		"nextras/secured-links": "~1.4.0",
+		"kdyby/autowired": "~1.4.0",
 		"kdyby/annotations": "~2.3.0",
 		"kdyby/events": "~3.0.0",
-		"kdyby/console": "~2.5.0",
-		"kdyby/doctrine": "~3.0.0",
-		"kdyby/translation": "~2.2.0",
+		"kdyby/console": "~2.6.0",
+		"kdyby/doctrine": "~3.1.0",
+		"kdyby/translation": "~2.3.0",
 		"kdyby/validator": "dev-master",
 		"kdyby/doctrine-forms": "dev-master",
 		"kdyby/rabbitmq": "~1.1.0",
 		"kdyby/fake-session": "~2.0.0",
-		"kdyby/monolog": "dev-master",
-		"doctrine/migrations": "1.0.0-ALPHA1 as 1.0.99-dev",
-		"zenify/doctrine-migrations": "~2.3.0",
-		"majkl578/nette-identity-doctrine": "~2.2",
-		"dg/texy": "~2.8.0",
-		"vojtech-dobes/nette-forms-gpspicker": "~1.3.0"
+		"kdyby/monolog": "~1.2.0",
+		"zenify/doctrine-migrations": "~3.0.0",
+		"majkl578/nette-identity-doctrine": "v2.3-rc1",
+		"texy/texy": "~2.9.0",
+		"vojtech-dobes/nette-forms-gpspicker": "dev-nette-2.4-compatibility"
 	},
 	"require-dev": {
 		"nette/tester": "~1.6",
@@ -41,6 +40,12 @@
 		"jakub-onderka/php-console-highlighter": "~0.3"
 	},
 	"replace": {
-		"nette/nette": "2.3.5"
-	}
+		"nette/nette": "2.4.0"
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/marian-r/nette-forms-gpspicker"
+		}
+	]
 }
