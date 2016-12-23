@@ -8,7 +8,7 @@
 	<h1>{include #title}</h1>
 
 	<p>Ahoj, píšu vám, protože jste se přihlásili k&nbsp;odběru nových příspěvků na herecsrymy.cz. Zrovna před chvílí jsem vydal nový příspěvek s&nbsp;názvem {$post->title}.</p>
-	<p>Příspěvek je zařazený v kategorii {$post->category->title} a je to&nbsp;{$post->description}. Přečíst si ho můžete tady: <a n:href="Front:Post: post => $post">{link Front:Post: post => $post}</a></p>
+	<p>Příspěvek je zařazený v kategorii {$post->category->title} a je to&nbsp;{$post->description}. Přečíst si ho můžete tady: <a href="{$postLink}">{$postLink}</a></p>
 	<p>S&nbsp;přáním, ať vám můj výtvor přinese dobré pocity<br>Jiří Pudil,<br>brněnský herec s&nbsp;rýmy</p>
 
 	<p style="font-size: .9em; color: #424242">

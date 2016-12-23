@@ -78,6 +78,7 @@ class NewsletterSender
 	{
 		$message = $this->createMessage($subscription, function (ITemplate $template) use ($post) {
 			$template->post = $post;
+			$template->postLink = $this->linkGenerator->link('Front:Post:', ['post' => $post]);
 			$template->setFile(__DIR__ . '/templates/newPost.latte');
 		});
 
@@ -95,6 +96,7 @@ class NewsletterSender
 	{
 		$message = $this->createMessage($subscription, function (ITemplate $template) use ($event) {
 			$template->event = $event;
+			$template->eventsLink = $this->linkGenerator->link('Front:Events:');
 			$template->setFile(__DIR__ . '/templates/newEvent.latte');
 		});
 
@@ -146,7 +148,6 @@ class NewsletterSender
 		$template = $this->templateFactory->createTemplate();
 		$template->subscription = $subscription;
 		$template->unsubscribeLink = $unsubscribeLink;
-		$template->_control = $this->linkGenerator;
 
 		if ($templateConfigurator !== NULL) {
 			call_user_func($templateConfigurator, $template);
