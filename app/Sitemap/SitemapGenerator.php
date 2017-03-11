@@ -50,6 +50,18 @@ class SitemapGenerator
 		$home->create('priority')->setText('0.5');
 		fwrite($sitemap, $home . PHP_EOL);
 
+		$aboutTag = Html::el('url');
+		$aboutTag->create('loc')->setText($this->linkGenerator->link('Front:Page:about'));
+		$aboutTag->create('changefreq')->setText('yearly');
+		$aboutTag->create('priority')->setText('0.3');
+		fwrite($sitemap, $aboutTag . PHP_EOL);
+
+		$contactTag = Html::el('url');
+		$contactTag->create('loc')->setText($this->linkGenerator->link('Front:Page:contact'));
+		$contactTag->create('changefreq')->setText('yearly');
+		$contactTag->create('priority')->setText('0.3');
+		fwrite($sitemap, $contactTag . PHP_EOL);
+
 		$eventsTag = Html::el('url');
 		$eventsTag->create('loc')->setText($this->linkGenerator->link('Front:Events:'));
 		$eventsTag->create('changefreq')->setText('weekly');
@@ -58,7 +70,7 @@ class SitemapGenerator
 
 		foreach ($categories as $category) {
 			$categoryTag = Html::el('url');
-			$categoryTag->create('loc')->setText($this->linkGenerator->link('Front:Category:', ['category' => $category]));
+			$categoryTag->create('loc')->setText($this->linkGenerator->link('Front:Posts:', ['filter-categories' => [$category->slug]]));
 			$categoryTag->create('changefreq')->setText('weekly');
 			$categoryTag->create('priority')->setText('0.7');
 			fwrite($sitemap, $categoryTag . PHP_EOL);

@@ -117,11 +117,11 @@ class RouterFactory extends Nette\Object
 		]);
 
 		$router[] = new NRouters\Route('<category>/<post>', function ($post, MicroPresenter $presenter) {
-			$presenter->redirectUrl('/prispevek/' . $post, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
+			return $presenter->redirectUrl('/prispevek/' . $post, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
 		});
 
 		$router[] = new NRouters\Route('<category>', function ($category, MicroPresenter $presenter) {
-			$presenter->redirectUrl('/tvorba/' . $category, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
+			return $presenter->redirectUrl('/tvorba/' . $category, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
 		});
 
 		$router[] = new NRouters\Route('<presenter>[/<action>[/<id>]]', 'Front:Homepage:default');
