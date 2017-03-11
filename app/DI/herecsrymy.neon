@@ -7,16 +7,13 @@ services:
 	- Herecsrymy\Texy\TexyFactory
 
 	# factories
-	- Herecsrymy\FrontModule\Components\Head\IHeadControlFactory
-	- Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory
-	- Herecsrymy\FrontModule\Components\MainMenu\IMainMenuControlFactory
+	- Herecsrymy\FrontModule\Components\Player\IPlayerControlFactory
 	- Herecsrymy\FrontModule\Components\Paging\IPagingControlFactory
-	- Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory
+	- Herecsrymy\FrontModule\Components\PostsFilter\IPostsFilterControlFactory
 	- Herecsrymy\FrontModule\Components\RecentPosts\IRecentPostsControlFactory
 	- Herecsrymy\FrontModule\Components\UpcomingEvents\IUpcomingEventsControlFactory
-	- Herecsrymy\FrontModule\Components\Calendar\ICalendarControlFactory
 	- Herecsrymy\FrontModule\Components\Attachments\IAttachmentsControlFactory
-	- {implement: Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory, arguments: {shortname: herecsrymy}}
+	- Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory
 
 	# admin
 	- {implement: Herecsrymy\Forms\IEntityFormFactory, inject: yes, setup: [addProtection]}
@@ -31,14 +28,15 @@ services:
 	- Herecsrymy\AdminModule\Components\EditEvent\IEditEventControlFactory
 	- Herecsrymy\AdminModule\Components\ListLocations\IListLocationsControlFactory
 	- Herecsrymy\AdminModule\Components\EditLocation\IEditLocationControlFactory
-	- Herecsrymy\AdminModule\Components\ListSubscribers\IListSubscribersControlFactory
-	- Herecsrymy\AdminModule\Components\SendNewsletter\ISendNewsletterControlFactory
 	- Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory
 	- Herecsrymy\AdminModule\Components\EditAttachment\IEditAttachmentControlFactory
+	- Herecsrymy\AdminModule\Components\ListPhotos\IListPhotosControlFactory
+	- Herecsrymy\AdminModule\Components\UploadPhoto\IUploadPhotoControlFactory
 	- Herecsrymy\AdminModule\Presenters\LocationPresenter(%gmapsApiKey%)
 
 	# files
 	- Herecsrymy\Files\FileUploader(%wwwDir%, uploads)
+	- Herecsrymy\Files\PhotoUploader(%wwwDir%, photos)
 
 	# sitemap
 	- Herecsrymy\Sitemap\SitemapGenerator(safe://%wwwDir%/sitemap.xml)
@@ -49,8 +47,6 @@ services:
 	- Herecsrymy\Security\Authenticator
 	- Herecsrymy\Console\CreateUserCommand
 
-	# newsletter
-	- Herecsrymy\Newsletter\NewsletterSender
-	- Herecsrymy\Console\SendNewsletterCommand
-	- Herecsrymy\Newsletter\NewsletterListener
-	- Herecsrymy\Newsletter\NewsletterQueue
+	# songs
+	- getID3
+	- Herecsrymy\Console\ComputePlaytimeCommand

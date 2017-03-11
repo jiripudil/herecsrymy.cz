@@ -1,38 +1,49 @@
+{block #title}Události - Jiří Pudil{/block}
 {block #content}
-<h1>Události</h1>
-
-{control calendar}
-
-<div class="sep cf"></div>
-
-{foreach $events as $event}
-	<div class="event event--list">
-		<h2 class="event-title event-title--top" id="{$event->datetime|date:'Y-m-d'}">{$event->name}</h2>
-		<div>{$event->note}</div>
-		<div class="event-datetime">
-			<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
-				<span class="event-date">{$event->datetime|czechDate}</span>
-				<span class="event-time">{$event->datetime|date:'G:i'}</span>
-			</time>
-		</div>
-		<div class="event-info">
-			<span class="fa fa-map-marker" title="Místo"></span> {$event->location->name}, {$event->location->address}
-			{if $event->location->point}
-				(<a href="{$event|map}">mapa</a>)
+<div class="row">
+	<div class="main-content">
+		<h1>Události</h1>
+		<div class="events">
+			{if count($events) === 0}
+				<p>V&nbsp;nejbližší době bohužel nic nechystám.</p>
+			{else}
+				<div class="event" n:foreach="$events as $event" id="{$event->datetime|date:'Y-m-d'}">
+					<div class="event-datetime">
+						<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
+							<span class="event-date">{$event->datetime|date:'j. n. Y'}</span>
+							<span class="event-time">{$event->datetime|date:'G.i'}</span>
+						</time>
+					</div>
+					<div class="event-title">{$event->name}</div>
+					<div class="event-location">
+						<a n:tag-if="$event->location->point" href="{$event|map}" title="Zobrazit mapu"><span class="fa fa-map-marker" aria-label="Zobrazit mapu"></span></a>
+						{$event->location->name}, {$event->location->address}
+					</div>
+					<div class="event-links">
+						<a n:if="$event->ticketsLink" href="{$event->ticketsLink}">
+							<span class="fa fa-ticket fa-fw"></span>
+							{if $event->ticketsPrice > 0}
+								Koupit vstupenky od {$event->ticketsPrice|price}
+							{else}
+								Registrovat zdarma
+							{/if}
+						</a>
+						<a n:if="$event->facebookUrl" href="{$event->facebookUrl}">
+							<span class="fa fa-facebook-official fa-fw"></span>
+							Událost na Facebooku
+						</a>
+						<a n:href="export $event">
+							<span class="fa fa-download fa-fw"></span>
+							Export do iCal
+						</a>
+					</div>
+				</div>
 			{/if}
-			<div class="event-buttons">
-				{if $event->ticketsPrice > 0 && $event->ticketsLink}
-					<a href="{$event->ticketsLink}" class="btn"><span class="fa fa-ticket" title="Vstupenky"></span> Koupit vstupenky ({$event->ticketsPrice|price})</a>
-				{/if}
-				{if $event->facebookUrl}
-					<a href="{$event->facebookUrl}" class="btn"><span class="fa fa-facebook-square" title="Facebook"></span> Událost na Facebooku</a>
-				{/if}
-				<a n:href="export $event" class="btn"><span class="fa fa-download" title="Exportovat"></span> Export do iCal</a>
-			</div>
 		</div>
 	</div>
 
-	<div class="sep cf"></div>
-{/foreach}
-
-{control newsletter}
+	<div class="main-sidebar">
+		<h2>Kalendář</h2>
+		<div id="calendar" data-eventDates="{$eventDates}" data-style-href="{webpack calendar.css}" data-script-src="{webpack calendar.js}"></div>
+	</div>
+</div>

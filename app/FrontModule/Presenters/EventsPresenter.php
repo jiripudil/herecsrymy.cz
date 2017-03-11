@@ -5,12 +5,9 @@ namespace Herecsrymy\FrontModule\Presenters;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\Queries\EventQuery;
-use Herecsrymy\FrontModule\Components\Calendar\ICalendarControlFactory;
-use Herecsrymy\FrontModule\Components\Head\HeadControl;
-use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
-use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
+use Nette\Utils\Json;
 
 
 class EventsPresenter extends Presenter
@@ -41,11 +38,10 @@ class EventsPresenter extends Presenter
 
 	public function renderDefault()
 	{
-		/** @var HeadControl $head */
-		$head = $this['head'];
-		$head->addTitlePart("Události");
-
 		$this->template->events = $this->events;
+		$this->template->eventDates = Json::encode(array_unique(array_map(function (Event $event) {
+			return $event->datetime->format('Y-m-d');
+		}, iterator_to_array($this->events))));
 	}
 
 
@@ -56,29 +52,6 @@ class EventsPresenter extends Presenter
 		}
 
 		$this->template->event = $event;
-	}
-
-
-	protected function createComponentCalendar(ICalendarControlFactory $factory)
-	{
-		return $factory->create();
-	}
-
-
-	protected function createComponentHeader(IHeaderControlFactory $factory)
-	{
-		return $factory->create('small');
-	}
-
-
-	protected function createComponentNewsletter(INewsletterControlFactory $factory)
-	{
-		$control = $factory->create();
-		$control->onSubscribe[] = function () {
-			$this->redirect('this');
-		};
-
-		return $control;
 	}
 
 }

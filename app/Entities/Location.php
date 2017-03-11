@@ -37,7 +37,7 @@ class Location extends BaseEntity
 	protected $point;
 
 
-	public function setPoint($point)
+	public function setPoint(?GpsPoint $point): void
 	{
 		if ($point instanceof GpsPoint) {
 			$point = new Point($point->getLng(), $point->getLat());

@@ -45,6 +45,21 @@ class PostQuery extends QueryObject
 
 
 	/**
+	 * @param Category[] $categories
+	 * @return PostQuery
+	 */
+	public function inCategories(array $categories)
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($categories) {
+			$builder->andWhere('p.category IN (:categories)')
+				->setParameter('categories', $categories);
+		};
+
+		return $this;
+	}
+
+
+	/**
 	 * @return PostQuery
 	 */
 	public function joinCategories()

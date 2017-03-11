@@ -1,7 +1,16 @@
 <!doctype html>
-<html>
-{control head}
+<html lang="cs">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+	<meta name="robots" content="noindex,nofollow">
 
+	<title>Admin - Jiří Pudil</title>
+
+	<link rel="shortcut icon" href="{$basePath}/favicon-32.jpg">
+	<link rel="stylesheet" href="{webpack admin.css}">
+</head>
 <body>
 <div class="container">
 	<div class="menu noprint">
@@ -10,7 +19,7 @@
 			<li><a n:href="Post:" n:class="$presenter->isLinkCurrent('Post:*') ? active">Posts</a></li>
 			<li><a n:href="Category:" n:class="$presenter->isLinkCurrent('Category:*') ? active">Categories</a></li>
 			<li><a n:href="Event:" n:class="$presenter->isLinkCurrent('Event:*') ? active">Events</a></li>
-			<li><a n:href="Newsletter:" n:class="$presenter->isLinkCurrent('Newsletter:*') ? active">Newsletter</a></li>
+			<li><a n:href="Photos:" n:class="$presenter->isLinkCurrent('Photos:*') ? active">Photos</a></li>
 		</ul>
 	</div>
 
@@ -19,5 +28,8 @@
 	{if isset($presenter['flashes'])}{control flashes}{/if}
 	{include #content}
 </div>
+
+<script n:nonce src="{webpack common.js}"></script>
+<script n:nonce src="{webpack admin.js}"></script>
 </body>
 </html>

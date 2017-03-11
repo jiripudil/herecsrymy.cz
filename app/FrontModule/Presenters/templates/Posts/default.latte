@@ -1,0 +1,32 @@
+{block #title}Tvorba - Jiří Pudil{/block}
+{block #content}
+<div class="row">
+	<div class="main-content">
+		<h1>Moje tvorba</h1>
+		<div class="works">
+			<div class="worksItem" n:foreach="$posts as $post">
+				<h2 class="worksItem-title">
+					<a n:href="Post: $post" class="ajax">
+						{$post->title}
+					</a>
+				</h2>
+				<div class="worksItem-description">{$post->description}</div>
+				<div class="worksItem-published">
+					<span class="fa fa-calendar" title="Publikováno"></span>
+					<time datetime="{$post->publishedOn|date:'Y-m-d H:i'}" title="{$post->publishedOn|czechDate}">
+						{$post->publishedOn|ago}
+					</time>
+				</div>
+			</div>
+		</div>
+
+		<div class="works-paging">
+			{control paging}
+		</div>
+	</div>
+
+	<div class="main-sidebar">
+		<h2>Zobrazit</h2>
+		{control filter}
+	</div>
+</div>

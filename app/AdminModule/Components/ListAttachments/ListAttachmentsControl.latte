@@ -35,6 +35,7 @@
 		<tr n:foreach="$attachments as $attachment">
 			<td width="60%">
 				<span n:class="fa, $attachment->displayed ? fa-eye : fa-eye-slash" title="{$attachment->displayed ? 'Displayed publicly' : 'Hidden from public'}"></span>
+				<span n:if="$attachment->inPlayer" class="fa fa-play" title="Available in audio player"></span>
 				{$attachment->name}
 			</td>
 			<td>{$attachment->type|attachmentType}</td>

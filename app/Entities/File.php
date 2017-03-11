@@ -54,7 +54,7 @@ class File extends BaseEntity
 	 * @param int $fileSize
 	 * @param Attachment $attachment
 	 */
-	public function __construct($fileName, $fileType, $fileSize, Attachment $attachment)
+	public function __construct(string $fileName, string $fileType, int $fileSize, Attachment $attachment)
 	{
 		$this->fileName = $fileName;
 		$this->fileType = $fileType;
@@ -64,13 +64,13 @@ class File extends BaseEntity
 	}
 
 
-	public function getExtension()
+	public function getExtension(): string
 	{
 		return pathinfo($this->fileName, PATHINFO_EXTENSION);
 	}
 
 
-	public function addDownload()
+	public function addDownload(): void
 	{
 		$this->downloadCount++;
 	}

@@ -1,53 +1,18 @@
+{block #title}Jiří Pudil, brněnský herec s rýmy{/block}
 {block #content}
-<div class="about">
-	<p class="lede">Ahoj, jsem Jiří, amatérský slovotepec a ochotnický herec s&nbsp;rýmy. Když mám čas a chuť, lepím slůvka jedno k&nbsp;druhému, vytvářím z&nbsp;nich verše a z&nbsp;veršů pak sloky. Rád také vášnivě hladím struny svých kytar, proto jistě není s&nbsp;podivem, že některé sloky opatřuji harmonií, melodií i&nbsp;rytmem a následně je zpívám.</p>
-</div>
-
-<div class="sep cf"></div>
-
-{control newsletter}
-
-<div class="sep cf"></div>
-
-<div class="flex-container">
-	<div class="flex-item">
+<div class="row">
+	<div class="latest-works">
 		<h2>Poslední tvorba</h2>
 		{control recentPosts}
-		<div class="sep"></div>
-		<h2>Nejbližší událost</h2>
+	</div>
+
+	<div class="upcoming-events">
+		<h2>Nejbližší události</h2>
 		{control upcomingEvents}
 	</div>
-	<div class="flex-item">
+
+	<div class="facebook">
 		<h2>Facebook</h2>
 		<div class="fb-page" data-href="https://www.facebook.com/herecsrymy" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/herecsrymy"><a href="https://www.facebook.com/herecsrymy">Jiří Pudil, herec s rýmy</a></blockquote></div></div>
 	</div>
 </div>
-
-<div class="sep cf"></div>
-
-<div>
-	<h2>Střípky informací</h2>
-	<img src="{$basePath}/static/images/jiri2.jpg" alt="Jiří Pudil zachycen v akci" title="Jiří Pudil zachycen v akci (zvěčnila Áša Sárová)" class="photo">
-	<p>Narodil jsem se v&nbsp;Českých Budějicích, dětství i&nbsp;dospívání jsem prožil na vysočinském maloměstě jménem Humpolec a aktuálně jsem usazený v&nbsp;překrásné moravské metropoli, jíž Pražští posměšně říkají Brno.</p>
-	<p>V&nbsp;šestnácti jsme se s&nbsp;kamarádem vsadili, že budeme psát básně, a tak jsem začal psát. V&nbsp;osmnácti mi vrazil do ruky kytaru a řekl, ať hraju, a tak jsem začal hrát. Na sklonku dvaadvacátého roku jsem skloubil obé a začal skládat vlastní písničky. Mimo to se každé jaro podílím na hudbě pro <a href="http://profidivadlo.cz">proFIdivadlo</a>.</p>
-	<p>Také mám rád kávu a posedávání v&nbsp;kavárnách mi docela přirostlo k&nbsp;srdci, takže pokud budete mít štěstí, můžete mě někdy odpoledne zastihnout v&nbsp;mé oblíbené Park Lane Café nebo taky třeba v&nbsp;Mezzaninu, Falku, Spolku nebo na zahrádce v&nbsp;Podnebí.</p>
-	<p>Abych nezapomněl, jsem taky šikovný <a href="https://jiripudil.cz">webový vývojář</a>.</p>
-</div>
-
-<div class="sep cf"></div>
-
-<div class="contact">
-	<h2>Kontakt</h2>
-	<p>Pokud mi potřebujete něco sdělit, pište na <a href="mailto:me&#64;jiripudil.cz">me&#64;jiripudil.cz</a>, v urgentních situacích zkuste vytočit <a href="tel:+420606351567">+420 606 351 567</a>. Najdete mě taky na <span class="fa fa-facebook-square" title="Facebook"></span>&nbsp;<a href="https://www.facebook.com/herecsrymy">Facebooku</a>, <span class="fa fa-twitter-square" title="Twitter"></span>&nbsp;<a href="https://twitter.com/jiripudil">Twitteru</a> a <span class="fa fa-instagram" title="Instagram"></span>&nbsp;<a href="https://instagram.com/jiripudil">Instagramu</a>.</p>
-</div>
-
-<div id="fb-root"></div>
-<script n:syntax="off">
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&appId=273296596032549&version=v2.3";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-</script>

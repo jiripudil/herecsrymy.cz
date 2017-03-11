@@ -54,13 +54,25 @@ class Attachment extends BaseEntity
 	 */
 	protected $post;
 
+	/**
+	 * @ORM\Column(type="boolean", nullable=TRUE)
+	 * @var bool|NULL
+	 */
+	protected $inPlayer;
+
+	/**
+	 * @ORM\Column(type="decimal", precision=10, scale=4, nullable=TRUE)
+	 * @var float|NULL
+	 */
+	protected $playtime;
+
 
 	/**
 	 * @param string $name
 	 * @param int $type
 	 * @param Post $post
 	 */
-	public function __construct($name, $type, Post $post)
+	public function __construct(string $name, int $type, Post $post)
 	{
 		$this->name = $name;
 		$this->type = $type;
@@ -70,7 +82,7 @@ class Attachment extends BaseEntity
 	}
 
 
-	public function getDirectoryName()
+	public function getDirectoryName(): string
 	{
 		return substr(md5($this->id), 0, 4);
 	}

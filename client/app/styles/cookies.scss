@@ -1,0 +1,28 @@
+.cookieLaw {
+	font-size: .9em;
+
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100vw;
+
+	text-align: center;
+	padding: .5em 0;
+
+	background: rgba($color-blue, .85);
+	color: #fff;
+
+	.btn {
+		text-decoration: none;
+		background: $color-blue-dark;
+		color: #fff;
+
+		margin: 0 .5em;
+		padding: .5em;
+	}
+
+	a:not(.btn) {
+		font-size: .9em;
+		color: #fff;
+	}
+}

@@ -1,0 +1,101 @@
+body {
+	padding: 0;
+
+	background: #e0e0e0;
+	font-size: 1.1em;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #222;
+}
+
+a {
+	color: #222;
+
+	&:hover {
+		color: #000;
+		text-decoration: none;
+	}
+}
+
+h1 {
+	font-size: 2em;
+	@include font-serif;
+}
+
+h2 {
+	font-size: 1.5em;
+	@include font-serif;
+}
+
+h3 {
+	font-size: 1.25em;
+	@include font-serif;
+}
+
+p {
+	line-height: 1.5;
+
+	&.lead {
+		font-size: 1.1em;
+	}
+}
+
+.button--more {
+	text-align: center;
+	padding: .5em 0;
+
+	a {
+		color: #fff;
+		background: $color-blue;
+		text-decoration: none;
+		padding: .25em .5em;
+
+		&:hover {
+			background: $color-blue-dark;
+		}
+	}
+}
+
+.flash {
+	margin: 0 0 .2em;
+	padding: .33em;
+	font-size: .8em;
+
+	&.flash--success {
+		background: #6b3;
+		color: #fff;
+	}
+
+	&.flash--error {
+		background: #c00;
+		color: #fff;
+	}
+
+	&.flash--info {
+		background: #28afcc;
+		color: #fff;
+	}
+}
+
+.container {
+	max-width: 1080px;
+	margin: 0 auto;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	@media (max-width: $breakpoint-mobile) {
+		display: block;
+	}
+}
+
+.main-content {
+	flex-basis: 65%;
+}
+
+.main-sidebar {
+	flex-basis: 33%;
+}

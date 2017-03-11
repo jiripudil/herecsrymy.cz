@@ -4,6 +4,3 @@ log/*
 temp/*
 vendor/*
 node_modules/*
-bower_components/*
-www/**/*.js
-www/**/*.css

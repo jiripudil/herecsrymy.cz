@@ -5,6 +5,7 @@ namespace Herecsrymy\FrontModule\Components\Disqus;
 
 interface IDisqusControlFactory
 {
-	/** @return DisqusControl */
-	function create($identifier = NULL, $title = NULL, $url = NULL);
+
+	public function create(int $identifier, string $title, string $url): DisqusControl;
+
 }

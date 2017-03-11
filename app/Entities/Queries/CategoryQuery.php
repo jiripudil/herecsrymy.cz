@@ -13,6 +13,27 @@ class CategoryQuery extends QueryObject
 	private $filters = [];
 
 
+	public function indexById(): CategoryQuery
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->indexBy('c', 'c.id');
+		};
+
+		return $this;
+	}
+
+
+	public function onlyPublished(): CategoryQuery
+	{
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
+			$builder->andWhere('c.published = :published')
+				->setParameter('published', TRUE);
+		};
+
+		return $this;
+	}
+
+
 	/**
 	 * @return CategoryQuery
 	 */

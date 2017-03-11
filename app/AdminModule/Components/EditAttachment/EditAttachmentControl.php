@@ -70,6 +70,7 @@ class EditAttachmentControl extends Control
 			Attachment::TYPE_PHOTOS => 'Gallery',
 		])->setRequired('Please select type.');
 		$form->addCheckbox('displayed', 'Displayed publicly');
+		$form->addCheckbox('inPlayer', 'Available in audio player');
 
 		$form->addSubmit('save', 'Save');
 		$form->onSuccess[] = function (EntityForm $form) {

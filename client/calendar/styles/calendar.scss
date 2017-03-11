@@ -1,0 +1,55 @@
+@import '../../common';
+
+.calendar {
+	width: 100%;
+	border-collapse: collapse;
+
+	th, td {
+		padding: .25em;
+	}
+
+	.calendar-month {
+		text-align: center;
+		background: $color-blue;
+		color: #fff;
+
+		.calendar-month-previous, .calendar-month-now, .calendar-month-next {
+			a {
+				color: #fff;
+				text-decoration: none;
+			}
+		}
+	}
+
+	.calendar-days {
+		background: #e0e0e0;
+		color: #000;
+
+		th {
+			font-weight: normal;
+			text-align: right;
+		}
+	}
+
+	tbody {
+		text-align: center;
+
+		.calendar-days-out {
+			color: #ccc;
+		}
+
+		.calendar-days-event:not(.calendar-days-out) {
+			font-weight: bold;
+			background: $color-blue-dark;
+
+			a {
+				color: #fff;
+			}
+		}
+
+		.calendar-days-today {
+			background: #e0e0e0;
+			font-weight: bold;
+		}
+	}
+}

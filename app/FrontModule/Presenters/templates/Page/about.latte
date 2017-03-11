@@ -1,0 +1,20 @@
+{block #title}O mně - Jiří Pudil{/block}
+{block #content}
+<div class="row">
+	<div class="main-content">
+		<h1>O&nbsp;mně</h1>
+		<p class="lead">V&nbsp;šestnácti jsme se s&nbsp;kamarádem vsadili, že budeme psát básně, a&nbsp;tak jsem začal psát. V&nbsp;osmnácti mi vrazil do ruky kytaru a řekl, ať hraju, a&nbsp;tak jsem začal hrát. Na sklonku dvaadvacátého roku jsem skloubil obé a začal skládat vlastní písničky.</p>
+		<p>Narodil jsem se v&nbsp;Českých Budějicích, ale po návratu z&nbsp;porodnice jsem celý zbytek dětství i&nbsp;dospívání prožil na vysočinském maloměstě jménem Humpolec. Aktuálně jsem spokojeně usazený v překrásné moravské vesničce jménem Brno.</p>
+		<p>Se svojí kytarou a partou kamarádů vcelku pravidelně a veskrze neoficálně a neohlášeně brázdím brněnské hospůdky, ale občas si odskočím tu na autorské čtení, tu na festiválek k&nbsp;narozeninám studentského spolku, tu na křest knihy a tak všelijak podobně. Všechna zajímavá vystoupení avizuji <a n:href="Events:" class="ajax">v&nbsp;událostech</a>.</p>
+		<p>Mimo to <a href="https://jiripudil.cz">programuji webové aplikace</a>, opíjím se kávou, každé jaro se podílím na hudbě pro <a href="http://www.profidivadlo.cz">proFIdivadlo</a> a nahodile dělám celou řadu dalších věcí.</p>
+	</div>
+
+	<div class="main-sidebar">
+		<h2>Fotografie</h2>
+		<div class="gallery">
+			<a n:foreach="$photos as $photo" href="{$photo|photoPath}" title="{$photo->description}">
+				<img src="{$photo|photoThumb}" alt="{$photo->description}">
+			</a>
+		</div>
+	</div>
+</div>

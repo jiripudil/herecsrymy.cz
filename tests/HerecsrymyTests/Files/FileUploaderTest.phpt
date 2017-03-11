@@ -48,7 +48,7 @@ class FileUploaderTest extends TestCase
 		$idProp->setAccessible(TRUE);
 		$idProp->setValue($attachment, 42);
 
-		$uploader = new FileUploader(__DIR__, 'uploads');
+		$uploader = new FileUploader(__DIR__, 'uploads', new \getID3());
 		$file = $uploader->upload($upload, $attachment);
 
 		Assert::same('readme.txt', $file->fileName);

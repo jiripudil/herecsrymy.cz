@@ -57,10 +57,7 @@ class Category extends BaseEntity
 	protected $posts;
 
 
-	/**
-	 * @param string $title
-	 */
-	public function __construct($title)
+	public function __construct(string $title)
 	{
 		$this->title = $title;
 		$this->posts = new ArrayCollection();

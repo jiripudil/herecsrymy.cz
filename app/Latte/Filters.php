@@ -5,7 +5,9 @@ namespace Herecsrymy\Latte;
 use Herecsrymy\Entities\Attachment;
 use Herecsrymy\Entities\Event;
 use Herecsrymy\Entities\File;
+use Herecsrymy\Entities\Photo;
 use Herecsrymy\Files\FileUploader;
+use Herecsrymy\Files\PhotoUploader;
 use Herecsrymy\Texy\TexyFactory;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
@@ -26,15 +28,19 @@ class Filters extends Object
 	/** @var FileUploader */
 	private $uploader;
 
+	/** @var PhotoUploader */
+	private $photoUploader;
+
 	/** @var IRequest */
 	private $httpRequest;
 
 
-	public function __construct(TexyFactory $texyFactory, IStorage $cacheStorage, FileUploader $uploader, IRequest $httpRequest)
+	public function __construct(TexyFactory $texyFactory, IStorage $cacheStorage, FileUploader $uploader, PhotoUploader $photoUploader, IRequest $httpRequest)
 	{
 		$this->texy = $texyFactory->create();
 		$this->cache = new Cache($cacheStorage, __CLASS__);
 		$this->uploader = $uploader;
+		$this->photoUploader = $photoUploader;
 		$this->httpRequest = $httpRequest;
 	}
 
@@ -112,6 +118,18 @@ class Filters extends Object
 	public function webPath(File $file)
 	{
 		return $this->httpRequest->getUrl()->getBasePath() . $this->uploader->getDirName() . '/' . $file->attachment->getDirectoryName() . '/' . $file->fileName;
+	}
+
+
+	public function photoPath(Photo $photo): string
+	{
+		return $this->httpRequest->getUrl()->getBasePath() . $this->photoUploader->getDirName() . '/' . $this->photoUploader->getOriginalDirectory() . '/' . $photo->fileName;
+	}
+
+
+	public function photoThumb(Photo $photo): string
+	{
+		return $this->httpRequest->getUrl()->getBasePath() . $this->photoUploader->getDirName() . '/' . $this->photoUploader->getThumbsDirectory() . '/' . $photo->fileName;
 	}
 
 

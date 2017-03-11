@@ -1,0 +1,14 @@
+.loader {
+	display: none;
+
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+
+	text-align: center;
+	padding: .5em 0;
+
+	background: $color-blue;
+	color: #fff;
+}

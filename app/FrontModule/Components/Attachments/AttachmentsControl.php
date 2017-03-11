@@ -36,11 +36,8 @@ class AttachmentsControl extends Control
 
 	public function render()
 	{
-		foreach ($this->attachments as $attachment) {
-			if ($attachment->displayed) {
-				$this['attachment-' . $attachment->id]->render();
-			}
-		}
+		$this->template->attachments = $this->attachments;
+		$this->template->render(__DIR__ . '/AttachmentsControl.latte');
 	}
 
 }

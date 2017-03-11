@@ -24,17 +24,15 @@ class Authenticator
 
 
 	/**
-	 * @param string $email
-	 * @param string $password
 	 * @return User|IIdentity
 	 * @throws AuthenticationException
 	 */
-	public function authenticate($email, $password)
+	public function authenticate(string $email, string $password): IIdentity
 	{
 		/** @var User $user */
 		$user = $this->repository->findOneBy(['email' => $email]);
 
-		if ($user === NULL || ! Passwords::verify($password, $user->password)) {
+		if ($user === NULL || ! $user->verifyPassword($password)) {
 			throw new AuthenticationException();
 		}
 

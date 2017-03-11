@@ -3,9 +3,3 @@ doctrine:
 	user: postgres
 	password:
 	dbname: herecsrymy_test
-
-
-rabbitmq:
-	connection:
-		user: guest
-		password: guest

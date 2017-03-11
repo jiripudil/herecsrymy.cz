@@ -1,27 +1,100 @@
 <!doctype html>
 <html lang="cs">
-{control head}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<meta property="fb:admins" content="1625947532">
+	<meta property="og:image" content="{$basePath}/static/images/jiri.jpg">
+
+	<title n:snippet="title">{include #title}</title>
+
+	<link rel="alternate" type="application/rss+xml" href="{link :Front:Feed:}" title="Nová tvorba – Jiří Pudil">
+	<link rel="shortcut icon" href="{$basePath}/favicon-32.jpg">
+	<link rel="stylesheet" href="{webpack app.css}">
+	<link rel="stylesheet" href="{webpack player.css}">
+
+	<script n:nonce src="{webpack common.js}"></script>
+	<script n:nonce src="{webpack app.js}"></script>
+	<script n:nonce src="{webpack player.js}" async></script>
+</head>
 <body>
 <div class="container">
-	<!-- Google Tag Manager -->
-	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLM5XK"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<script n:syntax="off">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-WLM5XK');</script>
-	<!-- End Google Tag Manager -->
+	<div class="header">
+		<a n:href="Homepage:" class="ajax">
+			<div class="header-photo">
+				<img src="{$basePath}/static/images/jiri2.jpg" class="header-image" alt="Jiří Pudil, fotografie">
+			</div>
+			<div class="header-text">
+				<div class="header-heading">Jiří Pudil</div>
+				<div class="header-motto">brněnský herec s&nbsp;rýmy</div>
+			</div>
+		</a>
+	</div>
 
-	{control header}
+	{control player}
 
-	<div class="sep cf"></div>
+	<div class="nav">
+		<input type="checkbox" id="menu-toggle">
+			<label for="menu-toggle" class="label-toggle">
+				<span class="fa fa-bars"></span> Menu
+			</label>
+		</input>
+		<ul n:snippet="menu">
+			<li>
+				<a n:href=":Front:Homepage:" n:class="$presenter->isLinkCurrent(':Front:Homepage:*') ? active, ajax">
+					<span class="fa fa-home" title="Hlavní stránka"></span>
+				</a>
+			</li>
+			<li>
+				<a n:href=":Front:Page:about" n:class="$presenter->isLinkCurrent(':Front:Page:about') ? active, ajax">
+					O&nbsp;mně
+				</a>
+			</li>
+			<li>
+				<a n:href=":Front:Events:" n:class="$presenter->isLinkCurrent(':Front:Events:*') ? active, ajax">
+					Události
+				</a>
+			</li>
+			<li>
+				<a n:href=":Front:Posts:" n:class="$presenter->isLinkCurrent(':Front:Posts:*') || $presenter->isLinkCurrent(':Front:Post:*') ? active, ajax">
+					Tvorba
+				</a>
+			</li>
+			<li>
+				<a n:href=":Front:Page:contact" n:class="$presenter->isLinkCurrent(':Front:Page:contact') ? active, ajax">
+					Kontakt
+				</a>
+			</li>
+		</ul>
+	</div>
 
-	{control mainMenu}
+	<div class="main" n:snippet="content">
+		{include #content}
+	</div>
 
-	<div class="sep cf"></div>
+	<div class="footer">
+		<div class="row">
+			<div class="copyright">
+				&copy; {date('Y')} Jiří Pudil
+			</div>
 
-	{include #content}
+			<div class="license">
+				<a href="https://creativecommons.org/licenses/by-nc/4.0/" title="Licencováno pod Creative Commons Uveďte autora-Neužívejte komerčně 4.0 Mezinárodní">
+					<img src="{$basePath}/static/images/cc.large.png" alt="Creative Commons"><!--
+					--><img src="{$basePath}/static/images/by.large.png" alt="Uveďte autora"><!--
+					--><img src="{$basePath}/static/images/nc-eu.large.png" alt="Neužívejte komerčně">
+					není-li uvedeno jinak
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="loader">
+		<span class="fa fa-circle-o-notch fa-fw fa-spin"></span>
+	</div>
+
+	<div id="fb-root"></div>
 </div>
 </body>
 </html>

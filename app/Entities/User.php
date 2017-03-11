@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\BaseEntity;
 use Nette\Security\IIdentity;
+use Nette\Security\Passwords;
 
 
 /**
@@ -30,12 +31,15 @@ class User extends BaseEntity implements IIdentity
 	protected $password;
 
 
-	/**
-	 * @param string $email
-	 */
-	public function __construct($email)
+	public function __construct(string $email)
 	{
 		$this->email = $email;
+	}
+
+
+	public function verifyPassword(string $password): bool
+	{
+		return Passwords::verify($password, $this->password);
 	}
 
 

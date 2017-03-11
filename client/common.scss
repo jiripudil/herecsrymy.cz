@@ -1,0 +1,26 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@mixin font-sans() {
+	font-family: 'Source Sans Pro', sans-serif;
+	.wf-sourcesanspro-n4-inactive & {
+		font-family: sans-serif;
+	}
+}
+
+@mixin font-serif() {
+	font-family: 'Merriweather', serif;
+	.wf-merriweather-n4-inactive & {
+		font-family: serif;
+	}
+}
+
+$color-blue: #3390e6;
+$color-blue-dark: #145c9f;
+
+$breakpoint-mobile: 670px;
+$breakpoint-tablet: 960px;
+
+* {
+	box-sizing: border-box;
+	@include font-sans;
+}

@@ -1,22 +1,26 @@
-{if $event === NULL}
-	<p>V&nbsp;nejbližší době bohužel nic nechystám.</p>
+{if count($events) === 0}
+	<div>
+		<p>V&nbsp;nejbližší době bohužel nic nechystám.</p>
+	</div>
 {else}
-	<ul class="eventsList">
-		<li class="event event--list">
-			<h3 class="event-title event-title--small">{$event->name} <a n:if="$event->facebookUrl" href="{$event->facebookUrl}"><span class="fa fa-facebook-square" title="Událost na Facebooku"></span></a></h3>
+	<div>
+		<div class="event" n:foreach="$events as $event">
 			<div class="event-datetime">
 				<time datetime="{$event->datetime|date:'Y-m-d H:i'}">
-					<span class="event-date">{$event->datetime|czechDate}</span>
-					<span class="event-time">{$event->datetime|date:'G:i'}</span>
+					<span class="event-date">{$event->datetime|date:'j. n. Y'}</span>
+					<span class="event-time">{$event->datetime|date:'H.i'}</span>
 				</time>
 			</div>
-			<div class="event-info event-info--small">
-				<span class="fa fa-map-marker" title="Místo"></span> <span class="tooltip" title="{$event->location->address}">{$event->location->name}</span>
-				{if $event->location->point}
-					(<a href="{$event|map}">mapa</a>)
-				{/if}
+			<div class="event-title">{$event->name}</div>
+			<div class="event-location">
+				<a n:tag-if="$event->location->point" href="{$event|map}" title="Zobrazit mapu"><span class="fa fa-map-marker" aria-label="Zobrazit mapu"></span></a>
+				{$event->location->name}, {$event->location->address}
 			</div>
-		</li>
-	</ul>
-	<a href="{plink Events:}" class="btn">Další události</a>
+		</div>
+	</div>
+	<div class="button--more">
+		<a href="{plink Events:}" class="ajax">
+			Zobrazit další
+		</a>
+	</div>
 {/if}

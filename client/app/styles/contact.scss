@@ -1,0 +1,29 @@
+.contact-info {
+	margin: 0;
+	padding: 0;
+
+	li {
+		list-style-type: none;
+		margin-bottom: .25em;
+
+		a {
+			text-decoration: none;
+		}
+	}
+}
+
+.contact-downloads {
+	padding-left: 1.2em;
+
+	li {
+		list-style-type: square;
+		margin-bottom: .25em;
+
+		a {
+			padding: .25em;
+			font-size: .9em;
+			background: #e0e0e0;
+			text-decoration: none;
+		}
+	}
+}

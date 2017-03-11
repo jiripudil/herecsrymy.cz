@@ -1,0 +1,12 @@
+<div class="attachments noprint">
+	<h3>Ke stažení</h3>
+	{foreach $attachments as $attachment}
+		<div class="attachment" n:foreach="$attachment->files as $file">
+			<a href="{plink File: $file}">
+				<span class="fa fa-download" title="Stáhnout"></span>
+				{$file->getExtension()|upper}
+				<span class="attachment-size">{$file->fileSize|bytes}</span>
+			</a>
+		</div>
+	{/foreach}
+</div>

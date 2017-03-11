@@ -6,7 +6,6 @@ use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\Paginator;
 use Herecsrymy\Application\UI\TBaseControl;
-use Herecsrymy\FrontModule\Components\Head\HeadControl;
 
 
 class PagingControl extends Control
@@ -38,24 +37,19 @@ class PagingControl extends Control
 	}
 
 
+	public function reset()
+	{
+		$this->page = 1;
+		$this->paginator->setPage(1);
+	}
+
+
 	/**
 	 * @return Paginator
 	 */
 	public function getPaginator()
 	{
 		return $this->paginator;
-	}
-
-
-	public function addLinks(HeadControl $head)
-	{
-		if ( ! $this->paginator->first) {
-			$head->addLink('prev', $this->link('this', ['page' => $this->page - 1]));
-		}
-
-		if ( ! $this->paginator->last) {
-			$head->addLink('next', $this->link('this', ['page' => $this->page + 1]));
-		}
 	}
 
 

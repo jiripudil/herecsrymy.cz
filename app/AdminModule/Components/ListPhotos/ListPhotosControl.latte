@@ -1,0 +1,22 @@
+<div>
+	<table width="100%">
+		<thead><tr>
+			<th>Photo</th>
+			<th>Description</th>
+			<th></th>
+		</tr></thead>
+		<tbody>
+		<tr n:foreach="$photos as $photo">
+			<td width="40%">
+				<img src="{$photo|photoThumb}">
+			</td>
+			<td>
+				{$photo->description}
+			</td>
+			<td width="10%">
+				<a n:href="delete! $photo->id" data-confirm="Do you really want to delete this photo?"><span class="fa fa-remove" title="Delete"></span></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

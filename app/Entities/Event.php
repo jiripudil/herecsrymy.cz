@@ -70,11 +70,7 @@ class Event extends BaseEntity
 	protected $published;
 
 
-	/**
-	 * @param string $name
-	 * @param \DateTime $datetime
-	 */
-	public function __construct($name, \DateTime $datetime)
+	public function __construct(string $name, \DateTime $datetime)
 	{
 		$this->name = $name;
 		$this->datetime = $datetime;

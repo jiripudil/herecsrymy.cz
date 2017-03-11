@@ -86,10 +86,10 @@ class EventQuery extends QueryObject
 	/**
 	 * @return EventQuery
 	 */
-	public function onlyOne()
+	public function only(int $limit)
 	{
-		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) {
-			$builder->setMaxResults(1);
+		$this->filters[] = function (Kdyby\Doctrine\QueryBuilder $builder) use ($limit) {
+			$builder->setMaxResults($limit);
 		};
 
 		return $this;

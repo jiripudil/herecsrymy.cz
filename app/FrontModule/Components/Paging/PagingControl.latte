@@ -6,13 +6,15 @@
  * (none)
  *}
 
-<ul class="paginator">
+<ul class="paginator" n:snippet="paging">
 	<li n:if="! $paginator->first" class="paginator-page">
-		<a n:href="this page => $page - 1">&laquo; předchozí</a>
+		<a n:href="this page => $page - 1" class="ajax">
+			<span class="fa fa-arrow-left"></span>
+		</a>
 	</li>
 
 	<li n:for="$i = max(1, $page - 2); $i <= min($page + 2, $paginator->lastPage); $i++" class="paginator-page">
-		<a n:tag-if="$i !== $page" n:href="this page => $i">
+		<a n:tag-if="$i !== $page" n:href="this page => $i" class="ajax">
 			<strong n:tag-if="$i === $page">
 				{$i}
 			</strong>
@@ -20,6 +22,8 @@
 	</li>
 
 	<li n:if="! $paginator->last" class="paginator-page">
-		<a n:href="this page => $page + 1">další &raquo;</a>
+		<a n:href="this page => $page + 1" class="ajax">
+			<span class="fa fa-arrow-right"></span>
+		</a>
 	</li>
 </ul>

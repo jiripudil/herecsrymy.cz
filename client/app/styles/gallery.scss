@@ -1,0 +1,40 @@
+.ltbox-overlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+	min-width: 100vw;
+	min-height: 100vh;
+	padding: 2em 0;
+
+	background: rgba(#999, .85);
+	z-index: 1000;
+
+	.ltbox-image {
+		position: relative;
+		z-index: 1001;
+
+		max-width: 90vw;
+		max-height: 90vh;
+		margin: auto;
+
+		text-align: center;
+
+		img {
+			max-width: 90vw;
+			max-height: 90vh;
+		}
+
+		.ltbox-description {
+			position: absolute;
+			width: 300px;
+			left: calc(50% - 150px);
+			top: 0;
+			padding: .5em;
+
+			font-size: .9em;
+
+			background: rgba(#262929, .8);
+			color: #fff;
+		}
+	}
+}

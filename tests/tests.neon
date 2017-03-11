@@ -1,2 +1,6 @@
 parameters:
 	gmapsApiKey: foo
+
+webpack:
+	manifest:
+		name: null

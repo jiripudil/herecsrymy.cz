@@ -5,6 +5,7 @@ namespace Herecsrymy\AdminModule\Presenters;
 use Herecsrymy\AdminModule\Components\EditLocation\IEditLocationControlFactory;
 use Herecsrymy\AdminModule\Components\ListLocations\IListLocationsControlFactory;
 use Herecsrymy\Entities\Location;
+use Herecsrymy\Http\Csp\NonceGenerator;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Presenter;
 
@@ -12,9 +13,7 @@ use Nette\Application\UI\Presenter;
 class LocationPresenter extends Presenter
 {
 
-	use TAdminPresenter {
-		beforeRender as baseBeforeRender;
-	}
+	use TAdminPresenter;
 	use TSecuredPresenter;
 
 
@@ -51,10 +50,9 @@ class LocationPresenter extends Presenter
 	}
 
 
-	protected function beforeRender()
+	public function renderEdit()
 	{
-		$this['head']->addScript('//maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=' . $this->gmapsApiKey);
-		$this->baseBeforeRender();
+		$this->template->gmapsApiKey = $this->gmapsApiKey;
 	}
 
 

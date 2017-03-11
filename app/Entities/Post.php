@@ -73,10 +73,7 @@ class Post extends BaseEntity
 	protected $attachments;
 
 
-	/**
-	 * @param string $title
-	 */
-	public function __construct($title)
+	public function __construct(string $title)
 	{
 		$this->title = $title;
 		$this->published = FALSE;
@@ -84,12 +81,17 @@ class Post extends BaseEntity
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isPublic()
+	public function isPublic(): bool
 	{
 		return $this->published && $this->publishedOn <= new \DateTime();
+	}
+
+
+	public function getPlayableAttachment(): ?Attachment
+	{
+		return $this->attachments->filter(function (Attachment $attachment) {
+			return $attachment->inPlayer;
+		})->first() ?: NULL;
 	}
 
 }

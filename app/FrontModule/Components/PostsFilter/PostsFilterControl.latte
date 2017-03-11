@@ -1,0 +1,8 @@
+<div class="filters" n:snippet="filter">
+	{form form class => 'ajax'}
+		<label n:foreach="array_keys($form['categories']->getItems()) as $key" class="filter" n:name="categories:$key">
+			<input type="checkbox" n:name="categories:$key" class="category-filter">
+			{$form['categories']->getLabelPart($key)->getText()}
+		</label>
+	{/form}
+</div>

@@ -11,21 +11,27 @@ use Nette\Object;
 class FileUploader extends Object
 {
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	private $wwwDir;
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	private $dirName;
 
-
 	/**
-	 * @param string $wwwDir
-	 * @param string $dirName
+	 * @var \getID3
 	 */
-	public function __construct($wwwDir, $dirName)
+	private $id3;
+
+
+	public function __construct(string $wwwDir, string $dirName, \getID3 $id3)
 	{
 		$this->wwwDir = $wwwDir;
 		$this->dirName = $dirName;
+		$this->id3 = $id3;
 	}
 
 
@@ -70,8 +76,13 @@ class FileUploader extends Object
 
 		$fileUpload->move($path);
 
-		$type = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
-		$size = filesize($path);
+		$type = $fileUpload->getContentType();
+		$size = $fileUpload->getSize();
+
+		$meta = $this->id3->analyze($path);
+		if (isset($meta['playtime_seconds']) && ! $attachment->playtime) {
+			$attachment->playtime = $meta['playtime_seconds'];
+		}
 
 		return new File($name, $type, $size, $attachment);
 	}

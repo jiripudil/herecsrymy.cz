@@ -8,9 +8,58 @@ application:
 		*: Herecsrymy\*Module\Presenters\*Presenter
 
 
+http:
+	csp:
+		default-src:
+			- self
+		connect-src:
+			- self
+		object-src:
+			- none
+		script-src:
+			- strict-dynamic
+			- nonce
+			- unsafe-inline
+			- "https:"
+		style-src:
+			- self
+			- unsafe-inline
+			- https://maxcdn.bootstrapcdn.com
+			- https://a.disquscdn.com
+			- https://fonts.googleapis.com
+		img-src:
+			- self
+			- https://maps.googleapis.com
+			- https://*.gstatic.com
+			- https://www.google-analytics.com
+			- https://a.disquscdn.com
+			- https://referrer.disqus.com
+			- https://static.flattr.net
+			- https://www.facebook.com
+			- https://*.twitter.com
+			- "data:"
+		font-src:
+			- self
+			- https://maxcdn.bootstrapcdn.com
+			- https://fonts.gstatic.com
+			- "data:"
+		child-src:
+			- self
+			- https://disqus.com
+			- https://*.flattr.com
+			- https://*.addthis.com
+			- https://*.facebook.com
+			- https://platform.twitter.com
+		upgrade-insecure-requests:
+		block-all-mixed-content:
+		report-uri: https://jiripudil.report-uri.io/r/default/csp/enforce
+
+
 session:
 	expiration: 14 days
 	cookieSecure: on
+	sidLength: 64
+	sidBitsPerCharacter: 6
 
 
 extensions:
@@ -21,14 +70,14 @@ extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	containerAdapter: Arachne\ContainerAdapter\DI\ContainerAdapterExtension
 	eventDispatcher: Arachne\EventDispatcher\DI\EventDispatcherExtension
-	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
+	migrations: Symplify\DoctrineMigrations\DI\MigrationsExtension
 	translation: Kdyby\Translation\DI\TranslationExtension
 	validator: Kdyby\Validator\DI\ValidatorExtension
 	doctrineForms: Kdyby\DoctrineForms\DI\FormsExtension
-	rabbitmq: Kdyby\RabbitMq\DI\RabbitMqExtension
 	monolog: Kdyby\Monolog\DI\MonologExtension
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	gpsPicker: VojtechDobes\NetteForms\GpsPickerExtension
+	webpack: Oops\WebpackNetteAdapter\DI\WebpackExtension(%debugMode%)
 	herecsrymy: Herecsrymy\DI\HerecsrymyExtension
 
 
@@ -44,26 +93,21 @@ doctrine:
 			distance: Herecsrymy\Doctrine\Dql\EarthDistance
 
 
-rabbitmq:
-	producers:
-		sendNewsletter:
-			connection: default
-			exchange: {name: herecsrymy, type: direct}
-			queue: {name: herecsrymy}
-
-	consumers:
-		sendNewsletter:
-			connection: default
-			exchange: {name: herecsrymy, type: direct}
-			queue: {name: herecsrymy}
-			callback: [@Herecsrymy\Newsletter\NewsletterSender, sendNewsletterFromAMQP]
-
-
 monolog:
 	name: herecsrymy
 	handlers:
 		- Monolog\Handler\StreamHandler(%appDir%/../log/error.log)
 		- Monolog\Handler\SyslogHandler(herecsrymy, local4)
+
+
+webpack:
+	devServer:
+		url: https://localhost:3000
+	manifest:
+		name: manifest.json
+	build:
+		directory: %wwwDir%/dist
+		publicPath: dist/
 
 
 migrations:

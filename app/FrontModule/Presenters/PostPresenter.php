@@ -4,12 +4,9 @@ namespace Herecsrymy\FrontModule\Presenters;
 
 use Herecsrymy\FrontModule\Components\Attachments\IAttachmentsControlFactory;
 use Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory;
-use Herecsrymy\FrontModule\Components\Newsletter\INewsletterControlFactory;
 use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
 use Herecsrymy\Entities\Post;
-use Herecsrymy\FrontModule\Components\Head\HeadControl;
-use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 
 
 class PostPresenter extends Presenter
@@ -34,27 +31,14 @@ class PostPresenter extends Presenter
 
 	public function renderDefault()
 	{
-		/** @var HeadControl $head */
-		$head = $this['head'];
-		$head->addTitlePart($this->post->category->title);
-		$head->addTitlePart($this->post->title);
-
-		$this['mainMenu']->setCurrentCategory($this->post->category);
-
 		$this->template->post = $this->post;
-	}
-
-
-	protected function createComponentHeader(IHeaderControlFactory $factory)
-	{
-		return $factory->create('small');
 	}
 
 
 	protected function createComponentDisqus(IDisqusControlFactory $factory)
 	{
 		return $factory->create(
-			$this->post->id,
+			$this->post->getId(),
 			$this->post->title,
 			$this->link('//this')
 		);
@@ -64,17 +48,6 @@ class PostPresenter extends Presenter
 	protected function createComponentAttachments(IAttachmentsControlFactory $factory)
 	{
 		return $factory->create($this->post);
-	}
-
-
-	protected function createComponentNewsletter(INewsletterControlFactory $factory)
-	{
-		$control = $factory->create();
-		$control->onSubscribe[] = function () {
-			$this->redirect('this');
-		};
-
-		return $control;
 	}
 
 }

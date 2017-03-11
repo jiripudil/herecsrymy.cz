@@ -1,0 +1,65 @@
+.post {
+	.post-song {
+		float: right;
+
+		a {
+			text-decoration: none;
+			vertical-align: middle;
+		}
+
+		.post-song-play {
+			font-size: 2em;
+		}
+	}
+
+	.post-published {
+		font-size: .9em;
+		padding-bottom: 1em;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 1.5em;
+	}
+}
+
+.attachments {
+	padding-bottom: 1em;
+
+	h3 {
+		font-size: 1.2em;
+		font-weight: bold;
+		@include font-serif;
+		margin-bottom: 0;
+	}
+
+	.attachment {
+		a {
+			padding: .25em;
+			font-size: .9em;
+			background: #e0e0e0;
+			text-decoration: none;
+		}
+
+		.attachment-size {
+			font-size: .9em;
+		}
+	}
+}
+
+.chord {
+	strong {
+		@include font-serif;
+		font-weight: bold;
+		font-size: .85em;
+		line-height: 1;
+		color: $color-blue-dark;
+		margin: 0 .33em;
+
+		span {
+			display: none;
+		}
+	}
+}
+
+.share {
+	background: #e0e0e0;
+	padding: .5em 1em;
+}

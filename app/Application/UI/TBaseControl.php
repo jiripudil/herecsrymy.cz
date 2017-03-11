@@ -3,12 +3,12 @@
 namespace Herecsrymy\Application\UI;
 
 use Kdyby\Autowired\AutowireComponentFactories;
-use Nette\Application\UI\PresenterComponent;
+use Nette\Application\UI\Component;
 use Nextras\Application\UI\SecuredLinksControlTrait;
 
 
 /**
- * @method void onAttached(PresenterComponent $this, PresenterComponent $parent)
+ * @method void onAttached(Component $self, Component $parent)
  */
 trait TBaseControl
 {
