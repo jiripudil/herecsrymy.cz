@@ -116,11 +116,11 @@ class RouterFactory extends Nette\Object
 			'Front:Page:contact' => 'kontakt',
 		]);
 
-		$router[] = new NRouters\Route('<category>/<post>', function ($post, MicroPresenter $presenter) {
+		$router[] = new NRouters\Route('<category (basnicky|pisnicky|eseje)>/<post>', function ($post, MicroPresenter $presenter) {
 			return $presenter->redirectUrl('/prispevek/' . $post, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
 		});
 
-		$router[] = new NRouters\Route('<category>', function ($category, MicroPresenter $presenter) {
+		$router[] = new NRouters\Route('<category (basnicky|pisnicky|eseje)>', function ($category, MicroPresenter $presenter) {
 			return $presenter->redirectUrl('/tvorba/' . $category, Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
 		});
 

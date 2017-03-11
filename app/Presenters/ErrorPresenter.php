@@ -5,7 +5,6 @@ namespace Herecsrymy\Presenters;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Herecsrymy\Application\UI\TBasePresenter;
-use Herecsrymy\FrontModule\Components\Header\IHeaderControlFactory;
 use Tracy\Debugger;
 
 
@@ -27,25 +26,14 @@ class ErrorPresenter extends Presenter
 			$this->setView(in_array($code, [403, 404, 410, 500]) ? $code : '4xx');
 			$this->template->httpCode = $code;
 
-			$this['head']->setTitle('Chyba - Jiří Pudil');
-
 			Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'access');
 
 		} else {
 			$this->getHttpResponse()->setCode(500);
 			$this->setView('500');
 
-			$this['head']->addMeta('robots', 'noindex');
-			$this['head']->setTitle('Chyba - Jiří Pudil');
-
 			Debugger::log($exception, Debugger::ERROR);
 		}
-	}
-
-
-	protected function createComponentHeader(IHeaderControlFactory $factory)
-	{
-		return $factory->create();
 	}
 
 }
