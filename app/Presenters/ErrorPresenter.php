@@ -14,7 +14,7 @@ class ErrorPresenter extends Presenter
 	use TBasePresenter;
 
 
-	public function renderDefault(\Exception $exception)
+	public function renderDefault(\Throwable $exception)
 	{
 		if ($this->isAjax()) {
 			$this->payload->error = TRUE;
