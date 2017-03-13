@@ -1,6 +1,6 @@
 import '../common';
 
-import naja from 'naja/dist/Naja';
+import naja from 'naja';
 import WebFont from 'webfontloader';
 
 import LoaderExtension from './scripts/LoaderExtension';
