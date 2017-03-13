@@ -4,6 +4,7 @@ import naja from 'naja/dist/Naja';
 import WebFont from 'webfontloader';
 
 import LoaderExtension from './scripts/LoaderExtension';
+import NavExtension from './scripts/NavExtension';
 import FacebookExtension from './scripts/FacebookExtension';
 import TwitterExtension from './scripts/TwitterExtension';
 import DisqusExtension from './scripts/DisqusExtension';
@@ -18,6 +19,7 @@ import './styles/index.scss';
 
 
 naja.registerExtension(LoaderExtension, {selector: '.loader'});
+naja.registerExtension(NavExtension);
 naja.registerExtension(GTMExtension, {id: 'GTM-WLM5XK'});
 naja.registerExtension(FacebookExtension, {appId: '273296596032549', locale: 'cs_CZ', version: '2.8'});
 naja.registerExtension(TwitterExtension);
