@@ -6,10 +6,12 @@ export default class PostsFilterExtension {
 		}));
 
 		naja.addEventListener('load', () => {
-			document.querySelectorAll('.category-filter').forEach(el => {
+			const elements = document.querySelectorAll('.category-filter');
+			for (let i = 0; i < elements.length; i++) {
+				const el = elements.item(i);
 				el.removeEventListener('change', listener);
 				el.addEventListener('change', listener);
-			});
+			}
 		});
 	}
 }

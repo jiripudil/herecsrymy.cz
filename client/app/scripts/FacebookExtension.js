@@ -1,9 +1,10 @@
 export default class FacebookExtension {
 	constructor(naja, {appId, locale, version}) {
 		naja.addEventListener('load', () => {
-			document.querySelectorAll('[class^="fb-"]').forEach(el => {
-				this.reload(el);
-			});
+			const elements = document.querySelectorAll('[class^="fb-"]');
+			for (let i = 0; i < elements.length; i++) {
+				this.reload(elements.item(i));
+			}
 		});
 
 		this.appId = appId;

@@ -8,10 +8,12 @@ export default class GalleryExtension {
 		};
 
 		naja.addEventListener('load', () => {
-			document.querySelectorAll('.gallery a').forEach(el => {
+			const photos = document.querySelectorAll('.gallery a');
+			for (let i = 0; i < photos.length; i++) {
+				const el = photos.item(i);
 				el.removeEventListener('click', listener);
 				el.addEventListener('click', listener);
-			});
+			}
 		});
 	}
 

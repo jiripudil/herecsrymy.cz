@@ -1,9 +1,10 @@
 export default class TwitterExtension {
 	constructor(naja) {
 		naja.addEventListener('load', () => {
-			document.querySelectorAll('[class^="twitter-"]').forEach(el => {
-				this.reload(el);
-			});
+			const elements = document.querySelectorAll('[class^="twitter-"]');
+			for (let i = 0; i < elements.length; i++) {
+				this.reload(elements.item(i));
+			}
 		});
 	}
 
