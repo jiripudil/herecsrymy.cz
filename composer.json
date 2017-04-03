@@ -36,7 +36,7 @@
 		"james-heinrich/getid3": "^1.9.0",
 		"zaxcms/routers": "^1.0.0",
 		"sentry/sentry": "^1.6.0",
-		"oops/webpack-nette-adapter": "dev-feature/compile-time-manifest"
+		"oops/webpack-nette-adapter": "^1.0.0@rc"
 	},
 	"require-dev": {
 		"nette/tester": "^1.7.0",

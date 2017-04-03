@@ -3304,12 +3304,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2ps/WebpackNetteAdapter.git",
-                "reference": "35338ca1ff332b4d4fbf1ba9806c83ae9bb98f5b"
+                "reference": "28426a5418b45336462ab7eb15e0599f010a6691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2ps/WebpackNetteAdapter/zipball/35338ca1ff332b4d4fbf1ba9806c83ae9bb98f5b",
-                "reference": "35338ca1ff332b4d4fbf1ba9806c83ae9bb98f5b",
+                "url": "https://api.github.com/repos/o2ps/WebpackNetteAdapter/zipball/28426a5418b45336462ab7eb15e0599f010a6691",
+                "reference": "28426a5418b45336462ab7eb15e0599f010a6691",
                 "shasum": ""
             },
             "require": {
@@ -3352,7 +3352,7 @@
                 "nette",
                 "webpack"
             ],
-            "time": "2017-03-11 09:51:17"
+            "time": "2017-03-13 18:29:02"
         },
         {
             "name": "psr/http-message",

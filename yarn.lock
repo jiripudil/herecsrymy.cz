@@ -2533,9 +2533,9 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-naja@^1.0.0-alpha.4:
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/naja/-/naja-1.0.0-alpha.4.tgz#4731d5438b176b796f7362d4301b1ed988ecee82"
+naja@^1.0.0-alpha.6:
+  version "1.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/naja/-/naja-1.0.0-alpha.6.tgz#ce11d902420c41d1e5b6639b46dd7241c546dcd6"
   dependencies:
     event-target-shim "^2.0.0"
     object-assign "^4.1.0"
