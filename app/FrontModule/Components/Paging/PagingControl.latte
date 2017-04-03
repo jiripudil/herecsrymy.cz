@@ -13,6 +13,8 @@
 		</a>
 	</li>
 
+	<li n:if="$page - 2 > 1" class="paginator-page">&hellip;</li>
+
 	<li n:for="$i = max(1, $page - 2); $i <= min($page + 2, $paginator->lastPage); $i++" class="paginator-page">
 		<a n:tag-if="$i !== $page" n:href="this page => $i" class="ajax">
 			<strong n:tag-if="$i === $page">
@@ -20,6 +22,8 @@
 			</strong>
 		</a>
 	</li>
+
+	<li n:if="$page + 2 < $paginator->lastPage" class="paginator-page">&hellip;</li>
 
 	<li n:if="! $paginator->last" class="paginator-page">
 		<a n:href="this page => $page + 1" class="ajax">
