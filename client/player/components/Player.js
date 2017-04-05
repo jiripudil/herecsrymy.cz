@@ -52,7 +52,7 @@ class Player extends Component {
 			requestAnimationFrame(updateSeek);
 		};
 
-		requestAnimationFrame(updateSeek);
+		requestAnimationFrame && requestAnimationFrame(updateSeek);
 	}
 
 	setupPlayButtonHandler() {
