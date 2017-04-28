@@ -12,6 +12,7 @@
 				</time>
 			</div>
 			<div class="event-title">{$event->name}</div>
+			<div class="event-note">{$event->note}</div>
 			<div class="event-location">
 				<a n:tag-if="$event->location->point" href="{$event|map}" title="Zobrazit mapu"><span class="fa fa-map-marker" aria-label="Zobrazit mapu"></span></a>
 				{$event->location->name}, {$event->location->address}
