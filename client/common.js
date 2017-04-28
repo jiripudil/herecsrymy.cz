@@ -1,4 +1,10 @@
+import 'babel-polyfill';
 import Raven from 'raven-js';
+
+import React from 'react';
+import 'react-dom';
+import 'react-redux';
+import 'redux';
 
 
 if (process.env.NODE_ENV === 'production') {

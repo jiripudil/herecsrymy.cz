@@ -4022,6 +4022,10 @@ webfontloader@^1.6.27:
   version "1.6.27"
   resolved "https://registry.yarnpkg.com/webfontloader/-/webfontloader-1.6.27.tgz#c3899649b0653aa57d0a23388f82409e0df224ba"
 
+webpack-chunk-hash@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/webpack-chunk-hash/-/webpack-chunk-hash-0.4.0.tgz#6b40c3070fbc9ff0cfe0fe781c7174af6c7c16a4"
+
 webpack-cleanup-plugin@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/webpack-cleanup-plugin/-/webpack-cleanup-plugin-0.5.1.tgz#df2d706bd75364c06e65b051186316d674eb96af"

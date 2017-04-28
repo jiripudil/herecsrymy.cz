@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 var WebpackManifestPlugin = require('webpack-manifest-plugin');
+var WebpackChunkHashPlugin = require('webpack-chunk-hash');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 var autoprefixer = require('autoprefixer');
 var path = require('path');
@@ -12,27 +13,16 @@ module.exports = function (env) {
 	var config = {
 		devtool: isProduction ? 'source-map' : 'eval',
 		entry: {
-			admin: [
-				'babel-polyfill',
-				'./client/admin/index'
-			],
-			app: [
-				'babel-polyfill',
-				'./client/app/index'
-			],
-			calendar: [
-				'babel-polyfill',
-				'./client/calendar/index'
-			],
-			player: [
-				'babel-polyfill',
-				'./client/player/index'
-			]
+			common: './client/common',
+			admin: './client/admin/index',
+			app: './client/app/index',
+			calendar: './client/calendar/index',
+			player: './client/player/index'
 		},
 		output: {
 			path: path.join(__dirname, 'www/dist'),
 			publicPath: isProduction ? '/dist/' : 'http://localhost:3000/',
-			filename: '[name].[hash].js'
+			filename: isProduction ? '[name].[chunkhash].js' : '[name].js'
 		},
 		module: {
 			rules: [
@@ -108,7 +98,7 @@ module.exports = function (env) {
 				$: 'jquery'
 			}),
 			new ExtractTextWebpackPlugin({
-				filename: '[name].[hash].css'
+				filename: isProduction ? '[name].[contenthash].css' : '[name].css'
 			}),
 			new webpack.LoaderOptionsPlugin({
 				options: {
@@ -118,10 +108,13 @@ module.exports = function (env) {
 			}),
 			new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /cs/), // https://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack
 			new WebpackManifestPlugin(),
-			new WebpackCleanupPlugin({
-				exclude: ['admin.js', 'admin.css', 'app.js', 'app.css', 'calendar.js', 'calendar.css', 'common.js', 'player.js', 'player.css']
-			}),
-			new webpack.optimize.CommonsChunkPlugin('common')
+			new WebpackCleanupPlugin(),
+			isProduction ? new webpack.HashedModuleIdsPlugin() : new webpack.NamedModulesPlugin(),
+			new WebpackChunkHashPlugin(),
+			new webpack.optimize.CommonsChunkPlugin({
+				names: ['common', 'manifest'],
+				minChunks: Infinity
+			})
 		]
 	};
 
