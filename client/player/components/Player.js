@@ -17,8 +17,8 @@ class Player extends Component {
 			this.howls[song.id] = new Howl({
 				src: song.src,
 				volume: props.volume,
-				onend: this.playNext.bind(this),
 
+				html5: true,
 				preload: false,
 				onload: () => this.props.dispatch(actions.markLoadedSong()),
 				onplay: () => this.props.dispatch(actions.play()),
