@@ -3,7 +3,6 @@ var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 var WebpackManifestPlugin = require('webpack-manifest-plugin');
 var WebpackChunkHashPlugin = require('webpack-chunk-hash');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-var autoprefixer = require('autoprefixer');
 var path = require('path');
 
 
@@ -128,7 +127,8 @@ module.exports = function (env) {
 				},
 				sourceMap: true,
 				comments: /$./,
-			})
+			}),
+			new webpack.optimize.ModuleConcatenationPlugin()
 		);
 	}
 

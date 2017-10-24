@@ -1,8 +1,21 @@
 {
 	"name": "jiripudil/herecsrymy",
 	"require": {
-		"php": ">= 7.0.0",
+		"php": ">= 7.1.0",
 
+		"james-heinrich/getid3": "^1.9.0",
+		"kdyby/annotations": "^2.4.0",
+		"kdyby/autowired": "^1.4.0",
+		"kdyby/console": "^2.7.0",
+		"kdyby/doctrine": "^3.2.0",
+		"kdyby/doctrine-forms": "dev-master",
+		"kdyby/events": "^3.1.0",
+		"kdyby/fake-session": "^2.0.0",
+		"kdyby/monolog": "dev-master",
+		"kdyby/translation": "^2.4.0",
+		"kdyby/validator": "dev-master",
+		"latte/latte": "^2.4.0",
+		"majkl578/nette-identity-doctrine": "v2.3-rc1",
 		"nette/application": "^2.4.0",
 		"nette/bootstrap": "^2.4.0",
 		"nette/caching": "^2.5.0",
@@ -13,36 +26,22 @@
 		"nette/safe-stream": "^2.3.0",
 		"nette/security": "^2.4.0",
 		"nette/utils": "^2.4.0",
-		"latte/latte": "^2.4.0",
-		"tracy/tracy": "^2.4.0",
-
 		"nextras/secured-links": "^1.4.0",
 		"nextras/static-router": "^1.1.0",
-		"kdyby/autowired": "^1.4.0",
-		"kdyby/annotations": "^2.3.0",
-		"kdyby/events": "^3.0.0",
-		"kdyby/console": "^2.6.0",
-		"kdyby/doctrine": "^3.1.0",
-		"kdyby/translation": "^2.3.0",
-		"kdyby/validator": "dev-master",
-		"kdyby/doctrine-forms": "dev-master",
-		"kdyby/fake-session": "^2.0.0",
-		"kdyby/monolog": "dev-master",
+		"oops/webpack-nette-adapter": "^1.0.0",
+		"sentry/sentry": "^1.7.0",
 		"symplify/doctrine-migrations": "^1.4.0",
 		"symplify/package-builder": "^1.4.0",
-		"majkl578/nette-identity-doctrine": "v2.3-rc1",
 		"texy/texy": "^2.9.0",
+		"tracy/tracy": "^2.4.0",
 		"vojtech-dobes/nette-forms-gpspicker": "dev-nette-2.4-compatibility",
-		"james-heinrich/getid3": "^1.9.0",
-		"zaxcms/routers": "^1.0.0",
-		"sentry/sentry": "^1.6.0",
-		"oops/webpack-nette-adapter": "^1.0.0@rc"
+		"zaxcms/routers": "^1.0.0"
 	},
 	"require-dev": {
-		"nette/tester": "^1.7.0",
-		"mockery/mockery": "^0.9.0",
+		"jakub-onderka/php-console-highlighter": "^0.3.0",
 		"jakub-onderka/php-parallel-lint": "^0.9.0",
-		"jakub-onderka/php-console-highlighter": "^0.3.0"
+		"mockery/mockery": "^1.0.0",
+		"nette/tester": "^2.0.0"
 	},
 	"replace": {
 		"nette/nette": "2.4.0"
