@@ -5,7 +5,7 @@
 	<channel>
 		{if $category !== NULL}
 			<title>{$category->title} - Jiří Pudil, herec s rýmy</title>
-			<link>{link //Category:default $category}</link>
+			<link>{link //Posts:default, filter-categories => [$category->slug]}</link>
 			<description>{$category->description}</description>
 		{else}
 			<title>Všechny příspěvky - Jiří Pudil, herec s rýmy</title>
