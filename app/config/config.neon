@@ -14,6 +14,7 @@ http:
 			- self
 		connect-src:
 			- self
+			- https://syndication.twitter.com
 		object-src:
 			- none
 		script-src:
@@ -25,14 +26,14 @@ http:
 			- self
 			- unsafe-inline
 			- https://maxcdn.bootstrapcdn.com
-			- https://a.disquscdn.com
+			- https://*.disquscdn.com
 			- https://fonts.googleapis.com
 		img-src:
 			- self
 			- https://maps.googleapis.com
 			- https://*.gstatic.com
 			- https://www.google-analytics.com
-			- https://a.disquscdn.com
+			- https://*.disquscdn.com
 			- https://referrer.disqus.com
 			- https://static.flattr.net
 			- https://www.facebook.com
