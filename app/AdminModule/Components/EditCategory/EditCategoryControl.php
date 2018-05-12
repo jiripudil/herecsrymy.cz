@@ -4,10 +4,9 @@ namespace Herecsrymy\AdminModule\Components\EditCategory;
 
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Category;
-use Herecsrymy\Forms\EntityForm;
-use Herecsrymy\Forms\IEntityFormFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
 
 
 /**
@@ -28,21 +27,18 @@ class EditCategoryControl extends Control
 	/** @var EntityManager */
 	private $em;
 
-	/** @var IEntityFormFactory */
-	private $formFactory;
 
-
-	public function __construct(Category $category, EntityManager $em, IEntityFormFactory $formFactory)
+	public function __construct(Category $category, EntityManager $em)
 	{
+		parent::__construct();
 		$this->category = $category;
 		$this->em = $em;
-		$this->formFactory = $formFactory;
 	}
 
 
 	protected function createComponentForm()
 	{
-		$form = $this->formFactory->create();
+		$form = new Form();
 
 		$form->addText('title', 'Title')
 			->setRequired('Please enter title.');
@@ -55,13 +51,28 @@ class EditCategoryControl extends Control
 			->setRequired('Please enter sort.');
 		$form->addCheckbox('published', 'Published');
 
+		$form->addProtection();
 		$form->addSubmit('save', 'Save');
-		$form->onSuccess[] = function (EntityForm $form) {
-			$this->em->persist($category = $form->getEntity())->flush();
-			$this->onSave($category);
-		};
 
-		$form->bindEntity($this->category);
+		$form->setDefaults([
+			'title' => $this->category->title,
+			'slug' => $this->category->slug,
+			'description' => $this->category->description,
+			'sort' => $this->category->sort,
+			'published' => $this->category->published,
+		]);
+
+		$form->onSuccess[] = function (Form $form, $values) {
+			$this->category->title = $values->title;
+			$this->category->slug = $values->slug;
+			$this->category->description = $values->description;
+			$this->category->sort = $values->sort;
+			$this->category->published = $values->published;
+
+			$this->em->persist($this->category);
+			$this->em->flush();
+			$this->onSave($this->category);
+		};
 
 		return $form;
 	}

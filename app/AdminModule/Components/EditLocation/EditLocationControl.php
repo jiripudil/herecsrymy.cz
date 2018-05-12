@@ -4,10 +4,9 @@ namespace Herecsrymy\AdminModule\Components\EditLocation;
 
 use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Location;
-use Herecsrymy\Forms\EntityForm;
-use Herecsrymy\Forms\IEntityFormFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
 use VojtechDobes\NetteForms\GpsPositionPicker;
 
 
@@ -29,21 +28,18 @@ class EditLocationControl extends Control
 	/** @var EntityManager */
 	private $em;
 
-	/** @var IEntityFormFactory */
-	private $formFactory;
 
-
-	public function __construct(Location $location, EntityManager $em, IEntityFormFactory $formFactory)
+	public function __construct(Location $location, EntityManager $em)
 	{
+		parent::__construct();
 		$this->location = $location;
 		$this->em = $em;
-		$this->formFactory = $formFactory;
 	}
 
 
 	protected function createComponentForm()
 	{
-		$form = $this->formFactory->create();
+		$form = new Form();
 
 		$form->addText('name', 'Name');
 		$form->addText('address', 'Address')
@@ -51,13 +47,24 @@ class EditLocationControl extends Control
 		$form['point'] = (new GpsPositionPicker('Coords'))
 			->setRequired('Please enter coordinates.');
 
+		$form->addProtection();
 		$form->addSubmit('save', 'Save');
-		$form->onSuccess[] = function (EntityForm $form) {
-			$this->em->persist($location = $form->getEntity())->flush();
-			$this->onSave($location);
-		};
 
-		$form->bindEntity($this->location);
+		$form->setDefaults([
+			'name' => $this->location->name,
+			'address' => $this->location->address,
+			'point' => $this->location->point,
+		]);
+
+		$form->onSuccess[] = function (Form $form, $values) {
+			$this->location->name = $values->name;
+			$this->location->address = $values->address;
+			$this->location->point = $values->point;
+
+			$this->em->persist($this->location);
+			$this->em->flush();
+			$this->onSave($this->location);
+		};
 
 		return $form;
 	}

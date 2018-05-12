@@ -11,10 +11,9 @@ use Nette;
 use Nette\Application\Routers as NRouters;
 use NetteModule\MicroPresenter;
 use Nextras\Routing\StaticRouter;
-use Zax\Application\Routers\MetadataBuilder;
 
 
-class RouterFactory extends Nette\Object
+class RouterFactory
 {
 
 	/** @var EntityManager */
@@ -100,16 +99,21 @@ class RouterFactory extends Nette\Object
 			],
 		]);
 
-		$mapping = [
+		$router[] = new NRouters\Route('tvorba[/<filter-categories \D+>][/<paging-page \d+>]', [
 			'module' => 'Front',
 			'presenter' => 'Posts',
 			'action' => 'default',
-		];
-		$meta = (new MetadataBuilder($mapping))
-			->addAlias('categories', 'filter-categories')
-			->addArrayParam('categories')
-			->build();
-		$router[] = new NRouters\Route('tvorba[/<categories \D+>][/<paging-page \d+>]', $meta);
+			'filter-categories' => [
+				NRouters\Route::FILTER_IN => function (string $value): array {
+					return \array_map(function($singleValue) {
+						return \is_numeric($singleValue) ? (int) $singleValue : $singleValue;
+					}, \explode(',', $value));
+				},
+				NRouters\Route::FILTER_OUT => function (array $value): string {
+					return \implode(',', $value);
+				}
+			],
+		]);
 
 		$router[] = new StaticRouter([
 			'Front:Page:about' => 'o-mne',

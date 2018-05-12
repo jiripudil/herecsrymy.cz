@@ -7,8 +7,6 @@ use Herecsrymy\Application\UI\TBaseControl;
 use Herecsrymy\Entities\Attachment;
 use Herecsrymy\Entities\File;
 use Herecsrymy\Files\FileUploader;
-use Herecsrymy\Forms\EntityForm;
-use Herecsrymy\Forms\IEntityFormFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
@@ -41,25 +39,22 @@ class EditAttachmentControl extends Control
 	/** @var EntityManager */
 	private $em;
 
-	/** @var IEntityFormFactory */
-	private $formFactory;
-
 	/** @var FileUploader */
 	private $uploader;
 
 
-	public function __construct(Attachment $attachment, EntityManager $em, IEntityFormFactory $formFactory, FileUploader $uploader)
+	public function __construct(Attachment $attachment, EntityManager $em, FileUploader $uploader)
 	{
+		parent::__construct();
 		$this->attachment = $attachment;
 		$this->em = $em;
-		$this->formFactory = $formFactory;
 		$this->uploader = $uploader;
 	}
 
 
 	protected function createComponentForm()
 	{
-		$form = $this->formFactory->create();
+		$form = new Form();
 
 		$form->addText('name', 'Name')
 			->setRequired('Please enter name.');
@@ -72,13 +67,26 @@ class EditAttachmentControl extends Control
 		$form->addCheckbox('displayed', 'Displayed publicly');
 		$form->addCheckbox('inPlayer', 'Available in audio player');
 
+		$form->addProtection();
 		$form->addSubmit('save', 'Save');
-		$form->onSuccess[] = function (EntityForm $form) {
-			$this->em->persist($attachment = $form->getEntity())->flush();
-			$this->onSave($attachment);
-		};
 
-		$form->bindEntity($this->attachment);
+		$form->setDefaults([
+			'name' => $this->attachment->name,
+			'type' => $this->attachment->type,
+			'displayed' => $this->attachment->displayed,
+			'inPlayer' => $this->attachment->inPlayer,
+		]);
+
+		$form->onSuccess[] = function (Form $form, $values) {
+			$this->attachment->name = $values->name;
+			$this->attachment->type = $values->type;
+			$this->attachment->displayed = $values->displayed;
+			$this->attachment->inPlayer = $values->inPlayer;
+
+			$this->em->persist($this->attachment);
+			$this->em->flush();
+			$this->onSave($this->attachment);
+		};
 
 		return $form;
 	}

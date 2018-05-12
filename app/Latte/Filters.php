@@ -12,11 +12,10 @@ use Herecsrymy\Texy\TexyFactory;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
 use Nette\Http\IRequest;
-use Nette\Object;
 use Texy\Texy;
 
 
-class Filters extends Object
+class Filters
 {
 
 	/** @var Texy */

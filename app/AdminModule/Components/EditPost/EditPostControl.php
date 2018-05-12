@@ -4,13 +4,12 @@ namespace Herecsrymy\AdminModule\Components\EditPost;
 
 use Herecsrymy\AdminModule\Components\ListAttachments\IListAttachmentsControlFactory;
 use Herecsrymy\Application\UI\TBaseControl;
+use Herecsrymy\Entities\Category;
 use Herecsrymy\Entities\Post;
 use Herecsrymy\Forms\Controls\DateTimeInput;
-use Herecsrymy\Forms\EntityForm;
-use Herecsrymy\Forms\IEntityFormFactory;
 use Kdyby\Doctrine\EntityManager;
-use Kdyby\DoctrineForms\IComponentMapper;
 use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
 
 
 /**
@@ -31,21 +30,18 @@ class EditPostControl extends Control
 	/** @var EntityManager */
 	private $em;
 
-	/** @var IEntityFormFactory */
-	private $formFactory;
 
-
-	public function __construct(Post $post, EntityManager $em, IEntityFormFactory $formFactory)
+	public function __construct(Post $post, EntityManager $em)
 	{
+		parent::__construct();
 		$this->post = $post;
 		$this->em = $em;
-		$this->formFactory = $formFactory;
 	}
 
 
 	protected function createComponentForm()
 	{
-		$form = $this->formFactory->create();
+		$form = new Form();
 
 		$form->addText('title', 'Title')
 			->setRequired('Please enter title.');
@@ -58,22 +54,43 @@ class EditPostControl extends Control
 
 		$form->addCheckbox('containsChords', 'Show chords controls');
 
-		$form->addSelect('category', 'Category')
-			->setRequired('Please select category.')
-			->setOption(IComponentMapper::ITEMS_TITLE, 'title');
+		$categoryItems = $this->em->getRepository(Category::class)->findPairs([], 'title', ['title' => 'ASC'], 'id');
+		$form->addSelect('category', 'Category', $categoryItems)
+			->setRequired('Please select category.');
 
 		$dateInput = (new DateTimeInput('Published on'))
 			->setRequired('Please enter publication date.');
 		$form->addComponent($dateInput, 'publishedOn');
 		$form->addCheckbox('published', 'Published');
 
+		$form->addProtection();
 		$form->addSubmit('save', 'Save');
-		$form->onSuccess[] = function (EntityForm $form) {
-			$this->em->persist($post = $form->getEntity())->flush();
-			$this->onSave($post);
-		};
 
-		$form->bindEntity($this->post);
+		$form->setDefaults([
+			'title' => $this->post->title,
+			'slug' => $this->post->slug,
+			'description' => $this->post->description,
+			'text' => $this->post->text,
+			'containsChords' => $this->post->containsChords,
+			'category' => $this->post->category,
+			'publishedOn' => $this->post->publishedOn,
+			'published' => $this->post->published,
+		]);
+
+		$form->onSuccess[] = function (Form $form, $values) {
+			$this->post->title = $values->title;
+			$this->post->slug = $values->slug;
+			$this->post->description = $values->description;
+			$this->post->text = $values->text;
+			$this->post->containsChords = $values->containsChords;
+			$this->post->category = $values->category;
+			$this->post->publishedOn = $values->publishedOn;
+			$this->post->published = $values->published;
+
+			$this->em->persist($this->post);
+			$this->em->flush();
+			$this->onSave($this->post);
+		};
 
 		return $form;
 	}

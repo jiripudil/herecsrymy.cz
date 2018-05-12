@@ -2,11 +2,10 @@
 
 namespace Herecsrymy\Texy;
 
-use Nette\Object;
 use Texy;
 
 
-class TexyFactory extends Object
+class TexyFactory
 {
 
 	/**

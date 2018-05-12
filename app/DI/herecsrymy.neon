@@ -16,7 +16,6 @@ services:
 	- Herecsrymy\FrontModule\Components\Disqus\IDisqusControlFactory
 
 	# admin
-	- {implement: Herecsrymy\Forms\IEntityFormFactory, inject: yes, setup: [addProtection]}
 	- Herecsrymy\AdminModule\Components\LoginForm\ILoginFormControlFactory
 	- Herecsrymy\AdminModule\Components\FlashMessages\IFlashMessagesControlFactory
 	- Herecsrymy\AdminModule\Components\ListPosts\IListPostsControlFactory

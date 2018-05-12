@@ -5,10 +5,9 @@ namespace Herecsrymy\Files;
 use Herecsrymy\Entities\Attachment;
 use Herecsrymy\Entities\File;
 use Nette\Http\FileUpload;
-use Nette\Object;
 
 
-class FileUploader extends Object
+class FileUploader
 {
 
 	/**
