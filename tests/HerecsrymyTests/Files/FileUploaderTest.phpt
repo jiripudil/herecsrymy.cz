@@ -44,7 +44,7 @@ class FileUploaderTest extends TestCase
 		$post = new Post('Title');
 		$attachment = new Attachment('Foo', Attachment::TYPE_DOCUMENT, $post);
 
-		$idProp = $attachment->getReflection()->getProperty('id');
+		$idProp = (new \ReflectionClass(Attachment::class))->getProperty('id');
 		$idProp->setAccessible(TRUE);
 		$idProp->setValue($attachment, 42);
 
