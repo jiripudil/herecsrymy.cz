@@ -12,6 +12,8 @@ application:
 
 http:
 	csp:
+		base-uri:
+			- none
 		default-src:
 			- self
 		connect-src:
