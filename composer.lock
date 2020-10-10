@@ -616,12 +616,12 @@
             "version": "v2.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/87ee409783a4a322b5597ebaae558661404055a7",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/87ee409783a4a322b5597ebaae558661404055a7",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7",
                 "shasum": ""
             },
@@ -1803,23 +1803,23 @@
         },
         {
             "name": "nette/application",
-            "version": "v2.4.11",
+            "version": "v2.4.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/application.git",
-                "reference": "2379b1ddeb1f2aebf21b73db67659575442c588a"
+                "reference": "e32c04de211873c792d13d9a00c50083b8e05a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/2379b1ddeb1f2aebf21b73db67659575442c588a",
-                "reference": "2379b1ddeb1f2aebf21b73db67659575442c588a",
+                "url": "https://api.github.com/repos/nette/application/zipball/e32c04de211873c792d13d9a00c50083b8e05a23",
+                "reference": "e32c04de211873c792d13d9a00c50083b8e05a23",
                 "shasum": ""
             },
             "require": {
                 "nette/component-model": "^2.3",
                 "nette/http": "^2.2",
                 "nette/reflection": "^2.2",
-                "nette/utils": "^2.4 || ~3.0.0",
+                "nette/utils": "^2.4",
                 "php": ">=5.6.0"
             },
             "conflict": {
@@ -1830,8 +1830,8 @@
             },
             "require-dev": {
                 "latte/latte": "^2.4.3",
-                "mockery/mockery": "^0.9.5",
-                "nette/di": "^2.4 || ~3.0.0",
+                "mockery/mockery": "^1.0",
+                "nette/di": "^2.4",
                 "nette/forms": "^2.4",
                 "nette/robot-loader": "^2.4.2 || ^3.0",
                 "nette/security": "^2.4",
@@ -1851,9 +1851,6 @@
             "autoload": {
                 "classmap": [
                     "src/"
-                ],
-                "files": [
-                    "src/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1886,7 +1883,7 @@
                 "routing",
                 "seo"
             ],
-            "time": "2018-03-07T16:04:13+00:00"
+            "time": "2020-08-25T01:51:49+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -2605,6 +2602,7 @@
                 "nette",
                 "reflection"
             ],
+            "abandoned": true,
             "time": "2017-07-11T19:28:57+00:00"
         },
         {
@@ -3845,6 +3843,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2017-10-20T15:21:32+00:00"
         },
         {
@@ -3899,6 +3898,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],
@@ -4226,5 +4226,6 @@
     "platform": {
         "php": "^7.2"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
