@@ -1,0 +1,12 @@
+{
+	"extends": [
+		"config:base"
+	],
+	"rangeStrategy": "update-lockfile",
+	"packageRules": [
+		{
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
+		}
+	]
+}
