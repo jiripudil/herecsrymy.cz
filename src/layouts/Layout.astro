@@ -32,7 +32,7 @@ const songs = await Promise.all(posts
 	.filter((post) => post.data.audio)
 	.sort((a, b) => b.data.publishedAt - a.data.publishedAt)
 	.map(async (post): Promise<AudioMetadata> => {
-		const playtime = await getAudioDurationInSeconds(new URL(`../../public/audio/${post.slug}.mp3`, import.meta.url).toString());
+		const playtime = await getAudioDurationInSeconds(new URL(`../../${import.meta.env.MODE === 'development' ? 'public/' : ''}audio/${post.slug}.mp3`, import.meta.url).toString());
 		return {
 			src: `/audio/${post.slug}.mp3`,
 			title: post.data.title,
