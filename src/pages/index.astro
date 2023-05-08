@@ -1,50 +1,106 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import {Image} from '@astrojs/image/components';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {getCollection} from 'astro:content';
+import Post from '../components/Post';
+import photo from '../images/photo2.jpg';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection('posts');
+posts.sort((a, b) => b.data.publishedAt - a.data.publishedAt);
+const latestPosts = posts.slice(0, 4);
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<style>
+	.container {
+		display: flex;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding-top: 1rem;
+	}
+
+	.aboutMe {
+		flex-basis: 65%;
+	}
+
+	.aboutMe img {
+		max-width: 100%;
+	}
+
+	.featuredPost {
+		flex-basis: 33%;
+	}
+
+	mark {
+		color: var(--color-blue-dark);
+		text-shadow: 0 0 .25rem #99c7f2;
+		background: none;
+	}
+
+	.more {
+		margin-top: 1.5rem;
+	}
+
+	.more a {
+		color: #fff;
+		background: var(--color-blue);
+		text-decoration: none;
+		padding: .5rem .75rem;
+		border-radius: .75rem;
+	}
+
+	.more a:hover {
+		background: var(--color-blue-dark);
+	}
+
+	@media (max-width: var(--breakpoint-mobile)) {
+		.container {
+			display: block;
+		}
+	}
+</style>
+
+<Layout title="Jiří Pudil">
+	<div class="container">
+		<div class="aboutMe">
+			<Image
+				src={photo}
+				alt="Jiří Pudil, brněnský herec s rýmy"
+				width={700}
+			/>
+			<p>V&nbsp;šestnácti jsme se s&nbsp;kamarádem vsadili, že budeme psát básně, a&nbsp;tak jsem začal psát. V&nbsp;osmnácti mi vrazil do ruky kytaru a řekl, ať hraju, a&nbsp;tak jsem začal hrát. Na sklonku dvaadvacátého roku jsem skloubil obé a začal skládat vlastní písničky.</p>
+			<div class="more">
+				<a href="/o-mne">
+					Více o&nbsp;mně
+					<FontAwesomeIcon icon={faChevronRight} />
+				</a>
+			</div>
+		</div>
+
+		<div class="featuredPost">
+			<h2>Polibek Múzy</h2>
+			<div>
+				<p>
+					Ani dnes mě nelíbají<br />
+					Múzy přímo na čelo.<br />
+					Říkám jim, ať říct si dají,<br />
+					ale jim se nechtělo.
+				</p>
+
+				<p>
+					Lítaj’ radši za jinými,<br />
+					líbají je po těle,<br />
+					a já, prostý <mark>herec s rýmy</mark>,<br />
+					jen pot stírám na čele.
+				</p>
+			</div>
+			<div class="more">
+				<a href="/tvorba">
+					Další tvorba
+					<FontAwesomeIcon icon={faChevronRight} />
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>

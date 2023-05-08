@@ -1,0 +1,25 @@
+.post {
+	padding: 1rem 0;
+}
+
+.post:not(:last-child) {
+	border-bottom: 1px solid #ccc;
+}
+
+.postTitle {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.postCategory {
+	font-size: 1rem;
+}
+
+.postPublished {
+	font-size: .9rem;
+	color: #666;
+}
+
+.postCategory svg, .postPublished svg {
+	margin-right: .25rem;
+}

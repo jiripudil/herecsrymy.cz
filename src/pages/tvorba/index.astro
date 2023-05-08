@@ -1,0 +1,16 @@
+---
+import {getCollection} from 'astro:content';
+import PostsListWithFilter from '../../components/PostsListWithFilter';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await getCollection('posts');
+posts.sort((a, b) => b.data.publishedAt - a.data.publishedAt)
+---
+
+<Layout title="Moje tvorba">
+	<h1>Moje tvorba</h1>
+	<PostsListWithFilter
+		posts={posts}
+		client:load
+	/>
+</Layout>

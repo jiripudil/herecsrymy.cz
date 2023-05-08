@@ -1,0 +1,278 @@
+---
+import {Image} from '@astrojs/image/components';
+import {faBars, faHome} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {getCollection} from 'astro:content';
+import {getAudioDurationInSeconds} from 'get-audio-duration';
+import Player from '../components/Player';
+import type {AudioMetadata} from '../components/Player/types';
+import photo from '../images/jiri.jpg';
+import cc from '../images/cc.png';
+import ccBy from '../images/cc-by.png';
+import ccNc from '../images/cc-nc-eu.png';
+
+import '../styles/global.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import '@fontsource/merriweather/400.css';
+import '@fontsource/merriweather/700.css';
+import '@fontsource/source-sans-pro/400.css';
+import '@fontsource/source-sans-pro/700.css';
+
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const {pathname} = Astro.url;
+const canonicalURL = new URL(pathname, Astro.site);
+const {title, description} = Astro.props;
+
+const posts = await getCollection('posts');
+const songs = await Promise.all(posts
+	.filter((post) => post.data.audio)
+	.sort((a, b) => b.data.publishedAt - a.data.publishedAt)
+	.map(async (post): Promise<AudioMetadata> => {
+		const playtime = await getAudioDurationInSeconds(new URL(`../../public/audio/${post.slug}.mp3`, import.meta.url).toString());
+		return {
+			src: `/audio/${post.slug}.mp3`,
+			title: post.data.title,
+			playtime,
+		};
+	}),
+);
+---
+
+<!DOCTYPE html>
+<html lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="turbo-cache-control" content="no-cache" />
+
+		<link rel="canonical" href={canonicalURL} />
+
+		<title>{title} – Herec s rýmy</title>
+		<meta name="title" content={title} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+
+		<script>
+			import '../utils/turbo.js';
+		</script>
+
+		<style>
+			.container {
+				max-width: 1080px;
+				margin: 0 auto;
+			}
+
+			.header {
+				padding: 1rem 1.5rem 1.5rem;
+			}
+
+			.header a {
+				color: #222;
+				text-decoration: none;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				gap: 1rem;
+			}
+
+			.photo {
+				position: relative;
+				top: 6px;
+			}
+
+			.photo img {
+				border-radius: 50%;
+			}
+
+			.heading {
+				font-family: var(--font-serif);
+				font-size: 2.4rem;
+				font-weight: bold;
+			}
+
+			.tagline {
+				color: var(--color-blue);
+				margin-top: -.75rem;
+			}
+
+			.navigation {
+				margin-top: 1rem;
+				padding: 0 1.5rem;
+				background: var(--color-blue);
+			}
+
+			:global(#menu-toggle), .toggleLabel {
+				display: none;
+			}
+
+			.navigation ul {
+				margin: 0;
+				padding: 0;
+			}
+
+			.navigation ul li {
+				display: inline-block;
+				list-style-type: none;
+
+				font-size: 1.1rem;
+				text-transform: uppercase;
+			}
+
+			.navigation ul li a {
+				display: inline-block;
+				padding: .75rem;
+				text-decoration: none;
+				color: #fff;
+			}
+
+			.navigation ul li.active a, .navigation ul li a:hover {
+				background: var(--color-blue-dark);
+			}
+
+			@media (max-width: var(--breakpoint-mobile)) {
+				.navigation ul {
+					opacity: 0;
+					height: 0;
+					visibility: hidden;
+					transition: all .5s ease;
+				}
+
+				.navigation ul li {
+					display: block;
+				}
+
+				.navigation ul li a {
+					display: block;
+				}
+
+				:global(#menu-toggle):checked ~ ul {
+					opacity: 1;
+					height: auto;
+					visibility: visible;
+				}
+
+				.toggleLabel {
+					cursor: pointer;
+					display: block;
+					padding: .75rem;
+					color: #fff;
+
+					font-size: 1.1rem;
+					text-transform: uppercase;
+				}
+			}
+
+			.main {
+				padding: .5rem 1.5rem 1.5rem;
+				background: #fff;
+			}
+
+			.footer {
+				padding: 1rem 1.5rem;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.copyright {
+				color: #585858;
+				font-size: .9rem;
+			}
+
+			.license a {
+				display: inline-flex;
+				align-items: center;
+				text-decoration: none;
+			}
+
+			.license a span {
+				margin-left: 6px;
+			}
+
+			.license img {
+				width: 32px;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<a href="/">
+					<div class="photo">
+						<Image
+							src={photo}
+							alt="Jiří Pudil, fotografie"
+							width={64}
+							height={64}
+						/>
+					</div>
+					<div>
+						<div class="heading">Jiří Pudil</div>
+						<div class="tagline">brněnský herec s rýmy</div>
+					</div>
+				</a>
+			</div>
+
+			<div id="player" data-turbo-permanent>
+				<Player
+					songs={songs}
+					client:load
+				/>
+			</div>
+
+			<div class="navigation">
+				<input type="checkbox" id="menu-toggle">
+				<label for="menu-toggle" class="toggleLabel">
+					<FontAwesomeIcon icon={faBars} /> Menu
+				</label>
+				<ul>
+					<li class:list={{active: pathname === '/'}}>
+						<a href="/">
+							<FontAwesomeIcon icon={faHome} />
+						</a>
+					</li>
+					<li class:list={{active: pathname === '/o-mne'}}>
+						<a href="/o-mne">
+							O&nbsp;mně
+						</a>
+					</li>
+					<li class:list={{active: pathname.startsWith('/tvorba')}}>
+						<a href="/tvorba">
+							Tvorba
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="main">
+				<slot/>
+			</div>
+
+			<div class="footer">
+				<div class="copyright">
+					&copy; {new Date().getFullYear()} Jiří Pudil
+				</div>
+				<div class="license">
+					<span title="Licencováno pod Creative Commons Uveďte autora-Neužívejte komerčně 4.0 Mezinárodní">
+						<a href="https://creativecommons.org/licenses/by-nc/4.0/">
+							<Image src={cc} width={32} height={32} alt="Creative Commons" />
+							<Image src={ccBy} width={32} height={32} alt="Uveďte autora" />
+							<Image src={ccNc} width={32} height={32} alt="Neužívejte komerčně" />
+							<span>není-li uvedeno jinak</span>
+						</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

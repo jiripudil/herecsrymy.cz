@@ -1,0 +1,17 @@
+---
+import {faClipboardQuestion} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Stránka nenalezena">
+	<h1>
+		<FontAwesomeIcon icon={faClipboardQuestion} />
+		Tyto rýmy v&nbsp;plném znění<br/>nejsou právě k&nbsp;nalezení
+	</h1>
+	<div>
+		<p>
+			Požadovaná stránka není tam, kde by měla být. Zkontrolujte si prosím, že jste zadali správnou adresu.
+		</p>
+	</div>
+</Layout>

@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+
+.posts {
+	flex-basis: 65%;
+}
+
+.filter {
+	flex-basis: 33%;
+}

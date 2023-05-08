@@ -1,0 +1,101 @@
+---
+import {faCalendarDay, faDownload} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {type CollectionEntry, getCollection, getEntryBySlug} from 'astro:content';
+import FormattedDate from '../../components/FormattedDate';
+import {Category, getCategory} from '../../data/categories';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('posts');
+	return posts.map((post) => ({
+		params: {slug: post.slug},
+		props: {post},
+	}));
+}
+
+interface Props {
+	readonly post: CollectionEntry<'posts'>;
+}
+
+const {post} = Astro.props;
+const category = getCategory(post.data.category);
+const {Content} = await post.render();
+---
+
+<style>
+	.postDownload {
+		float: right;
+	}
+
+	.postDownload a {
+		text-decoration: none;
+		vertical-align: middle;
+	}
+
+	.postCategory {
+		font-size: 1rem;
+		margin-top: 1rem;
+	}
+
+	.postPublished {
+		font-size: .9rem;
+		color: #666;
+	}
+
+	.postCategory svg, .postPublished svg {
+		margin-right: .25rem;
+	}
+
+	.content {
+		padding-top: 1rem;
+		border-top: 1px solid #ccc;
+		margin-top: 1.5rem;
+	}
+
+	:global(.chord) {
+		font-family: var(--font-serif);
+		font-size: .8rem;
+		font-weight: bold;
+		line-height: 1;
+		color: var(--color-blue-dark);
+		margin: 0 .33rem;
+		position: relative;
+		top: -.33rem;
+	}
+</style>
+
+<Layout
+	title={post.data.title}
+	description={post.data.tagline}
+>
+	<div class="post">
+		<h1>
+			{post.data.title}
+		</h1>
+
+		{category.id === Category.song && post.data.audio && (
+			<div class="postDownload">
+				<a href={`/audio/${post.slug}.mp3`} download={`${post.slug}.mp3`}>
+					<FontAwesomeIcon icon={faDownload} />
+				</a>
+			</div>
+		)}
+
+		<div>
+			{post.data.tagline}
+		</div>
+		<div class="postCategory">
+			<FontAwesomeIcon icon={category.icon} />
+			{category.name}
+		</div>
+		<div class="postPublished">
+			<FontAwesomeIcon icon={faCalendarDay} />
+			<FormattedDate date={post.data.publishedAt} />
+		</div>
+
+		<div class="content">
+			<Content />
+		</div>
+	</div>
+</Layout>

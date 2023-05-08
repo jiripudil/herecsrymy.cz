@@ -1,0 +1,93 @@
+---
+import {Image} from '@astrojs/image/components';
+import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import photo1 from '../images/photo1.jpg';
+import photo2 from '../images/photo2.jpg';
+import photo3 from '../images/photo3.jpg';
+import Layout from '../layouts/Layout.astro';
+---
+
+<style>
+	.container {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.aboutMe {
+		flex-basis: 65%;
+	}
+
+	.contact {
+		padding: 0;
+		list-style-type: none;
+	}
+
+	.contactIcon {
+		vertical-align: middle;
+		margin-right: .25rem;
+	}
+
+	.gallery {
+		flex-basis: 33%;
+	}
+
+	.gallery img {
+		max-width: 100%;
+	}
+
+	@media (max-width: var(--breakpoint-mobile)) {
+		.container {
+			display: block;
+		}
+	}
+</style>
+
+<Layout title="O mně">
+	<h1>O&nbsp;mně</h1>
+	<div class="container">
+		<div class="aboutMe">
+			<p class="lead">
+				V&nbsp;šestnácti jsme se s&nbsp;kamarádem vsadili, že budeme psát básně, a&nbsp;tak jsem začal psát. V&nbsp;osmnácti mi vrazil do ruky kytaru a řekl, ať hraju, a&nbsp;tak jsem začal hrát. Na sklonku dvaadvacátého roku jsem skloubil obé a začal skládat vlastní písničky.
+			</p>
+			<p>
+				Narodil jsem se v&nbsp;Českých Budějicích, ale po návratu z&nbsp;porodnice jsem celý zbytek dětství i&nbsp;dospívání prožil na vysočinském maloměstě jménem Humpolec. Aktuálně jsem spokojeně usazený v&nbsp;překrásné moravské vesničce jménem Brno. Se svojí kytarou a partou kamarádů vcelku pravidelně a veskrze neoficálně a neohlášeně brázdím brněnské hospůdky.
+			</p>
+			<p>
+				Mimo to <a href="https://jiripudil.cz">programuji webové aplikace</a>, opíjím se kávou, jezdím na kole, plácám do míče a nahodile dělám celou řadu dalších věcí.
+			</p>
+
+			<h2>Kontakt</h2>
+			<ul class="contact">
+				<li>
+					<FontAwesomeIcon icon={faEnvelope} />
+					<a href="mailto:me&#64;jiripudil.cz">me&#64;jiripudil.cz</a>
+				</li>
+				<li>
+					<FontAwesomeIcon icon={faFacebookSquare} />
+					<a href="https://www.facebook.com/herecsrymy">herecsrymy</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="gallery">
+			<Image
+				src={photo1}
+				alt="Vojtovy Pudy a Jirkovy Žákyně, září 2015, ZO Malina, Brno"
+				width={360}
+			/>
+			<Image
+				src={photo2}
+				alt="LeMUr.mu na vlastní ocas, listopad 2015, klub Desert, Brno"
+				width={360}
+			/>
+			<Image
+				src={photo3}
+				alt="Na sviňu svět Josefa Prokeše, prosinec 2016, kino Scala, Brno"
+				width={360}
+			/>
+		</div>
+	</div>
+</Layout>

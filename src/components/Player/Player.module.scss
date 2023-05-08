@@ -1,0 +1,188 @@
+.wrapper {
+	padding: .5em 1.5em;
+	color: #fff;
+	background: #262929;
+	border-bottom: 1px solid #000;
+}
+
+.player {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.controls {
+		flex-basis: 10%;
+		min-width: 100px;
+
+		svg {
+			vertical-align: middle;
+			font-size: .9em;
+			cursor: pointer;
+
+			&.disabledControl {
+				color: #666;
+				cursor: not-allowed;
+			}
+
+			&.play {
+				font-size: 2.2em;
+				margin: 0.125em .25em;
+			}
+		}
+	}
+
+	.volume {
+		flex-basis: 10%;
+		@media (max-width: var(--breakpoint-mobile)) {
+			flex-basis: 30%;
+		}
+
+		input[type=range] {
+			-webkit-appearance: none;
+			width: 100%;
+			margin: 4px 0;
+		}
+		input[type=range]:focus {
+			outline: none;
+		}
+		input[type=range]::-webkit-slider-runnable-track {
+			width: 100%;
+			height: 8px;
+			cursor: pointer;
+			background: #808080;
+		}
+		input[type=range]::-webkit-slider-thumb {
+			height: 16px;
+			width: 16px;
+			border-radius: 16px;
+			background: #ffffff;
+			cursor: pointer;
+			-webkit-appearance: none;
+			margin-top: -4px;
+		}
+		input[type=range]:focus::-webkit-slider-runnable-track {
+			background: #808080;
+		}
+		input[type=range]::-moz-range-track {
+			width: 100%;
+			height: 8px;
+			cursor: pointer;
+			background: #808080;
+		}
+		input[type=range]::-moz-range-thumb {
+			height: 16px;
+			width: 16px;
+			border-radius: 16px;
+			background: #ffffff;
+			cursor: pointer;
+		}
+		input[type=range]::-ms-track {
+			width: 100%;
+			height: 8px;
+			cursor: pointer;
+			background: transparent;
+			border-color: transparent;
+			color: transparent;
+		}
+		input[type=range]::-ms-fill-lower {
+			background: #808080;
+		}
+		input[type=range]::-ms-fill-upper {
+			background: #808080;
+		}
+		input[type=range]::-ms-thumb {
+			height: 16px;
+			width: 16px;
+			border-radius: 16px;
+			background: #ffffff;
+			cursor: pointer;
+		}
+		input[type=range]:focus::-ms-fill-lower {
+			background: #808080;
+		}
+		input[type=range]:focus::-ms-fill-upper {
+			background: #808080;
+		}
+	}
+
+	.currentSong {
+		flex-basis: 65%;
+		font-size: .9em;
+
+		@media (max-width: var(--breakpoint-mobile)) {
+			display: none;
+		}
+
+		.songName {
+			display: inline-block;
+			width: 75%;
+		}
+
+		.songDuration {
+			display: inline-block;
+			width: 24%;
+			text-align: right;
+		}
+
+		.playback {
+			color: #999;
+			margin-right: .5em;
+		}
+	}
+
+	.playlistToggle {
+		flex-basis: 5%;
+		text-align: right;
+
+		svg {
+			padding: .25em;
+			border-radius: 20%;
+			cursor: pointer;
+
+			&.activePlaylistToggle {
+				color: #262929;
+				background: #fff;
+			}
+		}
+	}
+}
+
+.playlist {
+	margin-top: 1em;
+	font-size: .9em;
+
+	max-height: 120px;
+	overflow-y: scroll;
+
+	transition: max-height .5s, margin-top .5s;
+
+	&.hiddenPlaylist {
+		margin-top: 0;
+		max-height: 0;
+	}
+
+	.song {
+		padding: .25em;
+		cursor: pointer;
+
+		&:hover {
+			background: #333;
+		}
+
+		&.activeSong {
+			background: #fff;
+			color: #262929;
+		}
+
+		.songName {
+			display: inline-block;
+			width: 75%;
+		}
+
+		.songDuration {
+			display: inline-block;
+			width: 24%;
+			text-align: right;
+		}
+	}
+}
